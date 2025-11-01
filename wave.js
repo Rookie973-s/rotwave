@@ -156,4 +156,23 @@ function runSearch(query) {
     });
   }
 }
+
 // ---- END ----
+// ---- SCROLL TO SHARED ARTICLE ----
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get("article");
+  
+  if (articleId) {
+    const target = document.querySelector(`[data-id="${articleId}"]`);
+    if (target) {
+      // Wait a bit for layout to render fully
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.add("expanded"); // Optional: open it if it's collapsible
+        target.style.boxShadow = "0 0 15px #ff9800"; // temporary highlight
+        setTimeout(() => (target.style.boxShadow = ""), 2000);
+      }, 800);
+    }
+  }
+});
