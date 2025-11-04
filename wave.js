@@ -129,6 +129,38 @@ function runSearch(query) {
     });
   }
 }
+// --- THEME TOGGLE LOGIC ---
+const themeToggle = document.getElementById('themeToggle');
+
+if (themeToggle) {
+    // 1. Function to apply the selected theme
+    function applyTheme(isLight) {
+        document.body.classList.toggle('light-mode', isLight);
+        themeToggle.innerHTML = isLight ? '<i class="theme-icon">☀️</i>' : '<i class="theme-icon">🌙</i>';
+    }
+
+    // 2. Load saved preference or check system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+    // Set initial theme
+    if (savedTheme) {
+        applyTheme(savedTheme === 'light');
+    } else {
+        // Default to dark mode (your site's default) unless system prefers light
+        applyTheme(prefersLight); 
+    }
+
+    // 3. Event listener for the click
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.body.classList.contains('light-mode');
+        // Toggle the theme
+        applyTheme(!isLight);
+        // Save the new preference
+        localStorage.setItem('theme', !isLight ? 'light' : 'dark');
+    });
+}
+// --- END THEME TOGGLE LOGIC ---
 
 // ---- DOM READY: MAIN FUNCTIONALITY ----
 document.addEventListener("DOMContentLoaded", function() {
