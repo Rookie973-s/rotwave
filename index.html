@@ -29,6 +29,10 @@
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search..." />
       </div>
+      <button id="themeToggle" style="background: 
+      transparent;
+      border: none; color: #e0e0e0; cursor: pointer; font-size: 1.5rem; padding: 0.5rem; transition: color 0.3s;">
+      <i class="theme-icon">🌙</i></button>
     </div>
   </header>
 
@@ -40,7 +44,25 @@
       <!-- Carousel -->
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
-          
+      
+          <div class="carousel-slide">
+            <img src="images/nowyou.jpg" class="carousel-image" alt="Featured 1" />
+            <div class="carousel-overlay">
+              <h3 class="carousel-title">NOW YOU SEE ME III</h3>
+              <p class="carousel-description">The third installation of 'Now You See Me' Titled 'Now You See Me: Now You Don't Will be Released 
+                In theatres 14th Of November.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/plubris.jpg" class="carousel-image" alt="Featured 1" />
+            <div class="carousel-overlay">
+              <h3 class="carousel-title">PLURIBUS</h3>
+              <p class="carousel-description">'Breaking Bad' Creator New Anticipated Apple series, Streaming 7 November .</p>
+            </div>
+          </div>
+  
+
           <div class="carousel-slide">
             <img src="images/clayface.jpg" class="carousel-image" alt="Featured 1" />
             <div class="carousel-overlay">
@@ -71,13 +93,7 @@
               <p class="carousel-description">After what feels like an eternity, the wait is finally over Stranger Things returns with its highly anticipated final season this November!</p>
             </div>
           </div>
-          <div class="carousel-slide">
-            <img src="images/witcher.jpg" class="carousel-image" alt="Featured 2" />
-            <div class="carousel-overlay">
-              <h3 class="carousel-title">HALLOWEEN WITCHER</h3>
-              <p class="carousel-description">The buzz is real! With major character changes and the addition of exciting new faces, The Witcher Season 4 is keeping fans on the edge of their seats—and it's streaming now..</p>
-            </div>
-          </div>
+          
         </div>
         
         <button class="carousel-arrow prev" onclick="moveCarousel(-1)">‹</button>
@@ -89,11 +105,158 @@
           <button class="carousel-dot" onclick="goToSlide(2)"></button>
           <button class="carousel-dot" onclick="goToSlide(3)"></button>
           <button class="carousel-dot" onclick="goToSlide(4)"></button>
+          <button class="carousel-dot" onclick="goToSlide(5)"></button>
         </div>
       </div>
 
       <h2 class="section-title">Latest News</h2>
       <div class="articles-grid">
+
+        <article class="article-card" data-id="gosling-vs-gyllenhaal">
+          <img src="images/cine.jpg" class="article-image" />
+          <div class="article-content">
+            <h3 class="article-title">Gosling vs Gyllenhaal </h3>
+            <p class="article-excerpt">
+              Ryan Gosling vs. Jake Gyllenhaal — Two Faces of Modern Cinema...
+            </p>
+            <div class="article-full">
+              <p>
+                 <section class="intro">
+    <p>
+      In an era where performances often blur under franchise fatigue, <strong>Ryan Gosling</strong> and <strong>Jake Gyllenhaal</strong> stand as proof that acting is still an art form — not a checklist. 
+      Both men have built careers that feel like reflections of human complexity: quiet storms that explode only when needed.
+    </p>
+  </section>
+
+  <section class="gosling-side">
+    <h2>Ryan Gosling — The Poetic Stoic</h2>
+    <p>
+      Gosling’s brilliance lies in restraint. Whether he’s a silent getaway driver in <em>Drive</em> or a replicant questioning existence in <em>Blade Runner 2049</em>, 
+      he communicates more with a stare than some actors manage with a monologue. His characters don’t beg for emotion — they earn it.
+    </p>
+    <p>
+      <em>La La Land</em> gave him rhythm and heartbreak; <em>The Notebook</em> made him a romantic legend; <em>The Nice Guys</em> proved his comedic timing is criminally underrated. 
+      There’s always a sense that Gosling is playing with stillness — he’s the calm center of chaos. Even when his world collapses, he doesn’t shout. He breathes through it.
+    </p>
+  </section>
+
+  <section class="gyllenhaal-side">
+    <h2>Jake Gyllenhaal — The Controlled Madness</h2>
+    <p>
+      If Gosling is the quiet poet, <strong>Jake Gyllenhaal</strong> is the method storm. His filmography bleeds intensity — 
+      every role feels like he’s burning calories for truth. In <em>Nightcrawler</em>, he becomes the embodiment of obsession, a mirror to modern media’s hunger for carnage. 
+      In <em>Prisoners</em>, he delivers a detective torn between faith and fury. 
+      <em>Donnie Darko</em> and <em>Zodiac</em> show his fascination with mystery, while <em>Brokeback Mountain</em> revealed raw vulnerability that defined a generation of drama.
+    </p>
+    <p>
+      Gyllenhaal doesn’t act; he <em>transforms</em>. There’s danger in his performances — the kind that makes you uneasy because you don’t know where the character ends and Jake begins.
+    </p>
+  </section>
+
+  <section class="comparison">
+    <h2>Two Sides of the Same Frame</h2>
+    <p>
+      What makes their duel fascinating is contrast. Gosling represents <strong>minimalism</strong> — emotion distilled to stillness. 
+      Gyllenhaal is <strong>maximalism</strong> — emotion turned up to eleven, but with surgical control. 
+      Together, they embody the evolution of male leads in modern cinema: flawed, layered, uncertain, and deeply human.
+    </p>
+    <p>
+      Their films mirror each other in strange ways. <em>Drive</em> and <em>Nightcrawler</em> both explore loneliness through motion. 
+      <em>Blade Runner 2049</em> and <em>Prisoners</em> ask what it means to be “real” in a world built on lies. 
+      Even <em>The Big Short</em> and <em>Zodiac</em> chase truth in systems designed to hide it.
+    </p>
+  </section>
+
+  <section class="rotwave-take">
+    <h2>RotWave Verdict</h2>
+    <p>
+      These two don’t compete — they complement. Gosling gives cinema <strong>grace under silence</strong>; Gyllenhaal gives it <strong>chaos under control</strong>. 
+      In a decade obsessed with franchises and quick fame, they remind us that acting isn’t about popularity — it’s about presence.
+    </p>
+    <p>
+      Maybe Gosling’s gaze tells stories that never need words. Maybe Gyllenhaal’s madness shows us truths we’d rather avoid. 
+      But together, they’ve shaped this generation’s cinematic soul — one quiet, one burning, both unforgettable.
+    </p>
+  </section>
+              </p>
+            </div>
+            <div class="article-meta">
+              <span>3-11-25</span>
+              <span>2min read</span>
+              <button class="share-btn">Share</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card" data-id="samsung-finally-unveils-galaxy-trifold">
+          <img src="images/samsung.jpg" class="article-image" />
+          <div class="article-content">
+            <h3 class="article-title">Samsung Finally Unveils Galaxy TriFold</h3>
+            <p class="article-excerpt">
+             Samsung Finally Unveils Galaxy TriFold — Big Leap or Bold Misstep?...
+            </p>
+            <div class="article-full">
+              <p>
+               <section class="intro">
+    <p>
+      Samsung just pulled the curtain back on its **Galaxy TriFold**, confirming a release date after months of speculation and leaks. <strong>Forbes</strong> reports the three-screen device is real, and Samsung is betting that foldables are about to get even more ambitious. 
+      But this isn’t just about screens folding again — it’s about whether Samsung can pull off something that changes how we use phones, or whether this will end up being a novelty we talk about — not use.
+    </p>
+  </section>
+
+  <section>
+    <h2>What We Know So Far</h2>
+    <p>
+      The Galaxy TriFold was unveiled in South Korea, and Samsung confirmed it is coming “soon.” 1 Early leaks suggest a Z-shaped dual hinge that lets the device fold inward twice, turning a compact phone into something closer to a tablet. 2
+      According to reports, the rollout might initially be limited, likely focused on markets Samsung already dominates in foldables. Production challenges, software optimization, and consumer pricing are obvious obstacles ahead.
+    </p>
+  </section>
+
+  <section>
+    <h2>Why Samsung Might Be Doing This</h2>
+    <p>
+      It’s not just ambition. Samsung’s already staking leadership in foldable tech with the Galaxy Z Fold line. The TriFold is the next frontier — a statement that it’s not satisfied with incremental change.  
+      But there’s also pressure. Competitors have teased triple-fold devices. Samsung needs to stay ahead of the curve. The question is, are they doing it to push boundaries — or just to say they did it first?
+    </p>
+  </section>
+
+  <section>
+    <h2>The Big Risks Behind the Fold</h2>
+    <p>
+      Technology like this is fragile — every hinge, every crevice, every fold line is a potential failure point. Battery life across three panels will be a nightmare to balance.  
+      Then there’s software. Can apps span three folding states without breaking UI, lagging, or draining performance? If they can’t, the TriFold becomes a tech demo, not a daily driver.  
+      And price — this kind of device won’t be cheap. If monthly users can’t justify it, Samsung risks making something niche for enthusiasts rather than the mainstream.
+    </p>
+  </section>
+
+  <section>
+    <h2>RotWave Questions (That Nobody’s Asking Loudly Enough)</h2>
+    <ul>
+      <li>Will the TriFold’s durability match the hype — or will users break it before they fall in love?</li>
+      <li>Will software support and optimization come fast enough to make this device usable beyond showrooms?</li>
+      <li>Will this shift Samsung’s foldables from flex gadgets to productivity tools — or will the “wow” fade into gimmick?</li>
+      <li>Is Samsung sacrificing reliability and lifetime support just to race ahead in innovation?</li>
+    </ul>
+  </section>
+
+  <section class="verdict">
+    <h2>Verdict (RotWave Take)</h2>
+    <p>
+      The Galaxy TriFold could either be the device that rewrote what we expect from smartphones — or it might end up as a fascinating misstep in product history. Right now, it’s a bold risk.  
+      If Samsung nails the hinge, the battery, and software, this could change how we think about screens — making phones, tablets, and even laptops blur. If they miscalculate on any major axis, the device will become one more expensive curiosity.  
+      I hope they get it right. Because the future they’re betting on — tri-fold screens, device flexibility, multi-mode productivity — is the kind of future RotWave loves to see. Just don’t let hype crush the promise.
+    </p>
+  </section>
+
+              </p>
+            </div>
+            <div class="article-meta">
+              <span>3/11/25</span>
+              <span>2min read</span>
+              <button class="share-btn">Share</button>
+            </div>
+          </div>
+        </article>
 
   <article class="article-card" data-id="netflix-bids-to-buy-warner-bros">
           <img src="images/netflix.jpg" class="article-image" />
@@ -636,14 +799,33 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
 
     <!-- ROTcomics Tab -->
     <div id="comics" class="tab-content">
-      <h2 class="section-title">ROTcomics Collection</h2>
+      <h2 class="section-title">ROTSHELL Files</h2>
       <div class="comics-grid">
+       
+        <div class="comic-card">
+          <img src="images/kantara.jpg" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Kantara </h3>
+            <p class="comic-issue">2025</p>
+            <a href="comics/Kantara – A Legend Chapter.srt" class="download-btn" download>Download PDF</a>
+          </div>
+        </div>
+
+        <div class="comic-card">
+          <img src="images/abomin.jpg" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Abominable</h3>
+            <p class="comic-issue">2019</p>
+            <a href="comics/Abominable2019.srt" class="download-btn" download>Download Subtitle</a>
+</div>
+        </div> 
+        
         <div class="comic-card">
           <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=300&h=400&fit=crop" class="comic-cover" />
           <div class="comic-info">
             <h3 class="comic-title">Shadow Protocol</h3>
             <p class="comic-issue">Issue #1</p>
-            <a href="comics/shadow-protocol.pdf" class="download-btn" download>Download PDF</a>
+            <a href="comics/eye.pdf" class="download-btn" download>Download PDF</a>
           </div>
         </div>
 
