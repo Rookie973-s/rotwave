@@ -10,6 +10,73 @@
       line-height: 1.6;
     }
 
+/* --- Light Mode Overrides (Applied to body.light-mode) --- */
+body.light-mode {
+  background: #ffffff; /* White background */
+  color: #1a1a1a;    /* Dark text color */
+}
+
+/* Header/Primary Colors */
+body.light-mode .header {
+  background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%);
+  border-bottom: 2px solid #007bff; /* Use a cool blue accent */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .tab-btn {
+  color: #1a1a1a;
+  border-bottom-color: transparent;
+}
+body.light-mode .tab-btn:hover,
+body.light-mode .tab-btn.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+/* Article/Card Backgrounds */
+body.light-mode .article-card,
+body.light-mode .comic-card,
+body.light-mode .review-card {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+body.light-mode .article-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 123, 255, 0.1); /* Light blue shadow */
+  border-color: #007bff;
+}
+
+/* Search Bar */
+body.light-mode .search-bar input {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #1a1a1a;
+}
+body.light-mode .search-bar input:focus {
+  border-color: #007bff;
+  background: #fff;
+}
+
+/* Sections and Titles */
+body.light-mode .section-title {
+  color: #1a1a1a;
+  border-bottom: 3px solid #007bff;
+}
+
+/* Carousel Overlay (Keep dark for contrast) */
+body.light-mode .carousel-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+
+/* Accent Button/Elements (Use the cool blue accent) */
+body.light-mode .share-btn,
+body.light-mode .download-btn,
+body.light-mode .rating-score {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  box-shadow: none;
+}
+body.light-mode .rating-text {
+  color: #007bff;
+}
+
 /* --- Header --- */
 .header {
   background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
@@ -39,7 +106,7 @@
 }
 .logo img {
   height: 45px;
-  width: 450;
+  width: auto;
   object-fit: contain;
   display: block;
   transition: opacity 0.3s ease;
@@ -150,7 +217,7 @@
       height: 100%;
     }
     .carousel-slide {
-width: 100%;
+        width: 100%;
       min-width: 100%;
       height: 100%;
       position: relative;
