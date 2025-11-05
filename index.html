@@ -15,21 +15,34 @@
     <div class="header-top">
       <div class="logo">
         <a href="index.html">
-          <img src="images/logo.png" class="logo-img" alt="ROTWAVE Studios"/>
+          <img src="images/fart.png" class="logo-img" alt="ROTWAVE Studios"/>
         </a>
       </div>
       
-      <nav class="nav-tabs">
+      <div class="header-controls">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search..." />
+        </div>
+        <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg></button>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('news')">NEWS</button>
         <button class="tab-btn" onclick="switchTab('comics')">ROTSHELL</button>
         <button class="tab-btn" onclick="switchTab('reviews')">ROTCHIRP</button>
         <button class="tab-btn" onclick="window.location.href='https://rookie973-s.github.io/Watchlist/';">MY WATCHLIST</button>
-      </nav>
-      
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search..." />
-      </div>
-    </div>
+    </nav>
   </header>
 
   <main class="container">
@@ -795,7 +808,7 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
 
     <!-- ROTcomics Tab -->
     <div id="comics" class="tab-content">
-      <h2 class="section-title">ROTSHELL Files</h2>
+      <h2 class="section-title">Files</h2>
       <div class="comics-grid">
        
         <div class="comic-card">
@@ -803,7 +816,7 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <div class="comic-info">
             <h3 class="comic-title">Kantara </h3>
             <p class="comic-issue">2025</p>
-            <a href="comics/Kantara – A Legend Chapter.srt" class="download-btn" download>Download Subtitle</a>
+            <a href="comics/Kantara – A Legend Chapter.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
           </div>
         </div>
 
@@ -812,7 +825,7 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <div class="comic-info">
             <h3 class="comic-title">Abominable</h3>
             <p class="comic-issue">2019</p>
-            <a href="comics/Abominable2019.srt" class="download-btn" download>Download Subtitle</a>
+            <a href="comics/Abominable2019.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
 </div>
         </div> 
         
@@ -821,24 +834,16 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <div class="comic-info">
             <h3 class="comic-title">Shadow Protocol</h3>
             <p class="comic-issue">Issue #1</p>
-            <a href="comics/eye.pdf" class="download-btn" download>Download PDF</a>
+            <a href="comics/eye.pdf" class="download-btn" download style="color: black;">Download PDF</a>
           </div>
         </div>
 
-        <div class="comic-card">
-          <img src="images/abomin.jpg" class="comic-cover" />
-          <div class="comic-info">
-            <h3 class="comic-title">Abominable</h3>
-            <p class="comic-issue">2019</p>
-            <a href="comics/Abominable2019.srt" class="download-btn" download>Download Subtitle</a>
-</div>
-        </div>
             <div class="comic-card">
           <img src="images/xmen.jpg" class="comic-cover" />
           <div class="comic-info">
             <h3 class="comic-title">X-Men</h3>
             <p class="comic-issue">2016</p>
-            <a href="comics/X men 2016.srt" class="download-btn" download>Download Subtitle </a>
+            <a href="comics/X men 2016.srt" class="download-btn" download  style="color: black;">Download Subtitle </a>
           </div>
         </div>
       </div>
