@@ -11,6 +11,75 @@
     }
 
 /* --- Light Mode Overrides (Applied to body.light-mode) --- */
+
+/* --- CRITICAL READABILITY FIXES (FOR ALL TEXT CONTENT - AGGRESSIVE FINAL VERSION) --- */
+
+/* Ensures the main body background and color are set for general text */
+body.light-mode {
+  background: #ffffff;
+  color: #1a1a1a; /* Base dark color */
+}
+
+/* THE AGGRESSIVE FIX: Target the card container and force dark text for EVERYTHING inside */
+body.light-mode .article-card,
+body.light-mode .review-card {
+  /* Set a light background for the card */
+  background-color: #f8f8f8; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Force the color property on the container, which all descendants inherit */
+  color: #1a1a1a; 
+}
+
+
+/* --- Secondary Fixes (to ensure highest specificity for common tags) --- */
+
+/* Ensure all headings (h1-h6) are explicitly dark */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6,
+body.light-mode .article-title, 
+body.light-mode .review-title {
+  color: #1a1a1a; 
+}
+body.light-mode .carousel-title,
+body.light-mode .carousel-description
+{
+    color: #f0f0f0;
+}
+
+/* Ensure all paragraphs, lists, and specific content wrappers are dark */
+body.light-mode p,
+body.light-mode li,
+body.light-mode ul,
+body.light-mode ol,
+body.light-mode .article-excerpts,
+body.light-mode .article-fulls,
+body.light-mode .review-bodies,
+body.light-mode .review-meta-infos,
+body.light-mode .review-intros {
+  color: #1a1a1a;
+}
+
+/* 4. Ensure all links are a readable color, e.g., blue */
+body.light-mode a {
+  color: #007bff; 
+}
+
+/* 5. Search bar and Footer text fixes (carried over) */
+body.light-mode .search-bar input {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+body.light-mode .footer-text {
+  color: #555;
+}
+
 body.light-mode {
   background: #ffffff; /* White background */
   color: #1a1a1a;    /* Dark text color */
@@ -76,41 +145,85 @@ body.light-mode .rating-score {
 body.light-mode .rating-text {
   color: #007bff;
 }
+body.light-mode .header {
+  background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%);
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
+body.light-mode .nav-tabs {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
 /* --- Header --- */
-.header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-bottom: 2px solid #ff6b35;
+  .header {
   position: fixed;
-  width: 100%;
   top: 0;
+  left: 0;
+  width: 100%;
+  background: #0a0a0a; /* Dark Mode Default */
+  border-bottom: 1px solid #333;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.1);
+  padding: 0; /* Removed padding here, added it inside components */
   transform: translateY(0);
   transition: transform 0.5s ease-in-out;
 }
+
 .header.hide {
   transform: translateY(-100%);
 }
 .header-top {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Pushes Logo and Controls to edges */
   align-items: center;
-  gap: 2rem;
+  padding: 0.5rem 2rem; /* Added padding here */
 }
+
+/* --- Theme Toggle Button Styling --- */
+#themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e0e0e0; /* Default color (Dark Mode) */
+  transition: color 0.3s, transform 0.2s;
+}
+
+#themeToggle:hover {
+  transform: scale(1.1);
+}
+
+body.light-mode #themeToggle {
+  color: #1a1a1a; /* Light Mode color */
+}
+
+/* Initial state is the sun (for dark mode page) - Moon is handled by JS toggling the SVG class */
+.theme-icon {
+  display: block;
+}
+
+
 .logo {
+  /* Logo will take up 70% of the available space */
+  flex-grow: 1; 
+  /* Ensures the logo starts a bit off-center to the left */
+  max-width: 70%; 
+}
+
+.logo-img {
+  /* Make the logo image visually larger */
+  height: 40px; 
+}
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between search and toggle */
   flex-shrink: 0;
 }
-.logo img {
-  height: 45px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  transition: opacity 0.3s ease;
-}
+
 
 .logo img:hover {
   opacity: 0.85;
@@ -118,32 +231,31 @@ body.light-mode .rating-text {
 
 .nav-tabs {
   display: flex;
-  gap: 0.3rem;
-  align-items: center;
+  justify-content: center; /* Center the tab buttons */
+  width: 100%;
+  padding: 0.3rem 0;
+  background-color: #000000; /* Dark background for the tab row */
+  border-bottom: 1px solid #222;
 }
+
 .tab-btn {
-  padding: 0.4rem 1rem;
-  background: transparent;
+  background: none;
   border: none;
-  color: #e0e0e0;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 0.3rem 1.5rem;
   cursor: pointer;
-  border-radius: 0;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   border-bottom: 3px solid transparent;
+  transition: color 0.3s, border-bottom 0.3s;
 }
-.tab-btn:hover {
+
+.tab-btn:hover, .tab-btn.active {
   color: #ff6b35;
   border-bottom-color: #ff6b35;
 }
-.tab-btn.active {
-  background: transparent;
-  border-bottom-color: #ff6b35;
-  color: #ff6b35;
-}
+
 
 /* --- Search Bar (INLINE WITH HEADER) --- */
 .search-bar {
@@ -153,27 +265,28 @@ body.light-mode .rating-text {
   justify-content: flex-end;
 }
 .search-bar input {
-  width: 100%;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  border: 1px solid #333;
-  background: #1a1a1a;
+  border: 1px solid #444;
+  background-color: #1a1a1a;
   color: #e0e0e0;
-  font-size: 0.85rem;
+  font-size: 1rem;
   outline: none;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s;
+  width: 200px; /* Default width */
 }
+
 .search-bar input:focus {
-  border-color: #ff6b35;
-  background: #0f0f0f;
+  border-color: #007bff;
 }
 
 /* --- Main Container --- */
 .container {
-  max-width: 1400px;
+  padding: 8.5rem 2rem 1rem; /* Adjust padding to account for the two-row header height */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 4.5rem 2rem 2rem;
 }
+
     .tab-content {
       display: none;
       animation: fadeIn 0.5s ease;
