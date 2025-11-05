@@ -1,4 +1,4 @@
-* {
+ * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -207,13 +207,16 @@ body.light-mode #themeToggle {
 
 
 .logo {
-  flex-shrink: 0;
+  /* Logo will take up 70% of the available space */
+  flex-grow: 1; 
+  /* Ensures the logo starts a bit off-center to the left */
+  max-width: 70%; 
 }
 
 .logo-img {
+  /* Make the logo image visually larger */
   height: 40px; 
 }
-
 .header-controls {
   display: flex;
   align-items: center;
@@ -607,27 +610,35 @@ body.light-mode #themeToggle {
     /* --- Responsive --- */
     @media (max-width: 768px) {
       .header-top {
+        flex-wrap: wrap;
+        gap: 0.5rem;
         padding: 0.5rem 1rem;
+      }
+      .logo {
+        order: 1;
       }
       .logo img {
         height: 35px;
       }
       .search-bar {
-        max-width: 180px;
-      }
-      .search-bar input {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-        width: 100%;
+        order: 2;
+        max-width: 200px;
+        margin-left: auto;
       }
       .nav-tabs {
+        order: 3;
+        width: 100%;
         justify-content: space-around;
         gap: 0.2rem;
-        padding: 0.5rem 0;
+        margin-top: 0.5rem;
       }
       .tab-btn {
         padding: 0.35rem 0.6rem;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+      }
+      .search-bar input {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
       }
       .container {
         padding: 6rem 1rem 1rem;
