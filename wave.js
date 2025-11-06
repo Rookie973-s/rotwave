@@ -45,10 +45,44 @@ function switchTab(tabName, event) { // Pass 'event' explicitly if available
   if (clickedButton) {
     clickedButton.classList.add("active");
   }
-
   // Ensure scroll to top happens for the new tab
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+// ---- NEW: MENU LOGIC ----
+function toggleMenu() {
+    const menu = document.getElementById('menuDrawer');
+    const isVisible = menu.classList.toggle('active');
+    
+    // Accessibility focus management
+    const menuToggleBtn = document.getElementById('menuToggle');
+    if (isVisible) {
+        // Find first link in the menu and focus it
+        menu.querySelector('a').focus(); 
+    } else {
+        // Return focus to the toggle button
+        menuToggleBtn.focus();
+    }
+}
+
+// ---- NEW: SEARCH ICON TOGGLE LOGIC (Replaces the inline search bar) ----
+function toggleSearchDropdown() {
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    
+    // Toggle the visibility
+    const isVisible = searchDropdown.classList.toggle('active');
+    
+    // If shown, focus the input; otherwise, clear and blur it
+    if (isVisible) {
+        searchInput.focus();
+    } else {
+        searchInput.value = ''; // Clear the input when hiding
+        runSearch('');         // Clear results
+        searchInput.blur();
+    }
+}
+
 
 // ---- SMALL TOAST (for copy success) ----
 function showCopiedToast() {
@@ -74,6 +108,12 @@ const header = document.querySelector(".header");
 
 window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
+  // Do not hide if the menu or search dropdown is open
+  if (document.getElementById('menuDrawer')?.classList.contains('active') ||
+      document.getElementById('searchDropdown')?.classList.contains('active')) {
+      return;
+  }
+  
   if (currentScroll > lastScroll && currentScroll > 100) {
     header.classList.add("hide");
   } else {
@@ -91,7 +131,8 @@ document.querySelectorAll(".tab-btn, .article-card").forEach(el => {
 });
 
 // ---- SEARCH LOGIC ----
-const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById('searchInput'); 
+
 if (searchInput) {
   searchInput.addEventListener('input', function () {
     const q = this.value.trim().toLowerCase();
@@ -102,10 +143,10 @@ if (searchInput) {
 function runSearch(query) {
   const activeTab = document.querySelector('.tab-content.active');
   if (!activeTab) return;
-
+  
   const tabId = activeTab.id;
   let items = [];
-
+  
   if (tabId === 'news') {
     items = Array.from(activeTab.querySelectorAll('.article-card'));
     items.forEach(item => {
@@ -129,9 +170,9 @@ function runSearch(query) {
     });
   }
 }
+
 // --- THEME TOGGLE LOGIC (UPDATED FOR SVG SWAP) ---
 const themeToggle = document.getElementById('themeToggle');
-
 // SVG content for the icons
 const sunIconSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon">
@@ -145,7 +186,6 @@ const sunIconSVG = `
       <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>`;
-
 const moonIconSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -168,7 +208,6 @@ if (themeToggle) {
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
     // Set initial theme
-    // Default to dark mode (your site's apparent default) unless system prefers light, or saved theme dictates otherwise
     if (savedTheme) {
         applyTheme(savedTheme === 'light');
     } else {
@@ -186,10 +225,11 @@ if (themeToggle) {
     });
 }
 // --- END THEME TOGGLE LOGIC ---
+
 // ---- DOM READY: MAIN FUNCTIONALITY ----
 document.addEventListener("DOMContentLoaded", function() {
   
-  // 1. Expand / collapse handling for news articles (FIXED)
+  // 1. Expand / collapse handling for news articles
   document.querySelectorAll(".article-card").forEach(article => {
     // Use the event listener here to reliably capture the click event (e)
     article.addEventListener("click", (e) => {
@@ -201,9 +241,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // 2. Run a search on load if input has text
+  // 2. Run a search on load if input has text (only relevant if page loads with a query)
   const input = document.getElementById('searchInput');
   if (input && input.value.trim() !== '') {
+    // Ensure the dropdown is active if there is a search query
+    document.getElementById('searchDropdown')?.classList.add('active');
     runSearch(input.value.trim().toLowerCase());
   }
 
@@ -212,18 +254,18 @@ document.addEventListener("DOMContentLoaded", function() {
   shareButtons.forEach(button => {
     button.addEventListener('click', (e) => {
       e.stopPropagation(); // crucial: prevents article from expanding/collapsing
-
+      
       // Find the nearest parent card with a data-id attribute
       const card = button.closest('.article-card, .review-card');
       if (!card) return;
-
+      
       // Get the title and generate ID/URL
       let title = card.querySelector('.article-title, .review-title')?.innerText.trim() || 'Content';
       const articleId = card.getAttribute('data-id') || button.getAttribute('data-id') || title.replace(/\s+/g, '-').toLowerCase();
       
       const shareText = `Check out this content on ROTWAVE: ${title}`;
       const articleUrl = `${window.location.origin}${window.location.pathname}?article=${encodeURIComponent(articleId)}`;
-
+      
       if (navigator.share) {
         navigator.share({
           title,
@@ -256,7 +298,6 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         targetTabName = 'news';
       }
-
       // 1. Switch the tab to make the content visible
       switchTab(targetTabName);
 
