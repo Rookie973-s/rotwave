@@ -1,14 +1,14 @@
 * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
 
 /* --- Light Mode Overrides (Applied to body.light-mode) --- */
 
@@ -24,13 +24,12 @@ body.light-mode {
 body.light-mode .article-card,
 body.light-mode .review-card {
   /* Set a light background for the card */
-  background-color: #f8f8f8; 
+  background-color: #f8f8f8;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   /* Force the color property on the container, which all descendants inherit */
-  color: #1a1a1a; 
+  color: #1a1a1a;
 }
-
 
 /* --- Secondary Fixes (to ensure highest specificity for common tags) --- */
 
@@ -41,9 +40,9 @@ body.light-mode h3,
 body.light-mode h4,
 body.light-mode h5,
 body.light-mode h6,
-body.light-mode .article-title, 
+body.light-mode .article-title,
 body.light-mode .review-title {
-  color: #1a1a1a; 
+  color: #1a1a1a;
 }
 body.light-mode .carousel-title,
 body.light-mode .carousel-description
@@ -66,16 +65,10 @@ body.light-mode .review-intros {
 
 /* 4. Ensure all links are a readable color, e.g., blue */
 body.light-mode a {
-  color: #007bff; 
+  color: #007bff;
 }
 
-/* 5. Search bar and Footer text fixes (carried over) */
-body.light-mode .search-bar input {
-  background-color: #ffffff;
-  color: #1a1a1a;
-  border: 1px solid #ccc;
-}
-
+/* 5. Footer text fixes */
 body.light-mode .footer-text {
   color: #555;
 }
@@ -113,17 +106,6 @@ body.light-mode .article-card:hover {
   border-color: #007bff;
 }
 
-/* Search Bar */
-body.light-mode .search-bar input {
-  background: #fff;
-  border: 1px solid #ccc;
-  color: #1a1a1a;
-}
-body.light-mode .search-bar input:focus {
-  border-color: #007bff;
-  background: #fff;
-}
-
 /* Sections and Titles */
 body.light-mode .section-title {
   color: #1a1a1a;
@@ -155,8 +137,9 @@ body.light-mode .nav-tabs {
   background-color: #f0f0f0;
   border-bottom: 1px solid #ddd;
 }
-/* --- Header --- */
-  .header {
+
+/* --- Header --- (NEW CONSOLIDATED HEADER STYLES START HERE) */
+.header {
   position: fixed;
   top: 0;
   left: 0;
@@ -164,7 +147,7 @@ body.light-mode .nav-tabs {
   background: #0a0a0a; /* Dark Mode Default */
   border-bottom: 1px solid #333;
   z-index: 1000;
-  padding: 0; /* Removed padding here, added it inside components */
+  padding: 0;
   transform: translateY(0);
   transition: transform 0.5s ease-in-out;
 }
@@ -172,60 +155,152 @@ body.light-mode .nav-tabs {
 .header.hide {
   transform: translateY(-100%);
 }
-.header-top {
+
+/* NEW: Three-column top bar for Menu | Logo | Controls */
+.header-top-bar {
   display: flex;
-  justify-content: space-between; /* Pushes Logo and Controls to edges */
+  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem; /* Added padding here */
+  padding: 0.8rem 2rem; /* Increased padding slightly for height */
 }
-
-/* --- Theme Toggle Button Styling --- */
-#themeToggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e0e0e0; /* Default color (Dark Mode) */
-  transition: color 0.3s, transform 0.2s;
-}
-
-#themeToggle:hover {
-  transform: scale(1.1);
-}
-
-body.light-mode #themeToggle {
-  color: #1a1a1a; /* Light Mode color */
-}
-
-/* Initial state is the sun (for dark mode page) - Moon is handled by JS toggling the SVG class */
-.theme-icon {
-  display: block;
-}
-
-
+/* Center the logo within the available space */
 .logo {
-  flex-shrink: 0;
+  flex-grow: 1; /* Allows it to take available space */
+  text-align: center; /* Centers the image */
+  padding: 0 1rem;
 }
-
 .logo-img {
-  height: 40px; 
+  height: 40px;
 }
 
-.header-controls {
+/* Grouping the right controls */
+.header-controls-right {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Space between search and toggle */
+  gap: 1rem;
   flex-shrink: 0;
 }
 
-
-.logo img:hover {
-  opacity: 0.85;
+/* Style for Menu and Search Icon Buttons */
+#menuToggle, #searchIconToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #e0e0e0;
+    transition: color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#menuToggle:hover, #searchIconToggle:hover {
+    color: #ff6b35;
+    transform: scale(1.1);
 }
 
+/* Theme Toggle Button Styling (Carried over and included in the new controls group) */
+#themeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e0e0e0;
+    transition: color 0.3s, transform 0.2s;
+}
+
+/* NEW: Menu Drawer (Off-Canvas) */
+.menu-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1a1a1a;
+    padding-top: 5rem;
+    transform: translateX(-100%); /* Start off-screen */
+    transition: transform 0.3s ease-out;
+    z-index: 1100; /* Above the header */
+    border-right: 2px solid #ff6b35;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.5);
+}
+.menu-drawer.active {
+    transform: translateX(0); /* Slide in */
+}
+.menu-drawer a {
+    display: block;
+    color: #e0e0e0;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    transition: background-color 0.2s, color 0.2s;
+}
+.menu-drawer a:hover {
+    background-color: #ff6b35;
+    color: #0a0a0a;
+}
+
+/* NEW: Search Dropdown Container */
+.search-dropdown-container {
+    padding: 0.5rem 2rem;
+    background-color: #1a1a1a;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    display: none; /* Initially hidden */
+}
+.search-dropdown-container.active {
+    display: block;
+}
+.search-dropdown-container input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ff6b35;
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    font-size: 1rem;
+    outline: none;
+}
+/* This hides the old, inline search bar element */
+.search-bar {
+  display: none !important;
+}
+
+/* Light Mode Overrides for new header elements */
+body.light-mode #menuToggle,
+body.light-mode #searchIconToggle,
+body.light-mode #themeToggle {
+    color: #1a1a1a;
+}
+body.light-mode .menu-drawer {
+    background: #ffffff;
+    border-right: 2px solid #007bff;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+body.light-mode .menu-drawer a {
+    color: #1a1a1a;
+    border-bottom: 1px solid #ddd;
+}
+body.light-mode .menu-drawer a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+body.light-mode .search-dropdown-container {
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+body.light-mode .search-dropdown-container input {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #007bff;
+}
+
+/* Nav Tabs - Kept from original */
 .nav-tabs {
   display: flex;
   justify-content: center; /* Center the tab buttons */
@@ -253,213 +328,191 @@ body.light-mode #themeToggle {
   border-bottom-color: #ff6b35;
 }
 
-
-/* --- Search Bar (INLINE WITH HEADER) --- */
-.search-bar {
-  flex: 1;
-  max-width: 350px;
-  display: flex;
-  justify-content: flex-end;
-}
-.search-bar input {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid #444;
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s;
-  width: 200px; /* Default width */
-}
-
-.search-bar input:focus {
-  border-color: #007bff;
-}
-
 /* --- Main Container --- */
 .container {
-  padding: 8.5rem 2rem 1rem; /* Adjust padding to account for the two-row header height */
+  /* Adjusted padding for the taller 3-row header (top-bar + search-dropdown + nav-tabs) */
+  padding: 7rem 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
+/* --- Header Styles End --- */
 
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+.tab-content.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 3px solid #ff6b35;
-      color: #fff;
-    }
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #ff6b35;
+  color: #fff;
+}
 
-    /* --- News Tab Styles --- */
-    /* Carousel Styles */
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      margin-bottom: 3rem;
-      overflow: hidden;
-      border-radius: 16px;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      height: 100%;
-    }
-    .carousel-slide {
-        width: 100%;
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .carousel-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .carousel-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-      padding: 3rem 3rem 2rem;
-      color: #fff;
-    }
-    .carousel-title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    .carousel-description {
-      font-size: 1rem;
-      color: #e0e0e0;
-      max-width: 700px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    }
-    .carousel-nav {
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 0.6rem;
-      z-index: 10;
-    }
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      padding: 0;
-    }
-    .carousel-dot.active {
-      background: #ff6b35;
-      width: 28px;
-      border-radius: 5px;
-    }
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-    .carousel-arrow:hover {
-      background: rgba(255,107,53,0.8);
-    }
-    .carousel-arrow.prev {
-      left: 1.5rem;
-    }
-    .carousel-arrow.next {
-      right: 1.5rem;
-    }
-    
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .article-card {
-      background: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      border: 1px solid #2a2a2a;
-    }
-    .article-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(255, 107, 53, 0.2);
-      border-color: #ff6b35;
-    }
-    .article-image {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .article-content {
-      padding: 1.5rem;
-    }
-    .article-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      color: #fff;
-      line-height: 1.4;
-    }
-    .article-excerpt {
-      color: #999;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .article-meta {
-      color: #666;
-      font-size: 0.85rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* --- News Tab Styles --- */
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 3rem;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+.carousel-slide {
+    width: 100%;
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  padding: 3rem 3rem 2rem;
+  color: #fff;
+}
+.carousel-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+.carousel-description {
+  font-size: 1rem;
+  color: #e0e0e0;
+  max-width: 700px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+.carousel-nav {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+.carousel-dot.active {
+  background: #ff6b35;
+  width: 28px;
+  border-radius: 5px;
+}
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.carousel-arrow:hover {
+  background: rgba(255,107,53,0.8);
+}
+.carousel-arrow.prev {
+  left: 1.5rem;
+}
+.carousel-arrow.next {
+  right: 1.5rem;
+}
 
-    .share-btn {
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.article-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #2a2a2a;
+}
+.article-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.2);
+  border-color: #ff6b35;
+}
+.article-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.article-content {
+  padding: 1.5rem;
+}
+.article-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: #fff;
+  line-height: 1.4;
+}
+.article-excerpt {
+  color: #999;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.article-meta {
+  color: #666;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-btn {
   background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
   border: none;
   color: #fff;
@@ -474,193 +527,192 @@ body.light-mode #themeToggle {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
 }
-   
-    
-    .article-full {
-      display: none;
-      color: #bbb;
-      font-size: 0.95rem;
-      margin-top: 1rem;
-      line-height: 1.7;
-      animation: fadeIn 0.3s ease;
-    }
-    .article-card.expanded .article-full {
-      display: block;
-    }
-    .article-card.expanded .article-excerpt {
-      display: none;
-    }
 
-    /* --- Comics Tab Styles --- */
-    .comics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .comic-card {
-      background: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-      border: 1px solid #2a2a2a;
-    }
-    .comic-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 30px rgba(255, 107, 53, 0.3);
-      border-color: #ff6b35;
-    }
-    .comic-cover {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-    }
-    .comic-info {
-      padding: 1.5rem;
-    }
-    .download-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-      color: #fff;
-      padding: 0.7rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-    }
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-    }
 
-    /* --- Reviews Tab Styles --- */
-    .review-card {
-      background: #1a1a1a;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      border: 1px solid #2a2a2a;
-      transition: border-color 0.3s ease;
-    }
-    .review-card:hover {
-      border-color: #ff6b35;
-    }
-    .review-header {
-      display: flex;
-      gap: 2rem;
-      padding: 2rem;
-    }
-    .review-poster {
-      width: 200px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-    .review-info {
-      flex: 1;
-    }
-    .review-title {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-    .review-meta-info {
-      color: #999;
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-    }
-    .rating {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .rating-score {
-      background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-      color: #fff;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 900;
-    }
-    .rating-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #ff6b35;
-    }
-    .review-body {
-      padding: 0 2rem 2rem;
-      color: #ccc;
-      line-height: 1.8;
-      font-size: 1rem;
-    }
+.article-full {
+  display: none;
+  color: #bbb;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  line-height: 1.7;
+  animation: fadeIn 0.3s ease;
+}
+.article-card.expanded .article-full {
+  display: block;
+}
+.article-card.expanded .article-excerpt {
+  display: none;
+}
 
-    /* --- Responsive --- */
-    @media (max-width: 768px) {
-      .header-top {
-        padding: 0.5rem 1rem;
-      }
-      .logo img {
-        height: 35px;
-      }
-      .search-bar {
-        max-width: 180px;
-      }
-      .search-bar input {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-        width: 100%;
-      }
-      .nav-tabs {
-        justify-content: space-around;
-        gap: 0.2rem;
-        padding: 0.5rem 0;
-      }
-      .tab-btn {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.75rem;
-      }
-      .container {
-        padding: 6rem 1rem 1rem;
-      }
-      .carousel-container {
-        height: 400px;
-      }
-      .carousel-title {
-        font-size: 1.5rem;
-      }
-      .carousel-overlay {
-        padding: 2rem 1.5rem 1.5rem;
-      }
-      .carousel-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-      }
-      .carousel-arrow.prev {
-        left: 0.5rem;
-      }
-      .carousel-arrow.next {
-        right: 0.5rem;
-      }
-      .articles-grid,
-      .comics-grid {
-        grid-template-columns: 1fr;
-      }
-      .review-header {
-        flex-direction: column;
-      }
-      .review-poster {
-        width: 100%;
-        height: 400px;
-      }
-    }
+/* --- Comics Tab Styles --- */
+.comics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.comic-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #2a2a2a;
+}
+.comic-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.3);
+  border-color: #ff6b35;
+}
+.comic-cover {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+.comic-info {
+  padding: 1.5rem;
+}
+.download-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* --- Reviews Tab Styles --- */
+.review-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: 1px solid #2a2a2a;
+  transition: border-color 0.3s ease;
+}
+.review-card:hover {
+  border-color: #ff6b35;
+}
+.review-header {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+.review-poster {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.review-info {
+  flex: 1;
+}
+.review-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.review-meta-info {
+  color: #999;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.rating-score {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.rating-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ff6b35;
+}
+.review-body {
+  padding: 0 2rem 2rem;
+  color: #ccc;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  /* NEW Header Responsive Styles */
+  .header-top-bar {
+    padding: 0.5rem 1rem;
+  }
+  .logo img {
+    height: 35px;
+  }
+  /* New Search Dropdown responsive padding */
+  .search-dropdown-container {
+    padding: 0.5rem 1rem;
+  }
+  .nav-tabs {
+    justify-content: space-around;
+    gap: 0.2rem;
+    padding: 0.5rem 0;
+  }
+  .tab-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  /* Container Padding Adjusted for the taller header on small screens */
+  .container {
+    padding: 8.5rem 1rem 1rem;
+  }
+  /* General Responsive Styles (Kept) */
+  .carousel-container {
+    height: 400px;
+  }
+  .carousel-title {
+    font-size: 1.5rem;
+  }
+  .carousel-overlay {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  .carousel-arrow.prev {
+    left: 0.5rem;
+  }
+  .carousel-arrow.next {
+    right: 0.5rem;
+  }
+  .articles-grid,
+  .comics-grid {
+    grid-template-columns: 1fr;
+  }
+  .review-header {
+    flex-direction: column;
+  }
+  .review-poster {
+    width: 100%;
+    height: 400px;
+  }
+}
