@@ -11,39 +11,54 @@
 </head>
 
 <body>
-  <header class="header">
-    <div class="header-top">
-      <div class="logo">
-        <a href="index.html">
-          <img src="images/doug.png" class="logo-img" alt="ROTWAVE Studios"/>
-        </a>
-      </div>
-      
-      <div class="header-controls">
-        <div class="search-bar">
-          <input type="text" id="searchInput" placeholder="Search..." />
-        </div>
-        <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg></button>
-      </div>
-    </div>
+ <header class="header">
+  <div class="header-top-bar">
+      <button id="menuToggle" aria-label="Open navigation menu" onclick="toggleMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
 
-    <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('news')">NEWS</button>
-        <button class="tab-btn" onclick="switchTab('comics')">ROTSHELL</button>
-        <button class="tab-btn" onclick="switchTab('reviews')">ROTCHIRP</button>
-        <button class="tab-btn" onclick="window.location.href='https://rookie973-s.github.io/Watchlist/';">MY WATCHLIST</button>
-    </nav>
-  </header>
+      <div class="logo">
+          <a href="index.html">
+              <img src="images/doug.png" class="logo-img" alt="ROTWAVE Studios"/>
+          </a>
+      </div>
+
+      <div class="header-controls-right">
+          <button id="searchIconToggle" aria-label="Open search bar" onclick="toggleSearchDropdown()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg></button>
+      </div>
+  </div>
+
+  <div class="search-dropdown-container" id="searchDropdown">
+      <input type="text" id="searchInput" placeholder="Search articles, reviews, and comics..." />
+  </div>
+
+  <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('news', event)">NEWS</button>
+      <button class="tab-btn" onclick="switchTab('comics', event)">ROTSHELL</button>
+      <button class="tab-btn" onclick="switchTab('reviews', event)">ROTCHIRP</button>
+      <button class="tab-btn" onclick="window.location.href='https://rookie973-s.github.io/Watchlist/';">MY WATCHLIST</button>
+  </nav>
+
+  <div id="menuDrawer" class="menu-drawer">
+      <a href="#about-us" onclick="toggleMenu()">About us(soon)</a>
+      <a href="#contact-us" onclick="toggleMenu()">Contact us(soon)</a>
+  </div>
+
+</header>
+
 
   <main class="container">
     <!-- Film News Tab -->
@@ -1311,3 +1326,4 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
   <script src="wave.js"></script>
 </body>
 </html>
+>
