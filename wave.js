@@ -319,4 +319,91 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+//Lens Logic
+ const bladeCount = 8;
+        const bladesContainer = document.getElementById('blades');
+        const centerCircle = document.getElementById('center');
+        const fstopDisplay = document.getElementById('fstop');
+        
+        // Create aperture blades
+        for (let i = 0; i < bladeCount; i++) {
+            const blade = document.createElement('div');
+            blade.className = 'blade';
+            blade.innerHTML = '<div class="blade-inner"></div>';
+            blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
+            bladesContainer.appendChild(blade);
+        }
+
+        const blades = document.querySelectorAll('.blade');
+        let lastScrollY = window.scrollY;
+        let rotation = 0;
+
+        // F-stop values for display
+        const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
+
+        function updateAperture() {
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = window.scrollY / maxScroll;
+            
+            // Calculate rotation based on scroll direction
+            const scrollDelta = window.scrollY - lastScrollY;
+            rotation += scrollDelta * 0.1;
+            lastScrollY = window.scrollY;
+            
+            // Aperture opens when scrolling down (0 to 100%)
+            const openPercent = scrollPercent;
+            
+            // Min and max aperture size
+            const minSize = 4; // Smallest opening (f/22)
+            const maxSize = 44; // Largest opening (f/1.4)
+            
+            // Calculate current aperture size (inverted: scroll down = open = large)
+            const currentSize = minSize + (maxSize - minSize) * openPercent;
+            
+            // Update center circle
+            centerCircle.style.width = currentSize + 'px';
+            centerCircle.style.height = currentSize + 'px';
+            
+            // Calculate blade angle (more closed = more angled inward)
+            const bladeAngle = 25 - (openPercent * 20); // From 25deg (closed) to 5deg (open)
+            
+            // Update each blade
+            blades.forEach((blade, index) => {
+                const baseRotation = (360 / bladeCount) * index;
+                const totalRotation = baseRotation + rotation;
+                blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
+            });
+            
+            // Update f-stop display (inverted: more open = lower f-stop number)
+            const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
+            fstopDisplay.textContent = `f/${fStops[fstopIndex]}`;
+        }
+
+        // Initialize
+        updateAperture();
+
+        // Update on scroll with throttling for performance
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateAperture();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', updateAperture);
+
+        // Click aperture to scroll to top
+        const apertureContainer = document.querySelector('.aperture-container');
+        apertureContainer.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
 // ---- END ----
