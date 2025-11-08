@@ -668,6 +668,7 @@ body.light-mode .search-dropdown-container input {
   .logo img {
     height: 30px;
     width: 150%;
+margin-left: -5px;
   }
   /* New Search Dropdown responsive padding */
   .search-dropdown-container {
