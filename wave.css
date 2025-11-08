@@ -165,13 +165,14 @@ body.light-mode .nav-tabs {
 }
 /* Center the logo within the available space */
 .logo {
-  flex-grow: 1; /* Allows it to take available space */
+  flex-grow: 0; /* Allows it to take available space */
   text-align: center; /* Centers the image */
   padding: 0 1rem;
   max-width: 40%;
 }
 .logo-img {
-  height: 20px;
+  height: 30px;
+  width: auto;
 }
 
 /* Grouping the right controls */
@@ -666,6 +667,7 @@ body.light-mode .search-dropdown-container input {
   }
   .logo img {
     height: 30px;
+    width: auto;
   }
   /* New Search Dropdown responsive padding */
   .search-dropdown-container {
