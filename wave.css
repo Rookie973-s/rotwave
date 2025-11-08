@@ -168,10 +168,10 @@ body.light-mode .nav-tabs {
   flex-grow: 1; /* Allows it to take available space */
   text-align: center; /* Centers the image */
   padding: 0 1rem;
+  max-width: 40%;
 }
 .logo-img {
-  height: 40px;
-  width: 200px:
+  height: 20px;
 }
 
 /* Grouping the right controls */
@@ -665,7 +665,7 @@ body.light-mode .search-dropdown-container input {
     padding: 0.5rem 1rem;
   }
   .logo img {
-    height: 35px;
+    height: 30px;
   }
   /* New Search Dropdown responsive padding */
   .search-dropdown-container {
