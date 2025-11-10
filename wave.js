@@ -761,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCommentCounts();
     updateAllCommentForms();
 });
-const API_URL = "http://localhost:5000/api/comments"; // your backend server
+const API_URL = "https://wave-backend-umi8.onrender.com"; // your backend server
 
 // Load and display comments from MongoDB
 async function renderComments(contentId) {
