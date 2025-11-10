@@ -405,5 +405,429 @@ document.addEventListener("DOMContentLoaded", function() {
                 behavior: 'smooth'
             });
         });
+       // --- COMMENT SECTION & THREADING LOGIC ---
+
+// In-memory storage for comments (simulating a database)
+const commentsDatabase = {};
+
+// Current user state (simulating authentication)
+let currentUser = null;
+
+// Check if user is signed in
+function isUserSignedIn() {
+    return currentUser !== null;
+}
+
+// Get current user email
+function getCurrentUserEmail() {
+    return currentUser;
+}
+
+// Simulate sign-in (for demo purposes)
+function promptSignIn() {
+    const email = prompt("Enter your email to sign in (demo):");
+    if (email && email.includes('@')) {
+        currentUser = email;
+        updateAllCommentForms();
+        showToast('✅ Signed in successfully!');
+    } else if (email) {
+        alert('Please enter a valid email address');
+    }
+}
+
+// Simulate sign-out
+function signOut() {
+    currentUser = null;
+    updateAllCommentForms();
+    showToast('👋 Signed out');
+}
+
+// Update all comment forms based on sign-in state
+function updateAllCommentForms() {
+    document.querySelectorAll('.comment-input').forEach(input => {
+        if (isUserSignedIn()) {
+            input.disabled = false;
+            input.placeholder = `Comment as ${getCurrentUserEmail()}...`;
+        } else {
+            input.disabled = true;
+            input.placeholder = 'Sign in to post a comment...';
+            input.value = '';
+        }
+    });
+    
+    document.querySelectorAll('.sign-in-prompt-btn').forEach(btn => {
+        btn.style.display = isUserSignedIn() ? 'none' : 'block';
+    });
+    
+    document.querySelectorAll('.submit-comment-btn').forEach(btn => {
+        btn.style.display = isUserSignedIn() ? 'block' : 'none';
+    });
+}
+
+// Toggle comment section visibility
+function toggleCommentSection(indicator) {
+    const contentId = indicator.querySelector('.comment-count').getAttribute('data-content-id');
+    const threadSection = document.querySelector(`.full-comment-thread[data-content-id="${contentId}"]`);
+    
+    if (threadSection) {
+        const isOpening = !threadSection.classList.contains('open');
+        threadSection.classList.toggle('open');
+        indicator.classList.toggle('active');
+        
+        if (isOpening) {
+            loadComments(contentId);
+        }
+    }
+}
+
+// Load and display comments
+function loadComments(contentId) {
+    const listElement = document.getElementById(`comments-list-${contentId}`);
+    
+    if (!commentsDatabase[contentId] || commentsDatabase[contentId].length === 0) {
+        listElement.innerHTML = '<div class="comments-empty">No comments yet. Be the first to comment!</div>';
+        return;
+    }
+    
+    listElement.innerHTML = '';
+    commentsDatabase[contentId].forEach(comment => {
+        listElement.appendChild(createCommentElement(comment, contentId));
+    });
+}
+
+// Create comment element
+function createCommentElement(comment, contentId) {
+    const commentDiv = document.createElement('div');
+    commentDiv.className = 'comment-item';
+    commentDiv.setAttribute('data-comment-id', comment.id);
+    
+    const isOwner = isUserSignedIn() && getCurrentUserEmail() === comment.userEmail;
+    
+    commentDiv.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-user-email">${comment.userEmail}</span>
+            <span class="comment-date">${comment.date}</span>
+        </div>
+        <div class="comment-body">${escapeHtml(comment.text)}</div>
+        <div class="comment-actions">
+            <button class="reply-btn" onclick="showReplyForm('${comment.id}', '${contentId}')">Reply</button>
+            ${isOwner ? `<button class="delete-btn" onclick="deleteComment('${contentId}', '${comment.id}')">Delete</button>` : ''}
+        </div>
+        <div class="reply-form-container" id="reply-form-${comment.id}">
+            <textarea class="reply-input" id="reply-input-${comment.id}" placeholder="${isUserSignedIn() ? 'Write a reply...' : 'Sign in to reply...'}" rows="2" ${!isUserSignedIn() ? 'disabled' : ''}></textarea>
+            <div class="reply-form-actions">
+                ${!isUserSignedIn() ? 
+                    `<button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Reply</button>` :
+                    `<button class="submit-reply-btn" onclick="submitReply('${contentId}', '${comment.id}')">Post Reply</button>
+                     <button class="cancel-reply-btn" onclick="hideReplyForm('${comment.id}')">Cancel</button>`
+                }
+            </div>
+        </div>
+        <div class="replies-container" id="replies-${comment.id}"></div>
+    `;
+    
+    // Add replies if they exist
+    if (comment.replies && comment.replies.length > 0) {
+        const repliesContainer = commentDiv.querySelector(`#replies-${comment.id}`);
+        comment.replies.forEach(reply => {
+            repliesContainer.appendChild(createReplyElement(reply, contentId, comment.id));
+        });
+    }
+    
+    return commentDiv;
+}
+
+// Create reply element
+function createReplyElement(reply, contentId, parentId) {
+    const replyDiv = document.createElement('div');
+    replyDiv.className = 'reply-item';
+    replyDiv.setAttribute('data-reply-id', reply.id);
+    
+    const isOwner = isUserSignedIn() && getCurrentUserEmail() === reply.userEmail;
+    
+    replyDiv.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-user-email">${reply.userEmail}</span>
+            <span class="comment-date">${reply.date}</span>
+        </div>
+        <div class="comment-body">${escapeHtml(reply.text)}</div>
+        <div class="comment-actions">
+            ${isOwner ? `<button class="delete-btn" onclick="deleteReply('${contentId}', '${parentId}', '${reply.id}')">Delete</button>` : ''}
+        </div>
+    `;
+    
+    return replyDiv;
+}
+
+// Submit new comment
+function submitComment(contentId) {
+    if (!isUserSignedIn()) {
+        promptSignIn();
+        return;
+    }
+    
+    const input = document.querySelector(`.full-comment-thread[data-content-id="${contentId}"] .comment-input`);
+    const text = input.value.trim();
+    
+    if (!text) {
+        showToast('⚠️ Please write a comment');
+        return;
+    }
+    
+    if (!commentsDatabase[contentId]) {
+        commentsDatabase[contentId] = [];
+    }
+    
+    const comment = {
+        id: 'comment-' + Date.now(),
+        userEmail: getCurrentUserEmail(),
+        text: text,
+        date: getTimeAgo(new Date()),
+        timestamp: new Date(),
+        replies: []
+    };
+    
+    commentsDatabase[contentId].push(comment);
+    input.value = '';
+    
+    loadComments(contentId);
+    updateCommentCount(contentId);
+    showToast('✅ Comment posted!');
+}
+
+// Show reply form
+function showReplyForm(commentId, contentId) {
+    if (!isUserSignedIn()) {
+        promptSignIn();
+        return;
+    }
+    
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.classList.toggle('active');
+        if (replyForm.classList.contains('active')) {
+            document.getElementById(`reply-input-${commentId}`).focus();
+        }
+    }
+}
+
+// Hide reply form
+function hideReplyForm(commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.classList.remove('active');
+        document.getElementById(`reply-input-${commentId}`).value = '';
+    }
+}
+
+// Submit reply
+function submitReply(contentId, parentCommentId) {
+    if (!isUserSignedIn()) {
+        promptSignIn();
+        return;
+    }
+    
+    const input = document.getElementById(`reply-input-${parentCommentId}`);
+    const text = input.value.trim();
+    
+    if (!text) {
+        showToast('⚠️ Please write a reply');
+        return;
+    }
+    
+    const parentComment = commentsDatabase[contentId].find(c => c.id === parentCommentId);
+    if (!parentComment) return;
+    
+    const reply = {
+        id: 'reply-' + Date.now(),
+        userEmail: getCurrentUserEmail(),
+        text: text,
+        date: getTimeAgo(new Date()),
+        timestamp: new Date()
+    };
+    
+    if (!parentComment.replies) {
+        parentComment.replies = [];
+    }
+    
+    parentComment.replies.push(reply);
+    input.value = '';
+    hideReplyForm(parentCommentId);
+    
+    loadComments(contentId);
+    updateCommentCount(contentId);
+    showToast('✅ Reply posted!');
+}
+
+// Delete comment
+function deleteComment(contentId, commentId) {
+    if (!confirm('Are you sure you want to delete this comment?')) {
+        return;
+    }
+    
+    const index = commentsDatabase[contentId].findIndex(c => c.id === commentId);
+    if (index !== -1) {
+        commentsDatabase[contentId].splice(index, 1);
+        loadComments(contentId);
+        updateCommentCount(contentId);
+        showToast('🗑️ Comment deleted');
+    }
+}
+
+// Delete reply
+function deleteReply(contentId, parentCommentId, replyId) {
+    if (!confirm('Are you sure you want to delete this reply?')) {
+        return;
+    }
+    
+    const parentComment = commentsDatabase[contentId].find(c => c.id === parentCommentId);
+    if (parentComment && parentComment.replies) {
+        const index = parentComment.replies.findIndex(r => r.id === replyId);
+        if (index !== -1) {
+            parentComment.replies.splice(index, 1);
+            loadComments(contentId);
+            updateCommentCount(contentId);
+            showToast('🗑️ Reply deleted');
+        }
+    }
+}
+
+// Update comment count display
+function updateCommentCount(contentId) {
+    const countElement = document.querySelector(`.comment-count[data-content-id="${contentId}"]`);
+    if (countElement && commentsDatabase[contentId]) {
+        let total = commentsDatabase[contentId].length;
+        commentsDatabase[contentId].forEach(comment => {
+            if (comment.replies) {
+                total += comment.replies.length;
+            }
+        });
+        countElement.textContent = total;
+    }
+}
+
+// Helper: Get time ago string
+function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    if (seconds < 60) return 'just now';
+    if (seconds < 3600) return Math.floor(seconds / 60) + ' minutes ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+    if (seconds < 604800) return Math.floor(seconds / 86400) + ' days ago';
+    return date.toLocaleDateString();
+}
+
+// Helper: Escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Helper: Show toast notification
+function showToast(message) {
+    let toast = document.createElement('div');
+    toast.innerText = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #222;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-size: 14px;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+// Initialize comment counts on page load
+function initializeCommentCounts() {
+    document.querySelectorAll('.comment-count').forEach(countElement => {
+        const contentId = countElement.getAttribute('data-content-id');
+        updateCommentCount(contentId);
+    });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCommentCounts();
+    updateAllCommentForms();
+});
+const API_URL = "http://localhost:5000/api/comments"; // your backend server
+
+// Load and display comments from MongoDB
+async function renderComments(contentId) {
+  const list = document.getElementById("comments-list-" + contentId);
+  list.innerHTML = "<p>Loading comments...</p>";
+
+  try {
+    const res = await fetch(`${API_URL}/${contentId}`);
+    const comments = await res.json();
+
+    list.innerHTML = "";
+    if (comments.length === 0) {
+      list.innerHTML = "<p>No comments yet.</p>";
+    } else {
+      comments.forEach(c => {
+        const div = document.createElement("div");
+        div.classList.add("comment-item");
+        div.innerHTML = `
+          <div class="comment-header">
+            <span class="comment-user-email">${c.email || "Guest"}</span>
+            <span class="comment-date">${new Date(c.date).toLocaleString()}</span>
+          </div>
+          <div class="comment-body">${c.text}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+  } catch (err) {
+    list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
+  }
+}
+
+// Add a new comment
+async function submitComment(contentId) {
+  const textarea = document.querySelector(
+    `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
+  );
+  const text = textarea.value.trim();
+  if (!text) return;
+
+  const email = localStorage.getItem("currentUser") || "Guest";
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contentId, email, text })
+    });
+
+    if (!res.ok) throw new Error("Failed to save comment");
+
+    textarea.value = "";
+    renderComments(contentId); // refresh comment list
+  } catch (err) {
+    alert("Error submitting comment: " + err.message);
+  }
+}
+
+// Toggle comment section (open/close)
+function toggleCommentSection(btn) {
+  const article = btn.closest(".article-card");
+  const thread = article.querySelector(".full-comment-thread");
+  thread.classList.toggle("open");
+  const id = article.dataset.id;
+  renderComments(id);
+}
 
 // ---- END ----
