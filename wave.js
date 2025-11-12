@@ -745,4 +745,54 @@ function toggleReplyForm(contentId, commentId) {
         console.warn(`Reply form not found for comment: ${commentId}`);
     }
 }
+/**
+ * Submits a reply for a specific comment.
+ * @param {string} contentId - The ID of the parent content item.
+ * @param {string} commentId - The ID of the parent comment being replied to.
+ */
+async function submitReply(contentId, commentId) {
+    if (!isUserSignedIn()) {
+        promptSignIn();
+        return;
+    }
+
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (!replyForm) {
+        console.error(`Reply form not found for comment: ${commentId}`);
+        return;
+    }
+
+    const textarea = replyForm.querySelector(".reply-input");
+    const text = textarea.value.trim();
+    if (!text) {
+        showToast("⚠️ Please write a reply");
+        return;
+    }
+
+    const email = getCurrentUserEmail();
+
+    try {
+        const res = await fetch(`${API_URL}/${commentId}/reply`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contentId, email, text }),
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        // Clear the input field and hide the form
+        textarea.value = "";
+        replyForm.classList.remove("active");
+
+        // Re-render comments so the new reply appears immediately
+        renderComments(contentId);
+
+        showToast("✅ Reply posted!");
+    } catch (err) {
+        console.error("Error submitting reply:", err);
+        showToast("Error submitting reply: " + err.message);
+    }
+}
 // ---- END ----
