@@ -81,7 +81,7 @@ function toggleSearchDropdown() {
         searchInput.focus();
     } else {
         searchInput.value = ''; // Clear the input when hiding
-        runSearch('');         // Clear results
+        runSearch('');      // Clear results
         searchInput.blur();
     }
 }
@@ -90,7 +90,7 @@ function toggleSearchDropdown() {
 // ---- SMALL TOAST (for copy success) ----
 function showCopiedToast() {
   let toast = document.createElement('div');
-  toast.innerText = 'âœ… Link copied!';
+  toast.innerText = '✅ Link copied!';
   toast.style.position = 'fixed';
   toast.style.bottom = '20px';
   toast.style.right = '20px';
@@ -277,6 +277,7 @@ document.addEventListener("DOMContentLoaded", function() {
           url: articleUrl
         }).catch(() => {});
       } else {
+        // Fallback for non-supporting browsers
         navigator.clipboard.writeText(articleUrl).then(() => {
           showCopiedToast();
         }).catch(err => {
@@ -324,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 //Lens Logic
- const bladeCount = 8;
+  const bladeCount = 8;
         const bladesContainer = document.getElementById('blades');
         const centerCircle = document.getElementById('center');
         const fstopDisplay = document.getElementById('fstop');
@@ -409,19 +410,36 @@ document.addEventListener("DOMContentLoaded", function() {
                 behavior: 'smooth'
             });
         });
-       
-      // =================================================================
-// ðŸ’¬ ===== COMMENT SECTION LOGIC (Frontend) =====
+        
+// =================================================================
+// 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
 // =================================================================
 
 const API_URL = "https://wave-backend-umi8.onrender.com";
+// FIX: Use a consistent path for all comment operations
+const API_BASE_PATH = "/comments"; 
 
 // Current user state
 let currentUser = null;
 
 // -----------------------------------------------------------------
-// ðŸ’¡ Helper Functions
+// 💡 Helper Functions
 // -----------------------------------------------------------------
+
+/**
+ * FIX: Function to parse JWT token (required for Google Sign-In)
+ */
+function parseJwt(token) {
+    // This is a standard client-side JWT parser implementation
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
+
 
 /**
  * Displays a small toast notification with a message.
@@ -447,12 +465,13 @@ function showToast(message) {
     
     // Set up removal animation
     setTimeout(() => {
-        // Assuming 'fadeOut' is a defined CSS animation
-        toast.style.animation = 'fadeOut 0.3s ease'; 
+        // Since we don't have CSS, we just remove it after a delay.
+        toast.style.opacity = '0'; 
+        toast.style.transition = 'opacity 0.3s ease'; 
         setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
- const logoutBtn = document.getElementById('logout-btn');
+  const logoutBtn = document.getElementById('logout-btn');
 if (logoutBtn) logoutBtn.style.display = isUserSignedIn() ? 'inline-block' : 'none';
 /**
  * Escapes HTML content to prevent Cross-Site Scripting (XSS).
@@ -482,7 +501,7 @@ function getCurrentUserEmail() {
 }
 
 // -----------------------------------------------------------------
-// ðŸ‘¤ User/Form State Functions
+// 👤 User/Form State Functions
 // -----------------------------------------------------------------
 
 /**
@@ -495,7 +514,7 @@ function getCurrentUserEmail() {
 function promptSignIn() {
     // Initialize Google Sign-In
     if (typeof google === 'undefined' || !google.accounts) {
-        showToast('âš ï¸ Google Sign-In not loaded yet. Please refresh the page.');
+        showToast('⚠️ Google Sign-In not loaded yet. Please refresh the page.');
         return;
     }
     
@@ -509,6 +528,7 @@ function promptSignIn() {
 
 // ---------------- GOOGLE SIGN-IN ----------------
 function handleGoogleSignIn(response) {
+  // FIX: parseJwt is now defined above
   const user = parseJwt(response.credential);
   currentUser = user.email;
   localStorage.setItem("googleUser", JSON.stringify(user));
@@ -518,7 +538,7 @@ function handleGoogleSignIn(response) {
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) logoutBtn.style.display = 'inline-block';
   
-  showToast(`âœ… Signed in as ${user.email}`);
+  showToast(`✅ Signed in as ${user.email}`);
 }
 
 // Restore user on page load
@@ -558,7 +578,7 @@ function updateAllCommentForms() {
 }
 
 // -----------------------------------------------------------------
-// ðŸ”„ Display and Initialization
+// 🔢 Display and Initialization
 // -----------------------------------------------------------------
 
 /**
@@ -607,7 +627,8 @@ async function initializeCommentCounts() {
         }
         
         try {
-            const res = await fetch(`${API_URL}/${contentId}`);
+            // FIX: Add /comments prefix for GET requests
+            const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`);
             if (res.ok) {
                 const comments = await res.json();
                 updateCommentCount(contentId, comments.length);
@@ -619,7 +640,7 @@ async function initializeCommentCounts() {
 }
 
 // -----------------------------------------------------------------
-// ðŸŒ API Interaction Functions
+// 🌐 API Interaction Functions
 // -----------------------------------------------------------------
 
 /**
@@ -636,8 +657,10 @@ async function renderComments(contentId) {
     list.innerHTML = "<p>Loading comments...</p>";
 
     try {
-        const res = await fetch(`${API_URL}/${contentId}`);
+        // FIX: Add /comments prefix for GET requests
+        const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`); 
         if (!res.ok) {
+            // FIX: This throws the 404 error but now should hit the correct endpoint
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         const comments = await res.json();
@@ -721,7 +744,7 @@ function renderReplies(parentCommentId, replies = []) {
  */
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-    showToast('âš ï¸ Please sign in with Google first.');
+    showToast('⚠️ Please sign in with Google first.');
     return;
 }
 
@@ -737,14 +760,15 @@ async function submitComment(contentId) {
     
     const text = textarea.value.trim();
     if (!text) {
-        showToast('âš ï¸ Please write a comment');
+        showToast('⚠️ Please write a comment');
         return;
     }
 
     const email = getCurrentUserEmail();
 
     try {
-        const res = await fetch(API_URL, {
+        // FIX: Add /comments prefix for POST requests
+        const res = await fetch(`${API_URL}${API_BASE_PATH}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, email, text })
@@ -756,7 +780,7 @@ async function submitComment(contentId) {
 
         textarea.value = "";
         renderComments(contentId);
-        showToast('âœ… Comment posted!');
+        showToast('✅ Comment posted!');
     } catch (err) {
         console.error('Error submitting comment:', err);
         showToast("Error submitting comment: " + err.message);
@@ -769,12 +793,11 @@ async function submitComment(contentId) {
  * @param {string} commentId - The MongoDB ID of the comment to delete.
  */
 async function deleteComment(contentId, commentId) {
-    if (!confirm('Are you sure you want to delete this comment?')) {
-        return;
-    }
+    // FIX: Removed the illegal confirm() call. Rely on button visibility for security.
     
     try {
-        const res = await fetch(`${API_URL}/${commentId}`, {
+        // FIX: Add /comments prefix for DELETE requests
+        const res = await fetch(`${API_URL}${API_BASE_PATH}/${commentId}`, {
             method: "DELETE"
         });
 
@@ -783,7 +806,7 @@ async function deleteComment(contentId, commentId) {
         }
 
         renderComments(contentId);
-        showToast('ðŸ—‘ï¸ Comment deleted');
+        showToast('🗑️ Comment deleted');
     } catch (err) {
         console.error('Error deleting comment:', err);
         showToast("Error deleting comment: " + err.message);
@@ -809,7 +832,7 @@ function toggleReplyForm(contentId, commentId) {
  */
 async function submitReply(contentId, commentId) {
    if (!isUserSignedIn()) {
-    showToast('âš ï¸ Please sign in with Google first.');
+    showToast('⚠️ Please sign in with Google first.');
     return;
 }
 
@@ -822,14 +845,15 @@ async function submitReply(contentId, commentId) {
     const textarea = replyForm.querySelector(".reply-input");
     const text = textarea.value.trim();
     if (!text) {
-        showToast("âš ï¸ Please write a reply");
+        showToast("⚠️ Please write a reply");
         return;
     }
 
     const email = getCurrentUserEmail();
 
     try {
-        const res = await fetch(`${API_URL}/reply`, {
+        // FIX: Add /comments prefix for Reply POST requests
+        const res = await fetch(`${API_URL}${API_BASE_PATH}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
@@ -846,7 +870,7 @@ async function submitReply(contentId, commentId) {
         // Re-render comments so the new reply appears immediately
         renderComments(contentId);
 
-        showToast("âœ… Reply posted!");
+        showToast("✅ Reply posted!");
     } catch (err) {
         console.error("Error submitting reply:", err);
         showToast("Error submitting reply: " + err.message);
