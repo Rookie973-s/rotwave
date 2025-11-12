@@ -50,6 +50,7 @@ function switchTab(tabName, event) { // Pass 'event' explicitly if available
 }
 
 // ---- NEW: MENU LOGIC ----
+// ---- NEW: MENU LOGIC ----
 function toggleMenu() {
     const menu = document.getElementById('menuDrawer');
     const isVisible = menu.classList.toggle('active');
@@ -57,8 +58,11 @@ function toggleMenu() {
     // Accessibility focus management
     const menuToggleBtn = document.getElementById('menuToggle');
     if (isVisible) {
-        // Find first link in the menu and focus it
-        menu.querySelector('a').focus(); 
+        // Find the new Close button or the first link and focus it
+        const firstFocusable = menu.querySelector('#menuCloseBtn, a'); 
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
     } else {
         // Return focus to the toggle button
         menuToggleBtn.focus();
@@ -229,14 +233,15 @@ if (themeToggle) {
 // ---- DOM READY: MAIN FUNCTIONALITY ----
 document.addEventListener("DOMContentLoaded", function() {
   
-  // 1. Expand / collapse handling for news articles
-  document.querySelectorAll(".article-card").forEach(article => {
-    // Use the event listener here to reliably capture the click event (e)
-    article.addEventListener("click", (e) => {
-      // Check if the click target is the share button or inside it
-      const isShareButton = e.target.closest('.share-btn');
-      if (!isShareButton) {
-         article.classList.toggle("expanded");
+  // 1. Expand / collapse handling for news articles - now handled by read-more button only
+  document.querySelectorAll(".read-more-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const article = btn.closest('.article-card');
+      if (article) {
+        article.classList.toggle("expanded");
+        // Update button text
+        btn.textContent = article.classList.contains('expanded') ? 'Read Less' : 'Read More';
       }
     });
   });
@@ -625,10 +630,24 @@ async function renderComments(contentId) {
                     </div>
                     <div class="comment-body">${escapeHtml(comment.text)}</div>
                     <div class="comment-actions">
+                        <button class="reply-btn" onclick="toggleReplyForm('${contentId}', '${comment._id}')">Reply</button>
                         ${isOwner ? `<button class="delete-btn" onclick="deleteComment('${contentId}', '${comment._id}')">Delete</button>` : ''}
                     </div>
+                    <div class="reply-form-container" id="reply-form-${comment._id}">
+                        <textarea class="reply-input" placeholder="Write a reply..." rows="2"></textarea>
+                        <div class="reply-form-actions">
+                            <button class="cancel-reply-btn" onclick="toggleReplyForm('${contentId}', '${comment._id}')">Cancel</button>
+                            <button class="submit-reply-btn" onclick="submitReply('${contentId}', '${comment._id}')">Post Reply</button>
+                        </div>
+                    </div>
+                    <div class="replies-container" id="replies-${comment._id}"></div>
                 `;
                 list.appendChild(div);
+                
+                // Render replies if they exist
+                if (comment.replies && comment.replies.length > 0) {
+                    renderReplies(comment._id, comment.replies);
+                }
             });
         }
         
@@ -637,80 +656,6 @@ async function renderComments(contentId) {
     } catch (err) {
         console.error('Error loading comments:', err);
         list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
-    }
-}
-
-/**
- * Submits a new comment to the backend API.
- * @param {string} contentId - The ID of the content item.
- */
-async function submitComment(contentId) {
-    if (!isUserSignedIn()) {
-        promptSignIn();
-        return;
-    }
-    
-    const textarea = document.querySelector(
-        `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
-    );
-    
-    if (!textarea) {
-        console.error(`Textarea not found for contentId: ${contentId}`);
-        return;
-    }
-    
-    const text = textarea.value.trim();
-    if (!text) {
-        showToast('⚠️ Please write a comment');
-        return;
-    }
-
-    const email = getCurrentUserEmail();
-
-    try {
-        const res = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contentId, email, text })
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        textarea.value = "";
-        renderComments(contentId);
-        showToast('✅ Comment posted!');
-    } catch (err) {
-        console.error('Error submitting comment:', err);
-        showToast("Error submitting comment: " + err.message);
-    }
-}
-
-/**
- * Sends a request to the API to delete a specific comment.
- * @param {string} contentId - The ID of the content item (used for re-rendering).
- * @param {string} commentId - The MongoDB ID of the comment to delete.
- */
-async function deleteComment(contentId, commentId) {
-    if (!confirm('Are you sure you want to delete this comment?')) {
-        return;
-    }
-    
-    try {
-        const res = await fetch(`${API_URL}/${commentId}`, {
-            method: "DELETE"
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        renderComments(contentId);
-        showToast('🗑️ Comment deleted');
-    } catch (err) {
-        console.error('Error deleting comment:', err);
-        showToast("Error deleting comment: " + err.message);
     }
 }
 
