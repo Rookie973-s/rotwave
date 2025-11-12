@@ -20,21 +20,20 @@ function goToSlide(index) {
   currentSlide = index;
   updateCarousel();
 }
+
 // Auto-advance carousel every 5 seconds
 setInterval(() => {
   moveCarousel(1);
 }, 5000);
 
-// --- TAB SWITCHING (FIXED for both user click and programmatic calls) ---
-function switchTab(tabName, event) { // Pass 'event' explicitly if available
+// --- TAB SWITCHING ---
+function switchTab(tabName, event) {
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
   
-  // Determine which button to activate
   let clickedButton = null; 
   if (event && event.target && event.target.classList.contains('tab-btn')) {
     clickedButton = event.target;
   } else {
-    // Fallback for programmatic calls (like from the shared link logic)
     clickedButton = document.querySelector(`.tab-btn[onclick*="switchTab('${tabName}')"]`);
   }
   
@@ -44,63 +43,57 @@ function switchTab(tabName, event) { // Pass 'event' explicitly if available
   if (clickedButton) {
     clickedButton.classList.add("active");
   }
-  // Ensure scroll to top happens for the new tab
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ---- NEW: MENU LOGIC ----
-// ---- NEW: MENU LOGIC ----
+// ---- MENU LOGIC ----
 function toggleMenu() {
     const menu = document.getElementById('menuDrawer');
     const isVisible = menu.classList.toggle('active');
     
-    // Accessibility focus management
     const menuToggleBtn = document.getElementById('menuToggle');
     if (isVisible) {
-        // Find the new Close button or the first link and focus it
         const firstFocusable = menu.querySelector('#menuCloseBtn, a'); 
         if (firstFocusable) {
             firstFocusable.focus();
         }
     } else {
-        // Return focus to the toggle button
         menuToggleBtn.focus();
     }
 }
 
-// ---- NEW: SEARCH ICON TOGGLE LOGIC (Replaces the inline search bar) ----
+// ---- SEARCH TOGGLE LOGIC ----
 function toggleSearchDropdown() {
     const searchDropdown = document.getElementById('searchDropdown');
     const searchInput = document.getElementById('searchInput');
     
-    // Toggle the visibility
     const isVisible = searchDropdown.classList.toggle('active');
     
-    // If shown, focus the input; otherwise, clear and blur it
     if (isVisible) {
         searchInput.focus();
     } else {
-        searchInput.value = ''; // Clear the input when hiding
-        runSearch('');      // Clear results
+        searchInput.value = '';
+        runSearch('');
         searchInput.blur();
     }
 }
 
-
-// ---- SMALL TOAST (for copy success) ----
+// ---- TOAST NOTIFICATION ----
 function showCopiedToast() {
   let toast = document.createElement('div');
   toast.innerText = '✅ Link copied!';
-  toast.style.position = 'fixed';
-  toast.style.bottom = '20px';
-  toast.style.right = '20px';
-  toast.style.background = '#222';
-  toast.style.color = '#fff';
-  toast.style.padding = '10px 15px';
-  toast.style.borderRadius = '8px';
-  toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-  toast.style.fontSize = '14px';
-  toast.style.zIndex = '1000';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #222;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    font-size: 14px;
+    z-index: 1000;
+  `;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 2000);
 }
@@ -111,7 +104,6 @@ const header = document.querySelector(".header");
 
 window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
-  // Do not hide if the menu or search dropdown is open
   if (document.getElementById('menuDrawer')?.classList.contains('active') ||
       document.getElementById('searchDropdown')?.classList.contains('active')) {
       return;
@@ -125,7 +117,6 @@ window.addEventListener("scroll", () => {
   lastScroll = currentScroll;
 });
 
-// Optional: hide header briefly when clicking a tab or article
 document.querySelectorAll(".tab-btn, .article-card").forEach(el => {
   el.addEventListener("click", () => {
     header.classList.add("hide");
@@ -174,9 +165,8 @@ function runSearch(query) {
   }
 }
 
-// --- THEME TOGGLE LOGIC (UPDATED FOR SVG SWAP) ---
+// --- THEME TOGGLE LOGIC ---
 const themeToggle = document.getElementById('themeToggle');
-// SVG content for the icons
 const sunIconSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon">
       <circle cx="12" cy="12" r="5"></circle>
@@ -195,75 +185,59 @@ const moonIconSVG = `
     </svg>`;
 
 if (themeToggle) {
-    // 1. Function to apply the selected theme
     function applyTheme(isLight) {
         document.body.classList.toggle('light-mode', isLight);
-        
-        // **NEW:** Swap the SVG based on the theme state
         themeToggle.innerHTML = isLight ? moonIconSVG : sunIconSVG; 
-        
-        // Update the button's aria-label for accessibility
         themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
 
-    // 2. Load saved preference or check system preference
     const savedTheme = localStorage.getItem('theme');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-    // Set initial theme
     if (savedTheme) {
         applyTheme(savedTheme === 'light');
     } else {
-        // Apply system preference on first visit
         applyTheme(prefersLight); 
     }
 
-    // 3. Event listener for the click
     themeToggle.addEventListener('click', () => {
         const isLight = document.body.classList.contains('light-mode');
-        // Toggle the theme
         applyTheme(!isLight);
-        // Save the new preference
         localStorage.setItem('theme', !isLight ? 'light' : 'dark');
     });
 }
-// --- END THEME TOGGLE LOGIC ---
 
 // ---- DOM READY: MAIN FUNCTIONALITY ----
 document.addEventListener("DOMContentLoaded", function() {
   
-  // 1. Expand / collapse handling for news articles - now handled by read-more button only
+  // 1. Read More button handling
   document.querySelectorAll(".read-more-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       const article = btn.closest('.article-card');
       if (article) {
         article.classList.toggle("expanded");
-        // Update button text
         btn.textContent = article.classList.contains('expanded') ? 'Read Less' : 'Read More';
       }
     });
   });
 
-  // 2. Run a search on load if input has text (only relevant if page loads with a query)
+  // 2. Run search if input has value
   const input = document.getElementById('searchInput');
   if (input && input.value.trim() !== '') {
-    // Ensure the dropdown is active if there is a search query
     document.getElementById('searchDropdown')?.classList.add('active');
     runSearch(input.value.trim().toLowerCase());
   }
 
-  // 3. SHARE BUTTON FEATURE (Applied to both Articles and Reviews)
+  // 3. Share button feature
   const shareButtons = document.querySelectorAll('.share-btn');
   shareButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-      e.stopPropagation(); // crucial: prevents article from expanding/collapsing
+      e.stopPropagation();
       
-      // Find the nearest parent card with a data-id attribute
       const card = button.closest('.article-card, .review-card');
       if (!card) return;
       
-      // Get the title and generate ID/URL
       let title = card.querySelector('.article-title, .review-title')?.innerText.trim() || 'Content';
       const articleId = card.getAttribute('data-id') || button.getAttribute('data-id') || title.replace(/\s+/g, '-').toLowerCase();
       
@@ -277,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function() {
           url: articleUrl
         }).catch(() => {});
       } else {
-        // Fallback for non-supporting browsers
         navigator.clipboard.writeText(articleUrl).then(() => {
           showCopiedToast();
         }).catch(err => {
@@ -287,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // 4. SCROLL TO SHARED ARTICLE / REVIEW (FIXED SCROLLING AFTER TAB SWITCH)
+  // 4. Scroll to shared article/review
   const params = new URLSearchParams(window.location.search);
   const articleId = params.get("article");
   
@@ -303,121 +276,105 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         targetTabName = 'news';
       }
-      // 1. Switch the tab to make the content visible
+      
       switchTab(targetTabName);
 
-      // 2. Wait longer (1000ms) for the tab switch, animation, and scroll-to-top 
-      // to fully complete before attempting the specific element scroll.
       setTimeout(() => {
-        // Now scroll to the target element
         target.scrollIntoView({ behavior: "smooth", block: "center" });
         
-        // Only expand if it's an article-card
         if (target.classList.contains('article-card')) {
           target.classList.add("expanded"); 
         }
 
-        // Temporary highlight
         target.style.boxShadow = "0 0 15px #ff9800"; 
         setTimeout(() => (target.style.boxShadow = ""), 2000);
-      }, 1000); // 1 second delay
+      }, 1000);
     }
   }
 });
-//Lens Logic
-  const bladeCount = 8;
-        const bladesContainer = document.getElementById('blades');
-        const centerCircle = document.getElementById('center');
-        const fstopDisplay = document.getElementById('fstop');
+
+// ---- LENS LOGIC ----
+const bladeCount = 8;
+const bladesContainer = document.getElementById('blades');
+const centerCircle = document.getElementById('center');
+const fstopDisplay = document.getElementById('fstop');
+
+if (bladesContainer && centerCircle && fstopDisplay) {
+    for (let i = 0; i < bladeCount; i++) {
+        const blade = document.createElement('div');
+        blade.className = 'blade';
+        blade.innerHTML = '<div class="blade-inner"></div>';
+        blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
+        bladesContainer.appendChild(blade);
+    }
+
+    const blades = document.querySelectorAll('.blade');
+    let lastScrollY = window.scrollY;
+    let rotation = 0;
+
+    const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
+
+    function updateAperture() {
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = window.scrollY / maxScroll;
         
-        // Create aperture blades
-        for (let i = 0; i < bladeCount; i++) {
-            const blade = document.createElement('div');
-            blade.className = 'blade';
-            blade.innerHTML = '<div class="blade-inner"></div>';
-            blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
-            bladesContainer.appendChild(blade);
-        }
-
-        const blades = document.querySelectorAll('.blade');
-        let lastScrollY = window.scrollY;
-        let rotation = 0;
-
-        // F-stop values for display
-        const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
-
-        function updateAperture() {
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = window.scrollY / maxScroll;
-            
-            // Calculate rotation based on scroll direction
-            const scrollDelta = window.scrollY - lastScrollY;
-            rotation += scrollDelta * 0.1;
-            lastScrollY = window.scrollY;
-            
-            // Aperture opens when scrolling down (0 to 100%)
-            const openPercent = scrollPercent;
-            
-            // Min and max aperture size
-            const minSize = 4; // Smallest opening (f/22)
-            const maxSize = 44; // Largest opening (f/1.4)
-            
-            // Calculate current aperture size (inverted: scroll down = open = large)
-            const currentSize = minSize + (maxSize - minSize) * openPercent;
-            
-            // Update center circle
-            centerCircle.style.width = currentSize + 'px';
-            centerCircle.style.height = currentSize + 'px';
-            
-            // Calculate blade angle (more closed = more angled inward)
-            const bladeAngle = 25 - (openPercent * 20); // From 25deg (closed) to 5deg (open)
-            
-            // Update each blade
-            blades.forEach((blade, index) => {
-                const baseRotation = (360 / bladeCount) * index;
-                const totalRotation = baseRotation + rotation;
-                blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
-            });
-            
-            // Update f-stop display (inverted: more open = lower f-stop number)
-            const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
-            fstopDisplay.textContent = `f/${fStops[fstopIndex]}`;
-        }
-
-        // Initialize
-        updateAperture();
-
-        // Update on scroll with throttling for performance
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateAperture();
-                    ticking = false;
-                });
-                ticking = true;
-            }
+        const scrollDelta = window.scrollY - lastScrollY;
+        rotation += scrollDelta * 0.1;
+        lastScrollY = window.scrollY;
+        
+        const openPercent = scrollPercent;
+        
+        const minSize = 4;
+        const maxSize = 44;
+        
+        const currentSize = minSize + (maxSize - minSize) * openPercent;
+        
+        centerCircle.style.width = currentSize + 'px';
+        centerCircle.style.height = currentSize + 'px';
+        
+        const bladeAngle = 25 - (openPercent * 20);
+        
+        blades.forEach((blade, index) => {
+            const baseRotation = (360 / bladeCount) * index;
+            const totalRotation = baseRotation + rotation;
+            blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
         });
+        
+        const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
+        fstopDisplay.textContent = `f/${fStops[fstopIndex]}`;
+    }
 
-        // Handle window resize
-        window.addEventListener('resize', updateAperture);
+    updateAperture();
 
-        // Click aperture to scroll to top
-        const apertureContainer = document.querySelector('.aperture-container');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateAperture();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    window.addEventListener('resize', updateAperture);
+
+    const apertureContainer = document.querySelector('.aperture-container');
+    if (apertureContainer) {
         apertureContainer.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
-        
+    }
+}
+
 // =================================================================
-// 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
+// 💬 ===== COMMENT SECTION LOGIC (FIXED) =====
 // =================================================================
 
 const API_URL = "https://wave-backend-umi8.onrender.com";
-// FIX: Use a consistent path for all comment operations
-const API_BASE_PATH = "/comments"; 
 
 // Current user state
 let currentUser = null;
@@ -427,23 +384,24 @@ let currentUser = null;
 // -----------------------------------------------------------------
 
 /**
- * FIX: Function to parse JWT token (required for Google Sign-In)
+ * Parse JWT token
  */
 function parseJwt(token) {
-    // This is a standard client-side JWT parser implementation
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-};
-
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error('Error parsing JWT:', e);
+        return null;
+    }
+}
 
 /**
- * Displays a small toast notification with a message.
- * @param {string} message - The message to display.
+ * Show toast notification
  */
 function showToast(message) {
     let toast = document.createElement('div');
@@ -463,20 +421,15 @@ function showToast(message) {
     `;
     document.body.appendChild(toast);
     
-    // Set up removal animation
     setTimeout(() => {
-        // Since we don't have CSS, we just remove it after a delay.
         toast.style.opacity = '0'; 
         toast.style.transition = 'opacity 0.3s ease'; 
         setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
-  const logoutBtn = document.getElementById('logout-btn');
-if (logoutBtn) logoutBtn.style.display = isUserSignedIn() ? 'inline-block' : 'none';
+
 /**
- * Escapes HTML content to prevent Cross-Site Scripting (XSS).
- * @param {string} text - The string to escape.
- * @returns {string} The HTML-safe string.
+ * Escape HTML
  */
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -485,16 +438,14 @@ function escapeHtml(text) {
 }
 
 /**
- * Checks if a user is currently simulated as signed in.
- * @returns {boolean} True if currentUser is set, false otherwise.
+ * Check if user is signed in
  */
 function isUserSignedIn() {
     return currentUser !== null;
 }
 
 /**
- * Gets the email of the current signed-in user.
- * @returns {string|null} The current user's email.
+ * Get current user email
  */
 function getCurrentUserEmail() {
     return currentUser;
@@ -505,14 +456,9 @@ function getCurrentUserEmail() {
 // -----------------------------------------------------------------
 
 /**
- * Simulates a sign-in process and saves the user email.
- */
-// ---------------- GOOGLE SIGN-IN ----------------
-/**
- * Prompts the user to sign in with Google.
+ * Prompt Google Sign-In
  */
 function promptSignIn() {
-    // Initialize Google Sign-In
     if (typeof google === 'undefined' || !google.accounts) {
         showToast('⚠️ Google Sign-In not loaded yet. Please refresh the page.');
         return;
@@ -526,35 +472,62 @@ function promptSignIn() {
     google.accounts.id.prompt();
 }
 
-// ---------------- GOOGLE SIGN-IN ----------------
+/**
+ * Handle Google Sign-In
+ */
 function handleGoogleSignIn(response) {
-  // FIX: parseJwt is now defined above
-  const user = parseJwt(response.credential);
-  currentUser = user.email;
-  localStorage.setItem("googleUser", JSON.stringify(user));
-  updateAllCommentForms();
-  
-  // Show/hide logout button
-  const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) logoutBtn.style.display = 'inline-block';
-  
-  showToast(`✅ Signed in as ${user.email}`);
+    const user = parseJwt(response.credential);
+    if (!user) {
+        showToast('❌ Error signing in');
+        return;
+    }
+    
+    currentUser = user.email;
+    localStorage.setItem("googleUser", JSON.stringify(user));
+    updateAllCommentForms();
+    
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+    
+    showToast(`✅ Signed in as ${user.email}`);
 }
 
-// Restore user on page load
-document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("googleUser");
-  if (saved) {
-    const user = JSON.parse(saved);
-    currentUser = user.email;
-  }
-  updateAllCommentForms();
-});
-
+/**
+ * Logout function
+ */
+function logout() {
+    currentUser = null;
+    localStorage.removeItem("googleUser");
+    updateAllCommentForms();
+    
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.style.display = 'none';
+    
+    showToast('✅ Logged out successfully');
+}
 
 /**
- * Updates the disabled status and visibility of all comment inputs/buttons
- * based on the current sign-in state.
+ * Restore user on page load
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const saved = localStorage.getItem("googleUser");
+    if (saved) {
+        try {
+            const user = JSON.parse(saved);
+            currentUser = user.email;
+            
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) logoutBtn.style.display = 'inline-block';
+        } catch (e) {
+            console.error('Error parsing saved user:', e);
+        }
+    }
+    updateAllCommentForms();
+    initializeCommentCounts();
+});
+
+/**
+ * Update all comment forms
  */
 function updateAllCommentForms() {
     document.querySelectorAll('.comment-input').forEach(input => {
@@ -578,12 +551,11 @@ function updateAllCommentForms() {
 }
 
 // -----------------------------------------------------------------
-// 🔢 Display and Initialization
+// 📢 Display and Initialization
 // -----------------------------------------------------------------
 
 /**
- * Toggles the visibility of a specific comment section thread.
- * @param {HTMLElement} indicator - The comment count/toggle button element.
+ * Toggle comment section
  */
 function toggleCommentSection(indicator) {
     const contentId = indicator.querySelector('.comment-count').getAttribute('data-content-id');
@@ -601,9 +573,7 @@ function toggleCommentSection(indicator) {
 }
 
 /**
- * Updates the visible comment count on the indicator element.
- * @param {string} contentId - The ID of the content item.
- * @param {number} count - The new comment count.
+ * Update comment count
  */
 function updateCommentCount(contentId, count) {
     const countElement = document.querySelector(`.comment-count[data-content-id="${contentId}"]`);
@@ -613,12 +583,9 @@ function updateCommentCount(contentId, count) {
 }
 
 /**
- * Initializes comment counts for all content items and restores user session on page load.
+ * Initialize comment counts
  */
 async function initializeCommentCounts() {
-    // Restore user session
-    
-    // Fetch and update comment count for every element
     document.querySelectorAll('.comment-count').forEach(async (countElement) => {
         const contentId = countElement.getAttribute('data-content-id');
         if (!contentId) {
@@ -627,8 +594,8 @@ async function initializeCommentCounts() {
         }
         
         try {
-            // FIX: Add /comments prefix for GET requests
-            const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`);
+            // FIX: Use correct API path without /comments prefix
+            const res = await fetch(`${API_URL}/${contentId}`);
             if (res.ok) {
                 const comments = await res.json();
                 updateCommentCount(contentId, comments.length);
@@ -644,8 +611,7 @@ async function initializeCommentCounts() {
 // -----------------------------------------------------------------
 
 /**
- * Loads and displays comments from the API for a specific content ID.
- * @param {string} contentId - The ID of the content item.
+ * Render comments
  */
 async function renderComments(contentId) {
     const list = document.getElementById("comments-list-" + contentId);
@@ -657,10 +623,9 @@ async function renderComments(contentId) {
     list.innerHTML = "<p>Loading comments...</p>";
 
     try {
-        // FIX: Add /comments prefix for GET requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`); 
+        // FIX: Use correct API path without /comments prefix
+        const res = await fetch(`${API_URL}/${contentId}`);
         if (!res.ok) {
-            // FIX: This throws the 404 error but now should hit the correct endpoint
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         const comments = await res.json();
@@ -696,7 +661,6 @@ async function renderComments(contentId) {
                 `;
                 list.appendChild(div);
                 
-                // Render replies if they exist
                 if (comment.replies && comment.replies.length > 0) {
                     renderReplies(comment._id, comment.replies);
                 }
@@ -710,16 +674,15 @@ async function renderComments(contentId) {
         list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
     }
 }
+
 /**
- * Renders a list of replies for a specific comment.
- * @param {string} parentCommentId - The ID of the comment to attach replies under.
- * @param {Array} replies - The array of reply objects.
+ * Render replies
  */
 function renderReplies(parentCommentId, replies = []) {
     const container = document.getElementById(`replies-${parentCommentId}`);
     if (!container) return;
 
-    container.innerHTML = ''; // Clear previous replies
+    container.innerHTML = '';
 
     if (replies.length === 0) return;
 
@@ -738,16 +701,15 @@ function renderReplies(parentCommentId, replies = []) {
         container.appendChild(div);
     });
 }
+
 /**
- * Submits a new comment to the backend API.
- * @param {string} contentId - The ID of the content item.
+ * Submit comment
  */
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-    showToast('⚠️ Please sign in with Google first.');
-    return;
-}
-
+        showToast('⚠️ Please sign in with Google first.');
+        return;
+    }
     
     const textarea = document.querySelector(
         `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
@@ -767,8 +729,8 @@ async function submitComment(contentId) {
     const email = getCurrentUserEmail();
 
     try {
-        // FIX: Add /comments prefix for POST requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}`, {
+        // FIX: Use correct API path without /comments prefix
+        const res = await fetch(`${API_URL}/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, email, text })
@@ -788,16 +750,17 @@ async function submitComment(contentId) {
 }
 
 /**
- * Sends a request to the API to delete a specific comment.
- * @param {string} contentId - The ID of the content item (used for re-rendering).
- * @param {string} commentId - The MongoDB ID of the comment to delete.
+ * Delete comment
  */
 async function deleteComment(contentId, commentId) {
-    // FIX: Removed the illegal confirm() call. Rely on button visibility for security.
+    if (!isUserSignedIn()) {
+        showToast('⚠️ Please sign in first.');
+        return;
+    }
     
     try {
-        // FIX: Add /comments prefix for DELETE requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/${commentId}`, {
+        // FIX: Use correct API path without /comments prefix
+        const res = await fetch(`${API_URL}/${commentId}`, {
             method: "DELETE"
         });
 
@@ -812,10 +775,9 @@ async function deleteComment(contentId, commentId) {
         showToast("Error deleting comment: " + err.message);
     }
 }
+
 /**
- * Toggles the reply form visibility for a specific comment.
- * @param {string} contentId - The parent content item ID.
- * @param {string} commentId - The ID of the comment to reply to.
+ * Toggle reply form
  */
 function toggleReplyForm(contentId, commentId) {
     const replyForm = document.getElementById(`reply-form-${commentId}`);
@@ -825,16 +787,15 @@ function toggleReplyForm(contentId, commentId) {
         console.warn(`Reply form not found for comment: ${commentId}`);
     }
 }
+
 /**
- * Submits a reply for a specific comment.
- * @param {string} contentId - The ID of the parent content item.
- * @param {string} commentId - The ID of the parent comment being replied to.
+ * Submit reply
  */
 async function submitReply(contentId, commentId) {
-   if (!isUserSignedIn()) {
-    showToast('⚠️ Please sign in with Google first.');
-    return;
-}
+    if (!isUserSignedIn()) {
+        showToast('⚠️ Please sign in with Google first.');
+        return;
+    }
 
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (!replyForm) {
@@ -852,8 +813,8 @@ async function submitReply(contentId, commentId) {
     const email = getCurrentUserEmail();
 
     try {
-        // FIX: Add /comments prefix for Reply POST requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/reply`, {
+        // FIX: Use correct API path without /comments prefix
+        const res = await fetch(`${API_URL}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
@@ -863,17 +824,12 @@ async function submitReply(contentId, commentId) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        // Clear the input field and hide the form
         textarea.value = "";
         replyForm.classList.remove("active");
-
-        // Re-render comments so the new reply appears immediately
         renderComments(contentId);
-
         showToast("✅ Reply posted!");
     } catch (err) {
         console.error("Error submitting reply:", err);
         showToast("Error submitting reply: " + err.message);
     }
 }
-// ---- END ----
