@@ -732,5 +732,17 @@ async function deleteComment(contentId, commentId) {
         showToast("Error deleting comment: " + err.message);
     }
 }
-
+/**
+ * Toggles the reply form visibility for a specific comment.
+ * @param {string} contentId - The parent content item ID.
+ * @param {string} commentId - The ID of the comment to reply to.
+ */
+function toggleReplyForm(contentId, commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.classList.toggle("active");
+    } else {
+        console.warn(`Reply form not found for comment: ${commentId}`);
+    }
+}
 // ---- END ----
