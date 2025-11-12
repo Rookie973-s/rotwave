@@ -108,12 +108,13 @@ function showToast(message) {
     }
 }
 
-// ---- HELPER FUNCTIONS FOR GOOGLE SIGN-IN (JWT PARSING) ----
+// =================================================================
+// 🔑 --- AUTH HELPER FUNCTIONS (FIXED) ---
+// =================================================================
 
 /**
  * Parses a JWT token to extract the payload data.
- * The token is base64url encoded in three parts separated by dots: header.payload.signature
- * We only need to decode the payload.
+ * FIX: This function was missing and caused the ReferenceError.
  * @param {string} token - The JWT token string.
  * @returns {object|null} The decoded payload object or null if decoding fails.
  */
@@ -134,6 +135,7 @@ function parseJwt(token) {
         return null;
     }
 }
+
 
 // ---- AUTH & USER STATE MANAGEMENT ----
 let currentUser = null; // Stores decoded user data
@@ -195,7 +197,8 @@ function updateAuthUI() {
  */
 function handleGoogleSignIn(response) {
     if (response.credential) {
-        const decodedToken = parseJwt(response.credential); // <-- This now calls the defined function
+        // This line is where the ReferenceError was occurring
+        const decodedToken = parseJwt(response.credential); 
         if (decodedToken) {
             currentUser = decodedToken;
             localStorage.setItem('wave_auth_token', response.credential);
@@ -216,12 +219,6 @@ function handleGoogleSignIn(response) {
 function signOutUser() {
     currentUser = null;
     localStorage.removeItem('wave_auth_token');
-    // Google's client library is not necessary for local sign-out
-    // try {
-    //     google.accounts.id.disableAutoSelect();
-    // } catch (e) {
-    //     console.warn("Google identity client not fully loaded for disableAutoSelect:", e);
-    // }
     
     updateAuthUI();
     showToast('You have been signed out.');
@@ -668,7 +665,7 @@ async function deleteReply(contentId, parentCommentId, replyId) {
 }
 
 
-// ---- MENU LOGIC ----
+// ---- MENU LOGIC (Ensuring this is correct) ----
 
 function toggleMenu() {
     const nav = document.getElementById('navMenu');
@@ -704,7 +701,7 @@ document.addEventListener('click', function(event) {
 });
 
 
-// ---- APERTURE EFFECT LOGIC ----
+// ---- APERTURE EFFECT LOGIC (Ensuring this is correct) ----
 // (Assuming this is a purely decorative effect based on scroll position)
 
 const apertureBlades = 6;
