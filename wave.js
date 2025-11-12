@@ -35,470 +35,781 @@ function switchTab(tabName, event) { // Pass 'event' explicitly if available
     clickedButton = event.target;
   } else {
     // Fallback for programmatic calls (like from the shared link logic)
-    clickedButton = document.querySelector(`.tab-btn[data-tab='${tabName}']`);
+    clickedButton = document.querySelector(`.tab-btn[onclick*="switchTab('${tabName}')"]`);
   }
-
-  // Handle button activation
-  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+  
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById(tabName).classList.add("active");
+  
   if (clickedButton) {
     clickedButton.classList.add("active");
-  } else {
-    // Activate the button matching the tabName if the click event wasn't used
-    const fallbackButton = document.querySelector(`.tab-btn[data-tab='${tabName}']`);
-    if (fallbackButton) fallbackButton.classList.add('active');
   }
-
-  // Activate the content
-  const content = document.getElementById(tabName);
-  if (content) {
-    content.classList.add("active");
-  }
+  // Ensure scroll to top happens for the new tab
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Initial tab load (default to the first one)
-window.addEventListener('load', () => {
-  const defaultTab = document.querySelector('.tab-btn.active');
-  if (defaultTab) {
-    switchTab(defaultTab.getAttribute('data-tab'));
-  } else {
-    // Fallback to the very first tab if no 'active' class is set
-    const firstTab = document.querySelector('.tab-btn');
-    if (firstTab) switchTab(firstTab.getAttribute('data-tab'));
-  }
-});
-
-
-// ---- DARK MODE LOGIC ----
-function toggleDarkMode() {
-  document.body.classList.toggle('light-mode');
-  // Save preference to localStorage
-  const isLightMode = document.body.classList.contains('light-mode');
-  localStorage.setItem('darkModePreference', isLightMode ? 'light' : 'dark');
-}
-
-// Load dark mode preference on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const preference = localStorage.getItem('darkModePreference');
-    if (preference === 'light') {
-        document.body.classList.add('light-mode');
+// ---- NEW: MENU LOGIC ----
+// ---- NEW: MENU LOGIC ----
+function toggleMenu() {
+    const menu = document.getElementById('menuDrawer');
+    const isVisible = menu.classList.toggle('active');
+    
+    // Accessibility focus management
+    const menuToggleBtn = document.getElementById('menuToggle');
+    if (isVisible) {
+        // Find the new Close button or the first link and focus it
+        const firstFocusable = menu.querySelector('#menuCloseBtn, a'); 
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
     } else {
-        document.body.classList.remove('light-mode');
+        // Return focus to the toggle button
+        menuToggleBtn.focus();
     }
+}
 
-    // Initialize the carousel
-    if (track) updateCarousel();
+// ---- NEW: SEARCH ICON TOGGLE LOGIC (Replaces the inline search bar) ----
+function toggleSearchDropdown() {
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchInput = document.getElementById('searchInput');
+    
+    // Toggle the visibility
+    const isVisible = searchDropdown.classList.toggle('active');
+    
+    // If shown, focus the input; otherwise, clear and blur it
+    if (isVisible) {
+        searchInput.focus();
+    } else {
+        searchInput.value = ''; // Clear the input when hiding
+        runSearch('');         // Clear results
+        searchInput.blur();
+    }
+}
+
+
+// ---- SMALL TOAST (for copy success) ----
+function showCopiedToast() {
+  let toast = document.createElement('div');
+  toast.innerText = 'âœ… Link copied!';
+  toast.style.position = 'fixed';
+  toast.style.bottom = '20px';
+  toast.style.right = '20px';
+  toast.style.background = '#222';
+  toast.style.color = '#fff';
+  toast.style.padding = '10px 15px';
+  toast.style.borderRadius = '8px';
+  toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+  toast.style.fontSize = '14px';
+  toast.style.zIndex = '1000';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+// ---- HEADER HIDE/SHOW ----
+let lastScroll = 0;
+const header = document.querySelector(".header");
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.pageYOffset;
+  // Do not hide if the menu or search dropdown is open
+  if (document.getElementById('menuDrawer')?.classList.contains('active') ||
+      document.getElementById('searchDropdown')?.classList.contains('active')) {
+      return;
+  }
+  
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.classList.add("hide");
+  } else {
+    header.classList.remove("hide");
+  }
+  lastScroll = currentScroll;
 });
 
-// Attach event listener for the toggle button
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (darkModeToggle) {
-  darkModeToggle.addEventListener('click', toggleDarkMode);
+// Optional: hide header briefly when clicking a tab or article
+document.querySelectorAll(".tab-btn, .article-card").forEach(el => {
+  el.addEventListener("click", () => {
+    header.classList.add("hide");
+    setTimeout(() => header.classList.remove("hide"), 1200);
+  });
+});
+
+// ---- SEARCH LOGIC ----
+const searchInput = document.getElementById('searchInput'); 
+
+if (searchInput) {
+  searchInput.addEventListener('input', function () {
+    const q = this.value.trim().toLowerCase();
+    runSearch(q);
+  });
 }
 
+function runSearch(query) {
+  const activeTab = document.querySelector('.tab-content.active');
+  if (!activeTab) return;
+  
+  const tabId = activeTab.id;
+  let items = [];
+  
+  if (tabId === 'news') {
+    items = Array.from(activeTab.querySelectorAll('.article-card'));
+    items.forEach(item => {
+      const titleEl = item.querySelector('.article-title');
+      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
+      item.style.display = title.includes(query) ? '' : 'none';
+    });
+  } else if (tabId === 'comics') {
+    items = Array.from(activeTab.querySelectorAll('.comic-card'));
+    items.forEach(item => {
+      const titleEl = item.querySelector('.comic-title');
+      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
+      item.style.display = title.includes(query) ? '' : 'none';
+    });
+  } else if (tabId === 'reviews') {
+    items = Array.from(activeTab.querySelectorAll('.review-card'));
+    items.forEach(item => {
+      const titleEl = item.querySelector('.review-title');
+      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
+      item.style.display = title.includes(query) ? '' : 'none';
+    });
+  }
+}
 
-// ---- TOAST NOTIFICATION UTILITY ----
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    if (toast) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000); // Hide after 3 seconds
+// --- THEME TOGGLE LOGIC (UPDATED FOR SVG SWAP) ---
+const themeToggle = document.getElementById('themeToggle');
+// SVG content for the icons
+const sunIconSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>`;
+const moonIconSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>`;
+
+if (themeToggle) {
+    // 1. Function to apply the selected theme
+    function applyTheme(isLight) {
+        document.body.classList.toggle('light-mode', isLight);
+        
+        // **NEW:** Swap the SVG based on the theme state
+        themeToggle.innerHTML = isLight ? moonIconSVG : sunIconSVG; 
+        
+        // Update the button's aria-label for accessibility
+        themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
-}
 
+    // 2. Load saved preference or check system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+    // Set initial theme
+    if (savedTheme) {
+        applyTheme(savedTheme === 'light');
+    } else {
+        // Apply system preference on first visit
+        applyTheme(prefersLight); 
+    }
+
+    // 3. Event listener for the click
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.body.classList.contains('light-mode');
+        // Toggle the theme
+        applyTheme(!isLight);
+        // Save the new preference
+        localStorage.setItem('theme', !isLight ? 'light' : 'dark');
+    });
+}
+// --- END THEME TOGGLE LOGIC ---
+
+// ---- DOM READY: MAIN FUNCTIONALITY ----
+document.addEventListener("DOMContentLoaded", function() {
+  
+  // 1. Expand / collapse handling for news articles - now handled by read-more button only
+  document.querySelectorAll(".read-more-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const article = btn.closest('.article-card');
+      if (article) {
+        article.classList.toggle("expanded");
+        // Update button text
+        btn.textContent = article.classList.contains('expanded') ? 'Read Less' : 'Read More';
+      }
+    });
+  });
+
+  // 2. Run a search on load if input has text (only relevant if page loads with a query)
+  const input = document.getElementById('searchInput');
+  if (input && input.value.trim() !== '') {
+    // Ensure the dropdown is active if there is a search query
+    document.getElementById('searchDropdown')?.classList.add('active');
+    runSearch(input.value.trim().toLowerCase());
+  }
+
+  // 3. SHARE BUTTON FEATURE (Applied to both Articles and Reviews)
+  const shareButtons = document.querySelectorAll('.share-btn');
+  shareButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation(); // crucial: prevents article from expanding/collapsing
+      
+      // Find the nearest parent card with a data-id attribute
+      const card = button.closest('.article-card, .review-card');
+      if (!card) return;
+      
+      // Get the title and generate ID/URL
+      let title = card.querySelector('.article-title, .review-title')?.innerText.trim() || 'Content';
+      const articleId = card.getAttribute('data-id') || button.getAttribute('data-id') || title.replace(/\s+/g, '-').toLowerCase();
+      
+      const shareText = `Check out this content on ROTWAVE: ${title}`;
+      const articleUrl = `${window.location.origin}${window.location.pathname}?article=${encodeURIComponent(articleId)}`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title,
+          text: shareText,
+          url: articleUrl
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(articleUrl).then(() => {
+          showCopiedToast();
+        }).catch(err => {
+          console.error('Could not copy text: ', err);
+        });
+      }
+    });
+  });
+
+  // 4. SCROLL TO SHARED ARTICLE / REVIEW (FIXED SCROLLING AFTER TAB SWITCH)
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get("article");
+  
+  if (articleId) {
+    const target = document.querySelector(`[data-id="${articleId}"]`);
+    
+    if (target) {
+      let targetTabName;
+      if (target.closest('#reviews')) {
+        targetTabName = 'reviews';
+      } else if (target.closest('#comics')) {
+        targetTabName = 'comics';
+      } else {
+        targetTabName = 'news';
+      }
+      // 1. Switch the tab to make the content visible
+      switchTab(targetTabName);
+
+      // 2. Wait longer (1000ms) for the tab switch, animation, and scroll-to-top 
+      // to fully complete before attempting the specific element scroll.
+      setTimeout(() => {
+        // Now scroll to the target element
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        
+        // Only expand if it's an article-card
+        if (target.classList.contains('article-card')) {
+          target.classList.add("expanded"); 
+        }
+
+        // Temporary highlight
+        target.style.boxShadow = "0 0 15px #ff9800"; 
+        setTimeout(() => (target.style.boxShadow = ""), 2000);
+      }, 1000); // 1 second delay
+    }
+  }
+});
+//Lens Logic
+ const bladeCount = 8;
+        const bladesContainer = document.getElementById('blades');
+        const centerCircle = document.getElementById('center');
+        const fstopDisplay = document.getElementById('fstop');
+        
+        // Create aperture blades
+        for (let i = 0; i < bladeCount; i++) {
+            const blade = document.createElement('div');
+            blade.className = 'blade';
+            blade.innerHTML = '<div class="blade-inner"></div>';
+            blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
+            bladesContainer.appendChild(blade);
+        }
+
+        const blades = document.querySelectorAll('.blade');
+        let lastScrollY = window.scrollY;
+        let rotation = 0;
+
+        // F-stop values for display
+        const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
+
+        function updateAperture() {
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = window.scrollY / maxScroll;
+            
+            // Calculate rotation based on scroll direction
+            const scrollDelta = window.scrollY - lastScrollY;
+            rotation += scrollDelta * 0.1;
+            lastScrollY = window.scrollY;
+            
+            // Aperture opens when scrolling down (0 to 100%)
+            const openPercent = scrollPercent;
+            
+            // Min and max aperture size
+            const minSize = 4; // Smallest opening (f/22)
+            const maxSize = 44; // Largest opening (f/1.4)
+            
+            // Calculate current aperture size (inverted: scroll down = open = large)
+            const currentSize = minSize + (maxSize - minSize) * openPercent;
+            
+            // Update center circle
+            centerCircle.style.width = currentSize + 'px';
+            centerCircle.style.height = currentSize + 'px';
+            
+            // Calculate blade angle (more closed = more angled inward)
+            const bladeAngle = 25 - (openPercent * 20); // From 25deg (closed) to 5deg (open)
+            
+            // Update each blade
+            blades.forEach((blade, index) => {
+                const baseRotation = (360 / bladeCount) * index;
+                const totalRotation = baseRotation + rotation;
+                blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
+            });
+            
+            // Update f-stop display (inverted: more open = lower f-stop number)
+            const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
+            fstopDisplay.textContent = `f/${fStops[fstopIndex]}`;
+        }
+
+        // Initialize
+        updateAperture();
+
+        // Update on scroll with throttling for performance
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateAperture();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', updateAperture);
+
+        // Click aperture to scroll to top
+        const apertureContainer = document.querySelector('.aperture-container');
+        apertureContainer.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+       
+      // =================================================================
+// ðŸ’¬ ===== COMMENT SECTION LOGIC (Frontend) =====
 // =================================================================
-// 🔑 --- AUTH HELPER FUNCTIONS (FIXED) ---
-// =================================================================
+
+const API_URL = "https://wave-backend-umi8.onrender.com";
+
+// Current user state
+let currentUser = null;
+
+// -----------------------------------------------------------------
+// ðŸ’¡ Helper Functions
+// -----------------------------------------------------------------
 
 /**
- * Parses a JWT token to extract the payload data.
- * FIX: This function was missing and caused the ReferenceError.
- * @param {string} token - The JWT token string.
- * @returns {object|null} The decoded payload object or null if decoding fails.
+ * Displays a small toast notification with a message.
+ * @param {string} message - The message to display.
  */
-function parseJwt(token) {
-    try {
-        // Get the payload part (the second part)
-        const base64Url = token.split('.')[1];
-        // Replace non-url-safe characters and decode
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        // Decode base64 and parse JSON
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        return JSON.parse(jsonPayload);
-    } catch (e) {
-        console.error('Failed to parse JWT:', e);
-        return null;
-    }
+function showToast(message) {
+    let toast = document.createElement('div');
+    toast.innerText = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #222;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-size: 14px;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    
+    // Set up removal animation
+    setTimeout(() => {
+        // Assuming 'fadeOut' is a defined CSS animation
+        toast.style.animation = 'fadeOut 0.3s ease'; 
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+ const logoutBtn = document.getElementById('logout-btn');
+if (logoutBtn) logoutBtn.style.display = isUserSignedIn() ? 'inline-block' : 'none';
+/**
+ * Escapes HTML content to prevent Cross-Site Scripting (XSS).
+ * @param {string} text - The string to escape.
+ * @returns {string} The HTML-safe string.
+ */
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
-
-// ---- AUTH & USER STATE MANAGEMENT ----
-let currentUser = null; // Stores decoded user data
-
+/**
+ * Checks if a user is currently simulated as signed in.
+ * @returns {boolean} True if currentUser is set, false otherwise.
+ */
 function isUserSignedIn() {
     return currentUser !== null;
 }
 
+/**
+ * Gets the email of the current signed-in user.
+ * @returns {string|null} The current user's email.
+ */
 function getCurrentUserEmail() {
-    return currentUser ? currentUser.email : null;
+    return currentUser;
 }
 
-function getCurrentUserName() {
-    return currentUser ? currentUser.name : 'Anonymous';
-}
-
-function getCurrentUserPic() {
-     // Fallback if picture is not available
-    return currentUser ? currentUser.picture : 'https://placehold.co/40x40/555/fff?text=U';
-}
+// -----------------------------------------------------------------
+// ðŸ‘¤ User/Form State Functions
+// -----------------------------------------------------------------
 
 /**
- * Updates the UI based on the user's sign-in status.
+ * Simulates a sign-in process and saves the user email.
  */
-function updateAuthUI() {
-    const signInButton = document.getElementById('g_id_signin');
-    const userProfileDiv = document.getElementById('userProfile');
-    const signOutButton = document.getElementById('signOutButton');
-    const commentInput = document.getElementById('comment-input');
-    const userNameDisplay = document.getElementById('userNameDisplay');
-
-    if (currentUser) {
-        // User is signed in
-        if (signInButton) signInButton.style.display = 'none';
-        if (userProfileDiv) {
-            userProfileDiv.style.display = 'flex';
-            const profilePic = userProfileDiv.querySelector('img');
-            if (profilePic) {
-                profilePic.src = getCurrentUserPic();
-                profilePic.alt = getCurrentUserName();
-            }
-            if(userNameDisplay) userNameDisplay.textContent = getCurrentUserName();
-        }
-        if (signOutButton) signOutButton.style.display = 'block';
-        if (commentInput) commentInput.placeholder = `Add a comment as ${getCurrentUserName()}...`;
-    } else {
-        // User is signed out
-        if (signInButton) signInButton.style.display = 'block';
-        if (userProfileDiv) userProfileDiv.style.display = 'none';
-        if (signOutButton) signOutButton.style.display = 'none';
-        if (commentInput) commentInput.placeholder = 'Please sign in to comment';
-        if (userNameDisplay) userNameDisplay.textContent = '';
-    }
-}
-
+// ---------------- GOOGLE SIGN-IN ----------------
 /**
- * Callback function provided to Google Sign-In button.
- * @param {object} response - The response object from Google.
+ * Prompts the user to sign in with Google.
  */
-function handleGoogleSignIn(response) {
-    if (response.credential) {
-        // This line is where the ReferenceError was occurring
-        const decodedToken = parseJwt(response.credential); 
-        if (decodedToken) {
-            currentUser = decodedToken;
-            localStorage.setItem('wave_auth_token', response.credential);
-            updateAuthUI();
-            showToast(`Welcome, ${getCurrentUserName()}!`);
-            // Re-render comments if a section is open, to enable commenting/replying
-            document.querySelectorAll('.full-comment-thread.open').forEach(thread => {
-                const contentId = thread.getAttribute('data-content-id');
-                if (contentId) renderComments(contentId);
-            });
-        }
-    }
-}
-
-/**
- * Signs the user out locally.
- */
-function signOutUser() {
-    currentUser = null;
-    localStorage.removeItem('wave_auth_token');
-    
-    updateAuthUI();
-    showToast('You have been signed out.');
-    // Re-render to disable input fields
-    document.querySelectorAll('.full-comment-thread.open').forEach(thread => {
-        const contentId = thread.getAttribute('data-content-id');
-        if (contentId) renderComments(contentId);
-    });
-}
-
-// Attach sign-out listener
-const signOutBtn = document.getElementById('signOutButton');
-if (signOutBtn) {
-    signOutBtn.addEventListener('click', signOutUser);
-}
-
-// Check for existing token on load
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('wave_auth_token');
-    if (token) {
-        const decodedToken = parseJwt(token);
-        if (decodedToken && decodedToken.exp * 1000 > Date.now()) { // Check if token is still valid
-            currentUser = decodedToken;
-        } else {
-            localStorage.removeItem('wave_auth_token'); // Token expired
-        }
-    }
-    // Update UI immediately on load, regardless of auth status
-    updateAuthUI();
-});
-
-// Make the sign-in handler globally accessible for the Google client script
-window.handleGoogleSignIn = handleGoogleSignIn;
-
-
-// ---- API SETUP ----
-const API_URL = 'https://wave-backend-umi8.onrender.com';
-
-// =================================================================
-// 💬 --- COMMENT & REPLY RENDERING/LOGIC ---
-// =================================================================
-
-/**
- * Creates the HTML for a single reply item.
- * @param {object} reply - The reply data object.
- * @param {string} contentId - The ID of the content.
- * @param {string} parentCommentId - The ID of the parent comment.
- * @returns {string} The HTML string for the reply.
- */
-function createReplyHTML(reply, contentId, parentCommentId) {
-    const isOwner = reply.email === getCurrentUserEmail();
-    const formattedDate = new Date(reply.createdAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
-
-    return `
-        <div class="reply-item" id="reply-${reply._id}">
-            <div class="reply-header">
-                <img src="${reply.userPic || 'https://placehold.co/40x40/555/fff?text=U'}" alt="${reply.userName}" class="user-pic">
-                <div class="reply-meta">
-                    <span class="reply-user-name">${reply.userName}</span>
-                    <span class="reply-date">${formattedDate}</span>
-                </div>
-                <div class="reply-actions">
-                    ${isOwner ? `<button class="delete-btn" onclick="deleteReply('${contentId}', '${parentCommentId}', '${reply._id}')">Delete</button>` : ''}
-                    <button class="like-btn" onclick="toggleLike('${reply._id}', 'reply', '${contentId}')">
-                        <svg class="like-icon ${reply.likes.includes(getCurrentUserEmail()) ? 'liked' : ''}" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        <span class="like-count">${reply.likes.length}</span>
-                    </button>
-                </div>
-            </div>
-            <p class="reply-text">${reply.text}</p>
-        </div>
-    `;
-}
-
-/**
- * Creates the HTML for a single comment thread.
- * @param {object} comment - The comment data object.
- * @param {string} contentId - The ID of the content.
- * @returns {string} The HTML string for the comment.
- */
-function createCommentHTML(comment, contentId) {
-    const isOwner = comment.email === getCurrentUserEmail();
-    const formattedDate = new Date(comment.createdAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
-
-    // Generate replies HTML
-    const repliesHTML = comment.replies.map(reply => createReplyHTML(reply, contentId, comment._id)).join('');
-
-    // Determine the reply form state
-    const replyFormActive = isUserSignedIn() ? 'active' : '';
-    const replyPlaceholder = isUserSignedIn() ? `Reply as ${getCurrentUserName()}...` : 'Please sign in to reply';
-    const isReplyEnabled = isUserSignedIn();
-    const replyInputDisabled = isReplyEnabled ? '' : 'disabled';
-
-
-    return `
-        <div class="comment-item" id="comment-${comment._id}">
-            <div class="comment-header">
-                <img src="${comment.userPic || 'https://placehold.co/40x40/555/fff?text=U'}" alt="${comment.userName}" class="user-pic">
-                <div class="comment-meta">
-                    <span class="comment-user-name">${comment.userName}</span>
-                    <span class="comment-date">${formattedDate}</span>
-                </div>
-                <div class="comment-actions">
-                    ${isOwner ? `<button class="delete-btn" onclick="deleteComment('${contentId}', '${comment._id}')">Delete</button>` : ''}
-                    <button class="like-btn" onclick="toggleLike('${comment._id}', 'comment', '${contentId}')">
-                         <svg class="like-icon ${comment.likes.includes(getCurrentUserEmail()) ? 'liked' : ''}" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        <span class="like-count">${comment.likes.length}</span>
-                    </button>
-                    <button class="reply-btn" onclick="toggleReplyForm('${comment._id}', event)">Reply</button>
-                </div>
-            </div>
-            <p class="comment-text">${comment.text}</p>
-            
-            <div class="replies-container">
-                ${repliesHTML}
-                
-                <form id="reply-form-${comment._id}" class="reply-form" onsubmit="event.preventDefault(); submitReply('${contentId}', '${comment._id}')">
-                    <textarea class="reply-input" placeholder="${replyPlaceholder}" rows="2" ${replyInputDisabled}></textarea>
-                    <button type="submit" class="submit-reply-btn" ${replyInputDisabled}>Post Reply</button>
-                </form>
-            </div>
-        </div>
-    `;
-}
-
-/**
- * Renders the comments for a specific content ID.
- * @param {string} contentId - The unique ID of the content.
- */
-async function renderComments(contentId) {
-    const commentsList = document.getElementById(`comments-list-${contentId}`);
-    const commentsSection = document.getElementById(`full-comment-thread-${contentId}`);
-    const commentInput = document.getElementById('comment-input');
-    
-    if (!commentsList || !commentsSection || !commentInput) return;
-
-    commentsList.innerHTML = '<div class="comments-loading">Loading comments...</div>';
-    
-    // Disable main comment input if user is not signed in
-    const isEnabled = isUserSignedIn();
-    commentInput.disabled = !isEnabled;
-    commentInput.placeholder = isEnabled ? `Add a comment as ${getCurrentUserName()}...` : 'Please sign in to comment';
-    
-    try {
-        // Fetch comments for the specific contentId
-        const res = await fetch(`${API_URL}/${contentId}`); 
-
-        if (!res.ok) {
-             // 502 Bad Gateway is likely handled here now.
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        const comments = await res.json();
-        
-        if (comments.length === 0) {
-            commentsList.innerHTML = '<div class="comments-empty">Be the first to leave a comment!</div>';
-            return;
-        }
-
-        const commentsHTML = comments.map(comment => createCommentHTML(comment, contentId)).join('');
-        commentsList.innerHTML = commentsHTML;
-
-    } catch (error) {
-        console.error('Error loading comments:', error);
-        commentsList.innerHTML = '<div class="comments-error">Error loading comments. Please try again later.</div>';
-    }
-}
-
-/**
- * Toggles the visibility of the full comment section.
- * @param {string} contentId - The unique ID of the content.
- * @param {Event} event - The click event.
- */
-function toggleCommentSection(contentId, event) {
-    // Prevent the event from bubbling up and interfering with other logic
-    if (event) event.stopPropagation();
-    
-    const thread = document.getElementById(`full-comment-thread-${contentId}`);
-    if (!thread) return;
-
-    // Close all other open threads
-    document.querySelectorAll('.full-comment-thread.open').forEach(t => {
-        if (t.id !== thread.id) {
-            t.classList.remove('open');
-        }
-    });
-
-    thread.classList.toggle('open');
-    
-    if (thread.classList.contains('open')) {
-        renderComments(contentId);
-    }
-}
-
-/**
- * Toggles the visibility of the reply form.
- * @param {string} commentId - The ID of the comment whose reply form to toggle.
- * @param {Event} event - The click event.
- */
-function toggleReplyForm(commentId, event) {
-    if (event) event.stopPropagation();
-    
-    if (!isUserSignedIn()) {
-        showToast('🔒 Please sign in with Google to reply.');
+function promptSignIn() {
+    // Initialize Google Sign-In
+    if (typeof google === 'undefined' || !google.accounts) {
+        showToast('âš ï¸ Google Sign-In not loaded yet. Please refresh the page.');
         return;
     }
+    
+    google.accounts.id.initialize({
+        client_id: '1045306694039-u5nahpbm784drnrro1o1nvr25r91l40r.apps.googleusercontent.com',
+        callback: handleGoogleSignIn
+    });
+    
+    google.accounts.id.prompt();
+}
 
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    if (replyForm) {
-        replyForm.classList.toggle('active');
-        // If opened, immediately focus the textarea
-        if (replyForm.classList.contains('active')) {
-            const textarea = replyForm.querySelector('.reply-input');
-            if (textarea) textarea.focus();
+// ---------------- GOOGLE SIGN-IN ----------------
+function handleGoogleSignIn(response) {
+  const user = parseJwt(response.credential);
+  currentUser = user.email;
+  localStorage.setItem("googleUser", JSON.stringify(user));
+  updateAllCommentForms();
+  
+  // Show/hide logout button
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) logoutBtn.style.display = 'inline-block';
+  
+  showToast(`âœ… Signed in as ${user.email}`);
+}
+
+// Restore user on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("googleUser");
+  if (saved) {
+    const user = JSON.parse(saved);
+    currentUser = user.email;
+  }
+  updateAllCommentForms();
+});
+
+
+/**
+ * Updates the disabled status and visibility of all comment inputs/buttons
+ * based on the current sign-in state.
+ */
+function updateAllCommentForms() {
+    document.querySelectorAll('.comment-input').forEach(input => {
+        if (isUserSignedIn()) {
+            input.disabled = false;
+            input.placeholder = `Comment as ${getCurrentUserEmail()}...`;
+        } else {
+            input.disabled = true;
+            input.placeholder = 'Sign in to post a comment...';
+            input.value = '';
+        }
+    });
+    
+    document.querySelectorAll('.sign-in-prompt-btn').forEach(btn => {
+        btn.style.display = isUserSignedIn() ? 'none' : 'block';
+    });
+    
+    document.querySelectorAll('.submit-comment-btn').forEach(btn => {
+        btn.style.display = isUserSignedIn() ? 'block' : 'none';
+    });
+}
+
+// -----------------------------------------------------------------
+// ðŸ”„ Display and Initialization
+// -----------------------------------------------------------------
+
+/**
+ * Toggles the visibility of a specific comment section thread.
+ * @param {HTMLElement} indicator - The comment count/toggle button element.
+ */
+function toggleCommentSection(indicator) {
+    const contentId = indicator.querySelector('.comment-count').getAttribute('data-content-id');
+    const threadSection = document.querySelector(`.full-comment-thread[data-content-id="${contentId}"]`);
+    
+    if (threadSection) {
+        const isOpening = !threadSection.classList.contains('open');
+        threadSection.classList.toggle('open');
+        indicator.classList.toggle('active');
+        
+        if (isOpening) {
+            renderComments(contentId);
         }
     }
 }
 
 /**
- * Submits the main comment.
+ * Updates the visible comment count on the indicator element.
+ * @param {string} contentId - The ID of the content item.
+ * @param {number} count - The new comment count.
+ */
+function updateCommentCount(contentId, count) {
+    const countElement = document.querySelector(`.comment-count[data-content-id="${contentId}"]`);
+    if (countElement) {
+        countElement.textContent = count || 0;
+    }
+}
+
+/**
+ * Initializes comment counts for all content items and restores user session on page load.
+ */
+async function initializeCommentCounts() {
+    // Restore user session
+    
+    // Fetch and update comment count for every element
+    document.querySelectorAll('.comment-count').forEach(async (countElement) => {
+        const contentId = countElement.getAttribute('data-content-id');
+        if (!contentId) {
+            console.error('Comment count element missing data-content-id');
+            return;
+        }
+        
+        try {
+            const res = await fetch(`${API_URL}/${contentId}`);
+            if (res.ok) {
+                const comments = await res.json();
+                updateCommentCount(contentId, comments.length);
+            }
+        } catch (err) {
+            console.error(`Error loading comment count for ${contentId}:`, err);
+        }
+    });
+}
+
+// -----------------------------------------------------------------
+// ðŸŒ API Interaction Functions
+// -----------------------------------------------------------------
+
+/**
+ * Loads and displays comments from the API for a specific content ID.
+ * @param {string} contentId - The ID of the content item.
+ */
+async function renderComments(contentId) {
+    const list = document.getElementById("comments-list-" + contentId);
+    if (!list) {
+        console.error(`Comments list not found for: comments-list-${contentId}`);
+        return;
+    }
+    
+    list.innerHTML = "<p>Loading comments...</p>";
+
+    try {
+        const res = await fetch(`${API_URL}/${contentId}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const comments = await res.json();
+
+        list.innerHTML = "";
+        if (comments.length === 0) {
+            list.innerHTML = '<div class="comments-empty">No comments yet. Be the first to comment!</div>';
+        } else {
+            comments.forEach(comment => {
+                const div = document.createElement("div");
+                div.classList.add("comment-item");
+                
+                const isOwner = isUserSignedIn() && getCurrentUserEmail() === comment.email;
+                
+                div.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-user-email">${escapeHtml(comment.email || "Guest")}</span>
+                        <span class="comment-date">${new Date(comment.date).toLocaleString()}</span>
+                    </div>
+                    <div class="comment-body">${escapeHtml(comment.text)}</div>
+                    <div class="comment-actions">
+                        <button class="reply-btn" onclick="toggleReplyForm('${contentId}', '${comment._id}')">Reply</button>
+                        ${isOwner ? `<button class="delete-btn" onclick="deleteComment('${contentId}', '${comment._id}')">Delete</button>` : ''}
+                    </div>
+                    <div class="reply-form-container" id="reply-form-${comment._id}">
+                        <textarea class="reply-input" placeholder="Write a reply..." rows="2"></textarea>
+                        <div class="reply-form-actions">
+                            <button class="cancel-reply-btn" onclick="toggleReplyForm('${contentId}', '${comment._id}')">Cancel</button>
+                            <button class="submit-reply-btn" onclick="submitReply('${contentId}', '${comment._id}')">Post Reply</button>
+                        </div>
+                    </div>
+                    <div class="replies-container" id="replies-${comment._id}"></div>
+                `;
+                list.appendChild(div);
+                
+                // Render replies if they exist
+                if (comment.replies && comment.replies.length > 0) {
+                    renderReplies(comment._id, comment.replies);
+                }
+            });
+        }
+        
+        updateCommentCount(contentId, comments.length);
+
+    } catch (err) {
+        console.error('Error loading comments:', err);
+        list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
+    }
+}
+/**
+ * Renders a list of replies for a specific comment.
+ * @param {string} parentCommentId - The ID of the comment to attach replies under.
+ * @param {Array} replies - The array of reply objects.
+ */
+function renderReplies(parentCommentId, replies = []) {
+    const container = document.getElementById(`replies-${parentCommentId}`);
+    if (!container) return;
+
+    container.innerHTML = ''; // Clear previous replies
+
+    if (replies.length === 0) return;
+
+    replies.forEach(reply => {
+        const div = document.createElement('div');
+        div.classList.add('reply-item');
+
+        div.innerHTML = `
+            <div class="reply-header">
+                <span class="reply-user-email">${escapeHtml(reply.email || 'Guest')}</span>
+                <span class="reply-date">${new Date(reply.date).toLocaleString()}</span>
+            </div>
+            <div class="reply-body">${escapeHtml(reply.text)}</div>
+        `;
+
+        container.appendChild(div);
+    });
+}
+/**
+ * Submits a new comment to the backend API.
  * @param {string} contentId - The ID of the content item.
  */
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-        showToast('🔒 Please sign in with Google first.');
+    showToast('âš ï¸ Please sign in with Google first.');
+    return;
+}
+
+    
+    const textarea = document.querySelector(
+        `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
+    );
+    
+    if (!textarea) {
+        console.error(`Textarea not found for contentId: ${contentId}`);
         return;
     }
-
-    const textarea = document.getElementById('comment-input');
+    
     const text = textarea.value.trim();
     if (!text) {
-        showToast("⚠️ Please write a comment");
+        showToast('âš ï¸ Please write a comment');
         return;
     }
 
     const email = getCurrentUserEmail();
-    const userName = getCurrentUserName();
-    const userPic = getCurrentUserPic();
 
     try {
-        const res = await fetch(`${API_URL}/comment`, {
+        const res = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contentId, email, userName, userPic, text }),
+            body: JSON.stringify({ contentId, email, text })
         });
 
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        // Clear the input field
         textarea.value = "";
-
-        // Re-render comments so the new comment appears immediately
         renderComments(contentId);
-        
-        showToast("Comment posted successfully! 🎉");
-
-    } catch (error) {
-        console.error('Error submitting comment:', error);
-        showToast(`❌ Failed to post comment: ${error.message}`);
+        showToast('âœ… Comment posted!');
+    } catch (err) {
+        console.error('Error submitting comment:', err);
+        showToast("Error submitting comment: " + err.message);
     }
 }
 
 /**
- * Submits a reply to a parent comment.
- * @param {string} contentId - The ID of the content item.
+ * Sends a request to the API to delete a specific comment.
+ * @param {string} contentId - The ID of the content item (used for re-rendering).
+ * @param {string} commentId - The MongoDB ID of the comment to delete.
+ */
+async function deleteComment(contentId, commentId) {
+    if (!confirm('Are you sure you want to delete this comment?')) {
+        return;
+    }
+    
+    try {
+        const res = await fetch(`${API_URL}/${commentId}`, {
+            method: "DELETE"
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        renderComments(contentId);
+        showToast('ðŸ—‘ï¸ Comment deleted');
+    } catch (err) {
+        console.error('Error deleting comment:', err);
+        showToast("Error deleting comment: " + err.message);
+    }
+}
+/**
+ * Toggles the reply form visibility for a specific comment.
+ * @param {string} contentId - The parent content item ID.
+ * @param {string} commentId - The ID of the comment to reply to.
+ */
+function toggleReplyForm(contentId, commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.classList.toggle("active");
+    } else {
+        console.warn(`Reply form not found for comment: ${commentId}`);
+    }
+}
+/**
+ * Submits a reply for a specific comment.
+ * @param {string} contentId - The ID of the parent content item.
  * @param {string} commentId - The ID of the parent comment being replied to.
  */
 async function submitReply(contentId, commentId) {
    if (!isUserSignedIn()) {
-    showToast('🔒 Please sign in with Google first.');
+    showToast('âš ï¸ Please sign in with Google first.');
     return;
 }
 
@@ -511,20 +822,17 @@ async function submitReply(contentId, commentId) {
     const textarea = replyForm.querySelector(".reply-input");
     const text = textarea.value.trim();
     if (!text) {
-        showToast("⚠️ Please write a reply");
+        showToast("âš ï¸ Please write a reply");
         return;
     }
 
     const email = getCurrentUserEmail();
-    const userName = getCurrentUserName();
-    const userPic = getCurrentUserPic();
-
 
     try {
         const res = await fetch(`${API_URL}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contentId, parentCommentId: commentId, email, userName, userPic, text }),
+            body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
         });
 
         if (!res.ok) {
@@ -538,215 +846,10 @@ async function submitReply(contentId, commentId) {
         // Re-render comments so the new reply appears immediately
         renderComments(contentId);
 
-        showToast("Reply posted successfully! 💬");
-
-    } catch (error) {
-        console.error('Error submitting reply:', error);
-        showToast(`❌ Failed to post reply: ${error.message}`);
+        showToast("âœ… Reply posted!");
+    } catch (err) {
+        console.error("Error submitting reply:", err);
+        showToast("Error submitting reply: " + err.message);
     }
 }
-
-/**
- * Toggles a like on a comment or reply.
- * @param {string} itemId - The ID of the comment or reply.
- * @param {('comment'|'reply')} type - The type of item (comment or reply).
- * @param {string} contentId - The ID of the content.
- */
-async function toggleLike(itemId, type, contentId) {
-    if (!isUserSignedIn()) {
-        showToast('🔒 Please sign in to like.');
-        return;
-    }
-    
-    const email = getCurrentUserEmail();
-
-    try {
-        const endpoint = type === 'comment' ? '/like-comment' : '/like-reply';
-        const body = type === 'comment' 
-            ? { commentId: itemId, email, contentId }
-            : { replyId: itemId, email, contentId };
-
-        const res = await fetch(`${API_URL}${endpoint}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
-        // No need to wait for response content, just re-render to reflect the change
-        renderComments(contentId);
-
-    } catch (error) {
-        console.error(`Error toggling like on ${type}:`, error);
-        showToast(`❌ Failed to toggle like: ${error.message}`);
-    }
-}
-
-/**
- * Deletes a comment.
- * @param {string} contentId - The ID of the content.
- * @param {string} commentId - The ID of the comment to delete.
- */
-async function deleteComment(contentId, commentId) {
-    if (!isUserSignedIn() || getCurrentUserEmail() !== document.querySelector(`#comment-${commentId} .comment-meta span`).previousElementSibling.textContent) {
-        // Simplified check, the server must perform a robust authorization check
-        showToast('🔒 Not authorized to delete this comment.');
-        return;
-    }
-    
-    // Instead of confirm(), use a simple log or modal if implemented
-    if (!window.confirm('Are you sure you want to delete this comment?')) {
-        return;
-    }
-
-    try {
-        const res = await fetch(`${API_URL}/delete-comment`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ commentId, contentId }), // Sending contentId for potential server-side logic
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
-        // Re-render comments to remove the deleted comment
-        renderComments(contentId);
-
-        showToast("Comment deleted successfully! 👋");
-
-    } catch (error) {
-        console.error('Error deleting comment:', error);
-        showToast(`❌ Failed to delete comment: ${error.message}`);
-    }
-}
-
-/**
- * Deletes a reply.
- * @param {string} contentId - The ID of the content.
- * @param {string} parentCommentId - The ID of the parent comment.
- * @param {string} replyId - The ID of the reply to delete.
- */
-async function deleteReply(contentId, parentCommentId, replyId) {
-    if (!isUserSignedIn() || getCurrentUserEmail() !== document.querySelector(`#reply-${replyId} .reply-meta span`).previousElementSibling.textContent) {
-        // Simplified check, the server must perform a robust authorization check
-        showToast('🔒 Not authorized to delete this reply.');
-        return;
-    }
-
-    // Instead of confirm(), use a simple log or modal if implemented
-    if (!window.confirm('Are you sure you want to delete this reply?')) {
-        return;
-    }
-
-    try {
-        const res = await fetch(`${API_URL}/delete-reply`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ parentCommentId, replyId, contentId }),
-        });
-
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
-        // Re-render comments to reflect the deleted reply
-        renderComments(contentId);
-
-        showToast("Reply deleted successfully! 👋");
-
-    } catch (error) {
-        console.error('Error deleting reply:', error);
-        showToast(`❌ Failed to delete reply: ${error.message}`);
-    }
-}
-
-
-// ---- MENU LOGIC (Ensuring this is correct) ----
-
-function toggleMenu() {
-    const nav = document.getElementById('navMenu');
-    nav.classList.toggle('active');
-    const toggleButton = document.getElementById('menuToggle');
-    // Simple state change for aria-expanded
-    const isExpanded = nav.classList.contains('active');
-    toggleButton.setAttribute('aria-expanded', isExpanded);
-}
-
-// Close menu if a link is clicked
-document.querySelectorAll('#navMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-        const nav = document.getElementById('navMenu');
-        if (nav.classList.contains('active')) {
-            toggleMenu();
-        }
-    });
-});
-
-// Close menu on outside click
-document.addEventListener('click', function(event) {
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    // Check if the click is outside the menu and the toggle button
-    const isClickInsideMenu = navMenu.contains(event.target);
-    const isClickOnToggle = menuToggle.contains(event.target);
-
-    if (navMenu.classList.contains('active') && !isClickInsideMenu && !isClickOnToggle) {
-        toggleMenu();
-    }
-});
-
-
-// ---- APERTURE EFFECT LOGIC (Ensuring this is correct) ----
-// (Assuming this is a purely decorative effect based on scroll position)
-
-const apertureBlades = 6;
-const bladesContainer = document.getElementById('blades');
-const centerCircle = document.getElementById('center');
-const fstopDisplay = document.getElementById('fstop');
-const maxFStop = 16;
-const minFStop = 1.4;
-
-// Create blades
-if (bladesContainer) {
-    for (let i = 0; i < apertureBlades; i++) {
-        const blade = document.createElement('div');
-        blade.className = 'blade';
-        // Distribute blades evenly around 360 degrees
-        const rotation = (360 / apertureBlades) * i;
-        blade.style.transform = `rotate(${rotation}deg)`;
-        bladesContainer.appendChild(blade);
-    }
-}
-
-
-function updateAperture() {
-    const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-
-    // Calculate a value between 0 (fully open) and 1 (fully closed)
-    const normalizedValue = Math.min(1, Math.max(0, scrollPercent * 2)); // Scroll 50% to open, 50-100% to close
-
-    // Map normalized value to scale (center circle size)
-    const scale = 1 - (normalizedValue * 0.9); // Scale goes from 1 (open) down to 0.1 (closed)
-    
-    // Map normalized value to F-stop display
-    // Logarithmic scale for F-stop (simplified for display)
-    const fStopValue = minFStop * Math.pow((maxFStop / minFStop), normalizedValue);
-    
-    if (centerCircle) {
-        centerCircle.style.transform = `scale(${scale})`;
-    }
-    if (fstopDisplay) {
-        fstopDisplay.textContent = `f/${fStopValue.toFixed(1)}`;
-    }
-}
-
-// Attach scroll listener
-window.addEventListener('scroll', updateAperture);
-
-// Initial update
-window.addEventListener('load', updateAperture);
+// ---- END ----
