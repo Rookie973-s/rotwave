@@ -658,7 +658,34 @@ async function renderComments(contentId) {
         list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
     }
 }
+/**
+ * Renders a list of replies for a specific comment.
+ * @param {string} parentCommentId - The ID of the comment to attach replies under.
+ * @param {Array} replies - The array of reply objects.
+ */
+function renderReplies(parentCommentId, replies = []) {
+    const container = document.getElementById(`replies-${parentCommentId}`);
+    if (!container) return;
 
+    container.innerHTML = ''; // Clear previous replies
+
+    if (replies.length === 0) return;
+
+    replies.forEach(reply => {
+        const div = document.createElement('div');
+        div.classList.add('reply-item');
+
+        div.innerHTML = `
+            <div class="reply-header">
+                <span class="reply-user-email">${escapeHtml(reply.email || 'Guest')}</span>
+                <span class="reply-date">${new Date(reply.date).toLocaleString()}</span>
+            </div>
+            <div class="reply-body">${escapeHtml(reply.text)}</div>
+        `;
+
+        container.appendChild(div);
+    });
+}
 /**
  * Submits a new comment to the backend API.
  * @param {string} contentId - The ID of the content item.
