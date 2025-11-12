@@ -659,4 +659,78 @@ async function renderComments(contentId) {
     }
 }
 
+/**
+ * Submits a new comment to the backend API.
+ * @param {string} contentId - The ID of the content item.
+ */
+async function submitComment(contentId) {
+    if (!isUserSignedIn()) {
+        promptSignIn();
+        return;
+    }
+    
+    const textarea = document.querySelector(
+        `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
+    );
+    
+    if (!textarea) {
+        console.error(`Textarea not found for contentId: ${contentId}`);
+        return;
+    }
+    
+    const text = textarea.value.trim();
+    if (!text) {
+        showToast('⚠️ Please write a comment');
+        return;
+    }
+
+    const email = getCurrentUserEmail();
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contentId, email, text })
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        textarea.value = "";
+        renderComments(contentId);
+        showToast('✅ Comment posted!');
+    } catch (err) {
+        console.error('Error submitting comment:', err);
+        showToast("Error submitting comment: " + err.message);
+    }
+}
+
+/**
+ * Sends a request to the API to delete a specific comment.
+ * @param {string} contentId - The ID of the content item (used for re-rendering).
+ * @param {string} commentId - The MongoDB ID of the comment to delete.
+ */
+async function deleteComment(contentId, commentId) {
+    if (!confirm('Are you sure you want to delete this comment?')) {
+        return;
+    }
+    
+    try {
+        const res = await fetch(`${API_URL}/${commentId}`, {
+            method: "DELETE"
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        renderComments(contentId);
+        showToast('🗑️ Comment deleted');
+    } catch (err) {
+        console.error('Error deleting comment:', err);
+        showToast("Error deleting comment: " + err.message);
+    }
+}
+
 // ---- END ----
