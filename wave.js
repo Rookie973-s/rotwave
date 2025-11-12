@@ -20,7 +20,6 @@ function goToSlide(index) {
   currentSlide = index;
   updateCarousel();
 }
-
 // Auto-advance carousel every 5 seconds
 setInterval(() => {
   moveCarousel(1);
@@ -91,7 +90,7 @@ function toggleSearchDropdown() {
 // ---- SMALL TOAST (for copy success) ----
 function showCopiedToast() {
   let toast = document.createElement('div');
-  toast.innerText = '✅ Link copied!';
+  toast.innerText = 'âœ… Link copied!';
   toast.style.position = 'fixed';
   toast.style.bottom = '20px';
   toast.style.right = '20px';
@@ -410,8 +409,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 behavior: 'smooth'
             });
         });
+       
       // =================================================================
-// 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
+// ðŸ’¬ ===== COMMENT SECTION LOGIC (Frontend) =====
 // =================================================================
 
 const API_URL = "https://wave-backend-umi8.onrender.com";
@@ -420,7 +420,7 @@ const API_URL = "https://wave-backend-umi8.onrender.com";
 let currentUser = null;
 
 // -----------------------------------------------------------------
-// 💡 Helper Functions
+// ðŸ’¡ Helper Functions
 // -----------------------------------------------------------------
 
 /**
@@ -452,7 +452,8 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
-
+ const logoutBtn = document.getElementById('logout-btn');
+if (logoutBtn) logoutBtn.style.display = isUserSignedIn() ? 'inline-block' : 'none';
 /**
  * Escapes HTML content to prevent Cross-Site Scripting (XSS).
  * @param {string} text - The string to escape.
@@ -481,23 +482,55 @@ function getCurrentUserEmail() {
 }
 
 // -----------------------------------------------------------------
-// 👤 User/Form State Functions
+// ðŸ‘¤ User/Form State Functions
 // -----------------------------------------------------------------
 
 /**
  * Simulates a sign-in process and saves the user email.
  */
+// ---------------- GOOGLE SIGN-IN ----------------
+/**
+ * Prompts the user to sign in with Google.
+ */
 function promptSignIn() {
-    const email = prompt("Enter your email to sign in (demo):");
-    if (email && email.includes('@')) {
-        currentUser = email;
-        localStorage.setItem("currentUser", email);
-        updateAllCommentForms();
-        showToast('✅ Signed in successfully!');
-    } else if (email) {
-        alert('Please enter a valid email address');
+    // Initialize Google Sign-In
+    if (typeof google === 'undefined' || !google.accounts) {
+        showToast('âš ï¸ Google Sign-In not loaded yet. Please refresh the page.');
+        return;
     }
+    
+    google.accounts.id.initialize({
+        client_id: '1045306694039-u5nahpbm784drnrro1o1nvr25r91l40r.apps.googleusercontent.com',
+        callback: handleGoogleSignIn
+    });
+    
+    google.accounts.id.prompt();
 }
+
+// ---------------- GOOGLE SIGN-IN ----------------
+function handleGoogleSignIn(response) {
+  const user = parseJwt(response.credential);
+  currentUser = user.email;
+  localStorage.setItem("googleUser", JSON.stringify(user));
+  updateAllCommentForms();
+  
+  // Show/hide logout button
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) logoutBtn.style.display = 'inline-block';
+  
+  showToast(`âœ… Signed in as ${user.email}`);
+}
+
+// Restore user on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("googleUser");
+  if (saved) {
+    const user = JSON.parse(saved);
+    currentUser = user.email;
+  }
+  updateAllCommentForms();
+});
+
 
 /**
  * Updates the disabled status and visibility of all comment inputs/buttons
@@ -525,7 +558,7 @@ function updateAllCommentForms() {
 }
 
 // -----------------------------------------------------------------
-// 🔄 Display and Initialization
+// ðŸ”„ Display and Initialization
 // -----------------------------------------------------------------
 
 /**
@@ -564,10 +597,6 @@ function updateCommentCount(contentId, count) {
  */
 async function initializeCommentCounts() {
     // Restore user session
-    const savedUser = localStorage.getItem("currentUser");
-    if (savedUser) {
-        currentUser = savedUser;
-    }
     
     // Fetch and update comment count for every element
     document.querySelectorAll('.comment-count').forEach(async (countElement) => {
@@ -590,7 +619,7 @@ async function initializeCommentCounts() {
 }
 
 // -----------------------------------------------------------------
-// 🌐 API Interaction Functions
+// ðŸŒ API Interaction Functions
 // -----------------------------------------------------------------
 
 /**
@@ -692,9 +721,10 @@ function renderReplies(parentCommentId, replies = []) {
  */
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-        promptSignIn();
-        return;
-    }
+    showToast('âš ï¸ Please sign in with Google first.');
+    return;
+}
+
     
     const textarea = document.querySelector(
         `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
@@ -707,7 +737,7 @@ async function submitComment(contentId) {
     
     const text = textarea.value.trim();
     if (!text) {
-        showToast('⚠️ Please write a comment');
+        showToast('âš ï¸ Please write a comment');
         return;
     }
 
@@ -726,7 +756,7 @@ async function submitComment(contentId) {
 
         textarea.value = "";
         renderComments(contentId);
-        showToast('✅ Comment posted!');
+        showToast('âœ… Comment posted!');
     } catch (err) {
         console.error('Error submitting comment:', err);
         showToast("Error submitting comment: " + err.message);
@@ -753,7 +783,7 @@ async function deleteComment(contentId, commentId) {
         }
 
         renderComments(contentId);
-        showToast('🗑️ Comment deleted');
+        showToast('ðŸ—‘ï¸ Comment deleted');
     } catch (err) {
         console.error('Error deleting comment:', err);
         showToast("Error deleting comment: " + err.message);
@@ -778,10 +808,10 @@ function toggleReplyForm(contentId, commentId) {
  * @param {string} commentId - The ID of the parent comment being replied to.
  */
 async function submitReply(contentId, commentId) {
-    if (!isUserSignedIn()) {
-        promptSignIn();
-        return;
-    }
+   if (!isUserSignedIn()) {
+    showToast('âš ï¸ Please sign in with Google first.');
+    return;
+}
 
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (!replyForm) {
@@ -792,7 +822,7 @@ async function submitReply(contentId, commentId) {
     const textarea = replyForm.querySelector(".reply-input");
     const text = textarea.value.trim();
     if (!text) {
-        showToast("⚠️ Please write a reply");
+        showToast("âš ï¸ Please write a reply");
         return;
     }
 
@@ -816,7 +846,7 @@ async function submitReply(contentId, commentId) {
         // Re-render comments so the new reply appears immediately
         renderComments(contentId);
 
-        showToast("✅ Reply posted!");
+        showToast("âœ… Reply posted!");
     } catch (err) {
         console.error("Error submitting reply:", err);
         showToast("Error submitting reply: " + err.message);
