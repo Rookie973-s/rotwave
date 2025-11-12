@@ -772,10 +772,10 @@ async function submitReply(contentId, commentId) {
     const email = getCurrentUserEmail();
 
     try {
-        const res = await fetch(`${API_URL}/${commentId}/reply`, {
+        const res = await fetch(`${API_URL}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contentId, email, text }),
+            body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
         });
 
         if (!res.ok) {
