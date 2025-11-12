@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -230,6 +231,7 @@ body.light-mode .nav-tabs {
 .menu-drawer.active {
     transform: translateX(0); /* Slide in */
 }
+
 .menu-drawer a {
     display: block;
     color: #e0e0e0;
@@ -243,6 +245,35 @@ body.light-mode .nav-tabs {
 .menu-drawer a:hover {
     background-color: #ff6b35;
     color: #0a0a0a;
+}
+#menuCloseBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #e0e0e0; /* White/Light color for dark mode */
+    z-index: 1200; /* Ensure it's above everything */
+    transition: color 0.3s, transform 0.2s;
+}
+#menuCloseBtn:hover {
+    color: #ff6b35; /* Accent color on hover */
+    transform: scale(1.1);
+}
+#menuCloseBtn svg {
+    width: 30px; /* Make the icon slightly larger */
+    height: 30px;
+    display: block;
+}
+
+/* Ensure the light mode version is styled too */
+body.light-mode #menuCloseBtn {
+    color: #1a1a1a;
+}
+body.light-mode #menuCloseBtn:hover {
+    color: #007bff;
 }
 
 /* NEW: Search Dropdown Container */
@@ -290,6 +321,7 @@ body.light-mode .menu-drawer a:hover {
     background-color: #007bff;
     color: #ffffff;
 }
+
 body.light-mode .search-dropdown-container {
     background-color: #f0f0f0;
     border-top: 1px solid #ddd;
@@ -511,6 +543,25 @@ body.light-mode .search-dropdown-container input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.read-more-btn {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  border: none;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
 }
 
 .share-btn {
@@ -851,6 +902,7 @@ body.light-mode .search-dropdown-container input {
     align-items: center;
     gap: 15px; 
     margin-top: 10px;
+    width: 100%;
 }
 
 .comment-indicator {
@@ -1212,7 +1264,9 @@ body.light-mode .cancel-reply-btn {
     background: #e0e0e0;
     color: #1a1a1a;
 }
-
+body.light-mode .read-more-btn {
+background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
 body.light-mode .cancel-reply-btn:hover {
     background: #d0d0d0;
 }
