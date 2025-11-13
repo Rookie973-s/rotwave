@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const API_URL = "https://wave-backend-umi8.onrender.com";
 // FIX: Use a consistent path for all comment operations
-const API_BASE_PATH = "/comments"; 
+
 
 // Current user state
 let currentUser = null;
@@ -651,7 +651,7 @@ async function initializeCommentCounts() {
         
         try {
             // FIX: Add /comments prefix for GET requests
-            const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`);
+            const res = await fetch(`${API_URL}/${contentId}`);
             if (res.ok) {
                 const comments = await res.json();
                 updateCommentCount(contentId, comments.length);
@@ -681,7 +681,7 @@ async function renderComments(contentId) {
 
     try {
         // FIX: Add /comments prefix for GET requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`); 
+        const res = await fetch(`${API_URL}/${contentId}`); 
         if (!res.ok) {
             // FIX: This throws the 404 error but now should hit the correct endpoint
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -791,7 +791,7 @@ async function submitComment(contentId) {
 
     try {
         // FIX: Add /comments prefix for POST requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}`, {
+        const res = await fetch(`${API_URL}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, email, text })
@@ -820,7 +820,7 @@ async function deleteComment(contentId, commentId) {
     
     try {
         // FIX: Add /comments prefix for DELETE requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/${commentId}`, {
+        const res = await fetch(`${API_URL}/${commentId}`, {
             method: "DELETE"
         });
 
@@ -876,7 +876,7 @@ async function submitReply(contentId, commentId) {
 
     try {
         // FIX: Add /comments prefix for Reply POST requests
-        const res = await fetch(`${API_URL}${API_BASE_PATH}/reply`, {
+        const res = await fetch(`${API_URL}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
