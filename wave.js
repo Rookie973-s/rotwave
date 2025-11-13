@@ -528,29 +528,52 @@ function promptSignIn() {
 
 // ---------------- GOOGLE SIGN-IN ----------------
 function handleGoogleSignIn(response) {
-  // FIX: parseJwt is now defined above
-  const user = parseJwt(response.credential);
-  currentUser = user.email;
-  localStorage.setItem("googleUser", JSON.stringify(user));
+  try {
+    const user = parseJwt(response.credential);
+    currentUser = user.email;
+    localStorage.setItem("googleUser", JSON.stringify(user));
+    updateAllCommentForms();
+    
+    // Show logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.style.display = 'flex';
+    
+    showToast(`✅ Signed in as ${user.email}`);
+  } catch (error) {
+    console.error('Sign-in error:', error);
+    showToast('❌ Sign-in failed. Please try again.');
+  }
+}
+
+// Handle logout
+function handleLogout() {
+  currentUser = null;
+  localStorage.removeItem("googleUser");
   updateAllCommentForms();
   
-  // Show/hide logout button
   const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) logoutBtn.style.display = 'inline-block';
+  if (logoutBtn) logoutBtn.style.display = 'none';
   
-  showToast(`✅ Signed in as ${user.email}`);
+  showToast('👋 Signed out successfully');
 }
 
 // Restore user on page load
 document.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("googleUser");
   if (saved) {
-    const user = JSON.parse(saved);
-    currentUser = user.email;
+    try {
+      const user = JSON.parse(saved);
+      currentUser = user.email;
+      
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) logoutBtn.style.display = 'flex';
+    } catch (error) {
+      console.error('Error restoring user session:', error);
+      localStorage.removeItem("googleUser");
+    }
   }
   updateAllCommentForms();
 });
-
 
 /**
  * Updates the disabled status and visibility of all comment inputs/buttons
