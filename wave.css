@@ -184,7 +184,7 @@ body.light-mode .nav-tabs {
 }
 
 /* Style for Menu and Search Icon Buttons */
-#menuToggle, #searchIconToggle {
+#menuToggle, #searchIconToggle, #logout-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -195,7 +195,7 @@ body.light-mode .nav-tabs {
     align-items: center;
     justify-content: center;
 }
-#menuToggle:hover, #searchIconToggle:hover {
+#menuToggle:hover, #searchIconToggle:hover, #logout-btn:hover {
     color: #ff6b35;
     transform: scale(1.1);
 }
