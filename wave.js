@@ -141,8 +141,8 @@ window.addEventListener("scroll", () => {
 
 // --- THEME TOGGLE LOGIC ---
 const themeToggle = document.getElementById('themeToggle');
-const sunIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-const moonIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+const sunIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+const moonIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
 if (themeToggle) {
     function applyTheme(isLight) {
@@ -170,13 +170,22 @@ if (themeToggle) {
 // ---- DOM READY ----
 document.addEventListener("DOMContentLoaded", function() {
   
-  document.querySelectorAll(".read-more-btn").forEach(btn => {
+  // NEW Article Modal Logic
+  // We replace the old "expand-in-place" logic with the modal logic.
+  document.querySelectorAll("#news .read-more-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      e.stopPropagation();
+      e.stopPropagation(); // Keep this to prevent card click
       const article = btn.closest('.article-card');
-      if (article) {
-        article.classList.toggle("expanded");
-        btn.textContent = article.classList.contains('expanded') ? 'Read Less' : 'Read More';
+      const contentId = article ? article.getAttribute('data-id') : null;
+      
+      if (contentId) {
+        openArticleModal(contentId);
+      } else {
+        // Fallback for articles without data-id
+        const title = article.querySelector('.article-title').innerText;
+        const imageSrc = article.querySelector('.article-image').src;
+        const fullContentHTML = article.querySelector('.article-full').innerHTML;
+        populateAndShowModal(title, imageSrc, fullContentHTML);
       }
     });
   });
@@ -237,7 +246,12 @@ document.addEventListener("DOMContentLoaded", function() {
       setTimeout(() => {
         target.scrollIntoView({ behavior: "smooth", block: "center" });
         if (target.classList.contains('article-card')) {
-          target.classList.add("expanded"); 
+          // Check if it's an article-card (not a review-card) to expand
+          // But now we use modal, so let's open modal instead
+           const contentId = target.getAttribute('data-id');
+           if (contentId) {
+                openArticleModal(contentId);
+           }
         }
         target.style.boxShadow = "0 0 15px #ff9800"; 
         setTimeout(() => (target.style.boxShadow = ""), 2000);
@@ -247,6 +261,23 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Initialize comments logic
   initializeCommentCounts();
+
+  // NEW: Add listeners for modal close buttons
+  const modalOverlay = document.getElementById('article-modal-overlay');
+  const modalCloseBtn = document.getElementById('article-modal-close-btn');
+
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      // Close if background is clicked
+      if (e.target === modalOverlay) {
+        closeArticleModal();
+      }
+    });
+  }
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeArticleModal);
+  }
+
 });
 
 // --- LENS ANIMATION ---
@@ -325,6 +356,95 @@ if (apertureContainer) {
         });
     });
 }
+
+// =================================================================
+// 📰 ===== NEW Article Modal Functions =====
+// =================================================================
+
+// --- FIX ---
+// The variables for the modal are now declared *inside* the functions
+// that use them (populateAndShowModal and closeArticleModal).
+// This ensures the script doesn't try to find them before they exist.
+
+/**
+ * Finds the article card by its data-id and opens the modal with its content.
+ * @param {string} contentId The 'data-id' of the article-card
+ */
+function openArticleModal(contentId) {
+  const articleCard = document.querySelector(`.article-card[data-id="${contentId}"]`);
+  if (!articleCard) {
+    console.error("Could not find article with ID:", contentId);
+    return;
+  }
+
+  // Grab content from the clicked card
+  const title = articleCard.querySelector('.article-title').innerText;
+  const imageSrc = articleCard.querySelector('.article-image').src;
+  const fullContentHTML = articleCard.querySelector('.article-full').innerHTML;
+
+  populateAndShowModal(title, imageSrc, fullContentHTML);
+}
+
+/**
+ * Populates the modal with content and makes it visible.
+ * @param {string} title - The article title
+ * @param {string} imageSrc - The URL for the article image
+ *_@param {string} fullContentHTML - The inner HTML of the .article-full div
+ */
+function populateAndShowModal(title, imageSrc, fullContentHTML) {
+  // --- FIX: Select elements *inside* the function ---
+  const articleModalOverlay = document.getElementById('article-modal-overlay');
+  const modalTitle = document.getElementById('article-modal-title');
+  const modalImage = document.getElementById('article-modal-image');
+  const modalFullText = document.getElementById('article-modal-full-text');
+  // --- END FIX ---
+
+  if (!articleModalOverlay || !modalTitle || !modalImage || !modalFullText) {
+      console.error("Modal elements not found. Check your HTML.");
+      return;
+  }
+
+  // Populate the modal
+  modalTitle.innerText = title;
+  modalImage.src = imageSrc;
+  modalImage.alt = title + " image";
+  modalFullText.innerHTML = fullContentHTML;
+
+  // Show the modal
+  articleModalOverlay.classList.add('visible');
+  
+  // Prevent background scrolling
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Hides the article modal and restores background scrolling.
+ */
+function closeArticleModal() {
+  // --- FIX: Select element *inside* the function ---
+  const articleModalOverlay = document.getElementById('article-modal-overlay');
+  // --- END FIX ---
+
+  if (!articleModalOverlay) return;
+  
+  articleModalOverlay.classList.remove('visible');
+  
+  // Allow background scrolling again
+  document.body.style.overflow = '';
+
+  // Optional: Reset content after fade-out to prevent flash
+  setTimeout(() => {
+    // Also select these here to reset them
+    const modalTitle = document.getElementById('article-modal-title');
+    const modalImage = document.getElementById('article-modal-image');
+    const modalFullText = document.getElementById('article-modal-full-text');
+
+    if (modalTitle) modalTitle.innerText = "Article Title";
+    if (modalImage) modalImage.src = "";
+    if (modalFullText) modalFullText.innerHTML = "";
+  }, 300); // Match transition duration
+}
+
 
 // =================================================================
 // 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
