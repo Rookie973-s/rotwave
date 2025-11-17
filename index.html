@@ -15,7 +15,7 @@
  <header class="header">
   <div class="header-top-bar">
       <button id="menuToggle" aria-label="Open navigation menu" onclick="toggleMenu()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
 
       <div class="logo">
@@ -24,11 +24,11 @@
           </a>
       </div>
 
-       <div class="header-controls-right">
+      <div class="header-controls-right">
           <button id="searchIconToggle" aria-label="Open search bar" onclick="toggleSearchDropdown()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
-          <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+          <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -39,9 +39,6 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg></button>
-          <button id="logout-btn" aria-label="Sign out" style="display:none;" onclick="handleLogout()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-          </button>
       </div>
   </div>
 
@@ -54,16 +51,22 @@
       <button class="tab-btn" onclick="switchTab('comics', event)">ROTSHELL</button>
       <button class="tab-btn" onclick="switchTab('reviews', event)">ROTCHIRP</button>
       <button class="tab-btn" onclick="window.location.href='https://rookie973-s.github.io/Watchlist/';">MY WATCHLIST</button>
+      
   </nav>
 
  <div id="menuDrawer" class="menu-drawer">
     <button id="menuCloseBtn" aria-label="Close navigation menu" onclick="toggleMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
     
     <a href="index.html" onclick="toggleMenu()">Back Home</a>
     <a href="aboutwave.html" onclick="toggleMenu()">About us</a>
     <a href="contactwave.html" onclick="toggleMenu()">Contact us</a>
+    <button onclick="logout()" id="logout-btn" style="display:none;">Logout</button>
+<button id="logout-btn" aria-label="Sign out" style="display:none;" onclick="handleLogout()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+         Log Out
+            </button>
 </div>
 
 
@@ -222,7 +225,7 @@
             <div class="card-actions">
               <button class="share-btn">Share</button>
               <div class="comment-indicator" onclick="toggleCommentSection(this)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                 </svg>
                 <span class="comment-count" data-content-id="new-camp-nou">0</span>
@@ -300,7 +303,7 @@
             <div class="card-actions">
                 <button class="share-btn">share</button>
                 <div class="comment-indicator" onclick="toggleCommentSection(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                     </svg>
                     <span class="comment-count" data-content-id="ronaldo-s-interview">0</span>
@@ -311,8 +314,9 @@
             <div class="comments-list" id="comments-list-ronaldo-s-interview"></div>
             <div class="comment-form-container">
                 <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
-                <div class="comment-form-actions">
+               <div class="comment-form-actions">
                     <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                    
                     <button class="submit-comment-btn" style="display:none;" onclick="submitComment('ronaldo-s-interview')">Post Comment</button>
                 </div>
             </div>
@@ -448,6 +452,7 @@
               <span>2 min read</span>
 
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
 
             </div>
           </div>
@@ -528,6 +533,7 @@
               <span>1min read</span>
 
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
 
             </div>
           </div>
@@ -609,6 +615,7 @@
               <span>Nov-6-25</span>
               <span>2 min read</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -674,6 +681,7 @@
               <span>Nov-5-25</span>
               <span>2min read</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -750,6 +758,7 @@
               <span>3-11-25</span>
               <span>2min read</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -820,6 +829,7 @@
               <span>3/11/25</span>
               <span>2min read</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -875,6 +885,7 @@
             <div class="article-meta">
               <span>2nd Nov, 2025</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -929,6 +940,7 @@
               <span>2nd Nov, 2025</span>
               <span>1 min read</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -989,6 +1001,7 @@
             <div class="article-meta">
               <span>1st Nov, 2025</span>
               <button class="share-btn">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -1016,6 +1029,7 @@
             <div class="article-meta">
   <span>October 31st</span>
   <button class="share-btn" data-id="trump-redesignates-nigeria-as-country-of-particular-concern">Share</button>
+  <button class="read-more-btn">Read More</button>
 </div>
           </div>
         </article>
@@ -1050,6 +1064,7 @@ While the world scrolls past, Africa bleeds — again.
             <div class="article-meta">
               <span>weeks ago</span>
               <button class="share-btn" data-id="tanzania-protest-hap">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -1078,6 +1093,7 @@ From tech nerds to meme armies to board-room watchers, everyone's trying to deco
             <div class="article-meta">
               <span>October 31st, 2025 — 7:42 PM</span>
               <button class="share-btn" data-id="elon-space-jam">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -1108,6 +1124,7 @@ The stage is set, the lights are ready, and the world's most talked-about athlet
             <div class="article-meta">
               <span>October 31st, 2025 — 7:42 PM</span>
               <button class="share-btn" data-id="ronaldo-interview-blow">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -1146,11 +1163,12 @@ Also starring Monica Barbaro, Corey Hawkins, Jennifer Jason Leigh, and Nick Nolt
               <span>October 30, 2025 — 7:02 PM</span>
               <span>📖 3 min read</span>
               <button class="share-btn" data-id="crime-trail-buzz">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
 
-        <article class="article-card">
+        <article class="article-card" data-id="rising-star-blockbuster">
           <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=220&fit=crop" class="article-image" />
           <div class="article-content">
             <h3 class="article-title">Rising Star Joins Blockbuster Franchise</h3>
@@ -1166,11 +1184,12 @@ Also starring Monica Barbaro, Corey Hawkins, Jennifer Jason Leigh, and Nick Nolt
               <span>weeks ago</span>
               <span>1 min read</span>
               <button class="share-btn" data-id="rise-star-join">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
 
-        <article class="article-card">
+        <article class="article-card" data-id="horror-film-box-office">
           <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=220&fit=crop" class="article-image" />
           <div class="article-content">
             <h3 class="article-title">Horror Film Dominates Weekend Box Office</h3>
@@ -1186,10 +1205,11 @@ Also starring Monica Barbaro, Corey Hawkins, Jennifer Jason Leigh, and Nick Nolt
               <span>October 31st, 2025 — 7:00 PM</span>
               <span>1min read</span>
               <button class="share-btn" data-id="horror-boom-box">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
-        <article class="article-card">
+        <article class="article-card" data-id="smartest-beings-dc">
           <img src="images/dc.jpg" class="article-image" />
           <div class="article-content">
             <h3 class="article-title">The Smartest Beings in the DC Universe</h3>
@@ -1327,10 +1347,11 @@ From Luthor’s ruthless genius to The Source’s omniscience, the DC Universe p
               <span>October 20, 2025 — 7:00 AM</span>
               <span>5 min read</span>
               <button class="share-btn" data-id="the-smartest-beings-in-the-dc-universe">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
-        <article class="article-card">
+        <article class="article-card" data-id="opta-predicts-arsenal">
           <img src="images/arsenal.jpg" class="article-image" />
           <div class="article-content">
             <h3 class="article-title">Opta Supercomputer Predicts Arsenal 2025 and 2026 Premier League</h3>
@@ -1356,6 +1377,7 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               <span>Published on October 31st, 2025 — 10:04 PM</span>
               <span>2min read</span>
               <button class="share-btn" data-id="opta-supercomputer-predicts-arsenal-2025-and-2026-premier-league">Share</button>
+              <button class="read-more-btn">Read More</button>
             </div>
           </div>
         </article>
@@ -1445,42 +1467,34 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         <div class="review-body">
           <p><strong>The Verdict:</strong> "Frankenstein" is a visually crafted sci-fi horror combining stunning plots and deep themes. The narrative challenges how we wrongfully and pridefully treat things as monstrous </p>
           <p style="margin-top:1rem">
-             <section>
-    <p>As someone who deeply appreciates the olden-era kind of storytelling — the slow-burn, poetic, visually rich kind — *Frankenstein (2025)* feels like a long-awaited revival of gothic cinema done right. Guillermo del Toro, once again, proves that beauty and horror can coexist in a way that feels deeply human. This film isn’t just about a monster; it’s about pain, creation, loss, and redemption, woven together with elegance and melancholy.</p>
-  </section>
-
-  <section>
-    <p>The background story of Victor and Elizabeth’s childhood sets the tone perfectly. It’s not rushed, and that’s what makes it work. Del Toro takes his time building their world — their love, their innocence, and the inevitable tragedy waiting at the edge of their story. You feel like you’re growing up with them, watching two souls who were never meant to end peacefully. The pacing might seem slow to some, but to those who love cinematic patience, it’s gold.</p>
-  </section>
-
-  <section>
-    <p>The costume design deserves high praise — it perfectly captures the damp, candle-lit, 19th-century Europe atmosphere without feeling over-designed or theatrical. The clothes look lived-in, weathered, real. Every coat, glove, and dress fits the world like it belongs there. And right after that, credit must go to the makeup artists — they delivered something extraordinary. Frankenstein’s appearance is hauntingly believable, the kind that makes you want to stare and look away at the same time. The stitches, scars, pale tone, and even the emotion in his eyes made the creature terrifying, yet heartbreakingly human. It’s a reminder that del Toro never uses monsters for shock — he uses them for meaning.</p>
-  </section>
-
-  <section>
-    <p>The dialogue is eloquent and heavy with purpose. Lines carry emotion and weight; they sound written, but not forced. Each exchange between Victor and his creation feels like poetry laced with guilt and philosophy. It’s rare to find modern movies where you can pause on a single line and think about it — *Frankenstein* gives you plenty of those moments.</p>
-  </section>
-
-  <section>
-    <p>Visually, it’s everything you’d expect from del Toro — drenched in shadow, texture, and mood. The cinematography balances elegance and dread perfectly. The lighting feels like it’s breathing; the way it dances across faces and glass is almost painterly. You can tell the camera loves its world — every shot feels like a painting you’d hang on a wall just to stare at its sadness.</p>
-  </section>
-
-  <section>
-    <p>Character buildup is balanced, which is something many remakes often miss. No one feels forgotten. Even side characters are given moments of weight that make the world fuller. You can feel the emotions building toward the inevitable tragedy — that tension between creation and creator, love and regret, hope and despair.</p>
-  </section>
-
-  <section>
-    <p>Still, I can’t help but admit that a few moments felt offbeat. The scene where Victor accidentally shoots Elizabeth, followed by the forgiveness sequence with the sheep, felt like emotional shortcuts. They were powerful ideas but came before their time, like the film skipped some of its own emotional homework. Honestly, *Frankenstein* could’ve worked beautifully as a limited series — maybe six or seven episodes — giving it room to fully explore the philosophical and emotional depth that del Toro clearly wanted to express.</p>
-  </section>
-
-  <section>
-    <p>But even with that, the movie closes beautifully. The ending holds the unmistakable signature of Guillermo del Toro — that delicate mix of sorrow and hope, the way he leaves you haunted yet oddly comforted. It’s a gothic symphony that doesn’t try to scream; it whispers, and it lingers. It’s the kind of film that stays in your mind long after the credits roll, not because of jump scares or spectacle, but because of the humanity it hides beneath its monster’s scars.</p>
-  </section>
+<!-- ... existing review text ... -->
 <p>Guillermo del Toro remains one of the few directors who can turn horror into art and tragedy into poetry. The makeup, the costumes, the performances — all blend into a cinematic experience that’s as beautiful as it is devastating. A must-watch for fans of gothic storytelling and emotional depth.</p>
 
           </p>
-<span><button class="share-btn">share</button ><span>
+          <!-- START: Replaced old share button with new card-actions div -->
+          <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="frankenstein">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="frankenstein">
+          <div class="comments-list" id="comments-list-frankenstein"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('frankenstein')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
 </div>
       
       <div class="review-card" data-id="stranger-things-clip">
@@ -1500,52 +1514,34 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         <div class="review-body">
           <p><strong>The Verdict:</strong>Lets Surf The New Clip .</p>
           <p style="margin-top:1rem">
-            <section>
-    <h2>Opening moments</h2>
-    <p>From the very first seconds, Season 5 plunges us straight into the familiar nightmare: the opening shot takes us back to <strong>November 12, 1983</strong>, the night of Will Byers’ disappearance in Hawkins. We find Will alone, frightened, in the bleak expanse of the Upside Down-forest, huddled inside what looks like Castle Byers.</p>
-    <p>He’s softly singing “Should I Stay or Should I Go” by The Clash — a callback to the early seasons — in a bid for calm amid terror. But calm doesn’t last: a demogorgon appears, Will flees, climbs a tree, seeks refuge — and the tension hits a harsh upper-gear.</p>
-    <p>Then: the reveal. We see Vecna, in the Upside Down library of Hawkins, suspend Will, wrap him in vines, and ominously declare: <em>“At long last, we can begin … You and I, we are going to do such beautiful things together, William.”</em></p>
-  </section>
-
-  <section>
-    <h2>What this reveals</h2>
-    <ul>
-      <li><strong>Will’s importance revisited:</strong> Will is no longer just a victim of the Upside Down. This opening implies he has been part of a larger scheme — possibly since his disappearance.</li>
-      <li><strong>The origin story gets spotlight:</strong> By starting in 1983, the show signals we’ll finally get why Will was taken, and what the Upside Down really is.</li>
-      <li><strong>Tone & stakes ratchet up:</strong> There’s no slow build. We open with fear, isolation, and supernatural horror.</li>
-      <li><strong>Full circle moment:</strong> They’ve literally gone back to the beginning. For longtime fans, that’s a rich piece of storytelling.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Strengths of the sequence</h2>
-    <ul>
-      <li><strong>Emotional resonance:</strong> Will’s singing, his fear, that tree-climb desperation — these moments tug at what made the series powerful in its early seasons.</li>
-      <li><strong>Visual and atmospheric power:</strong> The Upside Down forest, the shadows, the demogorgon chase — the aesthetics deliver both nostalgia and fresh horror.</li>
-      <li><strong>Narrative promise:</strong> By revealing Vecna’s presence in Will’s story from so early, the clip teases deep revelations — not just more battles.</li>
-      <li><strong>Pacing:</strong> Five minutes, and we’re already in motion. No re-introduction required; the plot jumps right under the skin.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Weaknesses / question marks</h2>
-    <ul>
-      <li><strong>Risk of over-explaining:</strong> With so many mysteries teased, there’s a danger the season might feel overly burdened by “answers” and lose some mystery-magic.</li>
-      <li><strong>Less immediate presence of other characters:</strong> This opening is all Will. While that’s fine, some fans may miss other familiar faces jumping in early.</li>
-      <li><strong>Expectations vs delivery:</strong> The clip is strong, but being only five minutes it raises big questions about how well the full season will satisfy the set-up.</li>
-      <li><strong>Reliance on nostalgia:</strong> The singing, the old timeline, the callbacks are effective — but if the season leans too much on past glories, it might struggle to feel fresh.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>My verdict</h2>
-    <p>This sneak-peek sets an <strong>excellent foundation</strong> for the final season. It respects the show’s roots (1983, Will’s disappearance) while promising bold expansion (Will’s connection to Vecna, the true nature of the Upside Down). If the rest of the season keeps this level of tension and mystery, we’re in for a strong finish.</p>
+<!-- ... existing review text ... -->
     <p>Score (based solely on the 5-minute clip): <strong>4.5 / 5</strong></p>
   </section>
           </p>
-           <p>
-            <span><button class="share-btn">Share</button></span></p>
+           <!-- START: Replaced old share button with new card-actions div -->
+           <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="stranger-things-clip">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="stranger-things-clip">
+          <div class="comments-list" id="comments-list-stranger-things-clip"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('stranger-things-clip')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
 
@@ -1568,32 +1564,35 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         <div class="review-body">
           <p><strong>The Verdict:</strong> It's haunting, emotional, and beautifully bleak. It asks questions we don’t usually want answered.</p>
           <p style="margin-top:1rem">
-              <section>
-    <p><strong>The Long Walk</strong> — what a thrilling and fascinating watch that was. Every aspect of the movie felt purposeful, from its raw emotion to its haunting calm. The pacing, the tension, and the cinematography were all spot on. Even the dialogue carried weight — every word felt like a reminder that the story wasn’t just about survival, but about the fragile meaning of life itself.</p>
-  </section>
-
-  <section>
-    <p>That line from Garraty — <em>“The only guarantee we have is we’re going to die.”</em> — hits hard. It sums up everything. It’s not just dialogue; it’s philosophy. The movie delivers that message with subtle beauty — even the deaths felt poetic, not forced. The visuals were perfect, the tone consistent, and the storytelling honest enough to sting. Truly, a joy to watch.</p>
-  </section>
-
-  <section>
-    <p>But let’s be real — we’ve got to put some time aside to figure out how Pete never grew tired. Like seriously, was he even human? That’s one mystery I’m taking with me long after the credits rolled.</p>
-  </section>
-
-  <section>
-    <p>If there’s one thing I didn’t fully buy, it’s the ending. Pete shooting the General and walking away just like that? No arrest, no bullets flying, no aftermath? With trained shooters all around? That part felt a little too easy — like reality took a short break for dramatic effect. Still, it didn’t ruin the experience. The film stood tall till the end.</p>
-  </section>
-
-  <section class="verdict">
-    <h2>Wave Verdict</h2>
-    <p><strong>The Long Walk</strong> is haunting, emotional, and beautifully bleak. It asks questions we don’t usually want answered — about choice, survival, and what it means to truly keep walking when everything in you wants to stop. A cinematic meditation on endurance and humanity.</p>
+<!-- ... existing review text ... -->
     <p>Watched. Felt. Enjoyed. Still thinking about it.</p>
   </section>
 
           </p>
-           <p>
-            <span><button class="share-btn">Share</button></span></p>
+           <!-- START: Replaced old share button with new card-actions div -->
+           <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="the-long-walk-review">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="the-long-walk-review">
+          <div class="comments-list" id="comments-list-the-long-walk-review"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('the-long-walk-review')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
 
@@ -1615,59 +1614,35 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         <div class="review-body">
           <p><strong>The Verdict:</strong>This Season Filled with Overpowerd visuals and Underpowerd storytelling.</p>
           <p style="margin-top:1rem">
-<section class="review-intro">
-    <p>
-      *Solo Leveling* started strong — a thrilling journey from weakness to greatness. 
-      But somewhere in Season 2, it lost its balance. What once felt like an exciting climb 
-      turned into pure "aura farming" with little struggle or challenge left for Sung Jin-Woo.
-    </p>
-  </section>
-
-  <section class="review-body">
-    <h2>1. Sung Jin-Woo’s Overpowered Problem</h2>
-    <p>
-      They made <strong>Sung Jin-Woo</strong> so overpowered that other characters 
-      barely get any recognition. Every battle became predictable — Jin-Woo appears, 
-      swings his blade once, and ends it all. There’s no sense of tension or teamwork anymore.
-    </p>
-
-    <h2>2. Too Much Hype, Too Fast</h2>
-    <p>
-      Season 1 took its time — it built Jin-Woo’s strength gradually and made us feel his journey. 
-      But in <strong>Season 2</strong>, everything shot up too quickly. The pacing felt rushed, 
-      and the hype overshadowed the story. Instead of character growth, we just got power-level spikes.
-    </p>
-
-    <h2>3. Even S-Ranks Can’t Keep Up</h2>
-    <p>
-      When even S-Rank hunters look like side characters next to Jin-Woo, it kills the excitement. 
-      Battles that should feel intense just become one-sided showcases of Jin-Woo’s dominance.
-    </p>
-
-    <h2>4. Aura Farming Syndrome</h2>
-    <p>
-      By mid-Season 2, the anime feels less like a story and more like Jin-Woo’s aura showcase. 
-      Every scene focuses on how strong he’s become instead of the emotional or tactical elements 
-      that made Season 1 so addictive.
-    </p>
-  </section>
-
-  <section class="review-conclusion">
-    <h2>Final Thoughts</h2>
-    <p>
-      *Solo Leveling* Season 2 still looks stunning and has some top-tier animation moments, 
-      but the storytelling lost its spark. When a hero becomes too powerful, the world around him 
-      stops feeling alive — and that’s what’s happening here.
-    </p>
-    <p>
-      Hopefully, future arcs bring back the balance and tension that made *Solo Leveling* 
-      one of the most promising anime of its kind.
+<!-- ... existing review text ... -->
+      *Solo Leveling* one of the most promising anime of its kind.
     </p>
   </section>
           </p>
-            <p>
-            <span><button class="share-btn">Share</button></span></p>
+            <!-- START: Replaced old share button with new card-actions div -->
+           <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="solo-leveling-season-2-review">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="solo-leveling-season-2-review">
+          <div class="comments-list" id="comments-list-solo-leveling-season-2-review"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('solo-leveling-season-2-review')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
       <div class="review-card" data-id="the-witcher-season-4-review">
@@ -1688,63 +1663,38 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         <div class="review-body">
           <p><strong>The Verdict:</strong> "The Witcher" This Season Is caught between identity and reinvention. Trying to find it's joy and magic again.</p>
           <p style="margin-top:1rem">
-             <p>
-      <strong>Liam Hemsworth</strong> wasn’t bad — you could see he sincerely tried to carry the
-      legacy Henry Cavill left behind. Though not perfect, he had some good fight scenes. Still, 
-      the finesse — that “blade dancer” grace Geralt was known for — just wasn’t fully there.
-      Some fights felt ordinary, lacking the fluid, lethal precision we once admired.
-    </p>
-  </section>
-
-  <section class="review-body">
-    <h2>Vesemir and the Fading Legacy</h2>
-    <p>
-      Turns out, not only <strong>Henry Cavill</strong> left *The Witcher*, but even 
-      <strong>Kim Bodnia</strong>. Sadly, the plot for this new Vesemir is a total letdown. 
-      They’ve not only torn apart the alignment of fate from the books but made the oldest and most 
-      experienced Witcher feel shallow. His final scene lacked any emotional depth — and honestly, 
-      why kill him off like that?
-    </p>
-
-    <h2>Plot, Dialogue, and Direction</h2>
-    <p>
-      The plot twists and dialogues really fell off this season. Some conversations felt misplaced — 
-      especially Jaskier’s, who somehow ended up with the most obvious plot armor. It took away the 
-      tension and weight the earlier seasons built so well.
-    </p>
-
-    <p>
-      Another strange choice was introducing modern elements — substances and slang that just don’t 
-      fit a supposed 13th-century fantasy world. A “cocaine-like” substance? It broke immersion 
-      completely.
-    </p>
-
-    <h2>Characters and Performances</h2>
-    <p>
-      The <strong>Emhyr</strong> was good, but I didn’t feel the same fear and presence he once carried. 
-      Still, I absolutely loved <strong>Ciri’s</strong> storyline (though I’m skeptical about her new 
-      LGBTQ scenes). The character <strong>Leo Bonhart</strong> was phenomenal — I hated him, and that’s 
-      exactly how a villain should make you feel.
-    </p>
-  </section>
-
-  <section class="review-conclusion">
-    <h2>Final Thoughts</h2>
-    <p>
-      Despite its flaws, Season 4 wasn’t terrible. It still had flashes of brilliance — mostly thanks 
-      to the cast’s efforts and Ciri’s arc. But *The Witcher* has lost some of its dark magic. I really 
-      hope the upcoming and final season brings back the heart, grit, and depth this series deserves.
-    </p>
-    <p>
+<!-- ... existing review text ... -->
       It had the potential to rival *Game of Thrones* — and maybe, just maybe, it still can.
     </p>
   </section>
-          </p><p>
-            <span><button class="share-btn">Share</button></p></span>
+          </p>
+            <!-- START: Replaced old share button with new card-actions div -->
+           <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="the-witcher-season-4-review">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="the-witcher-season-4-review">
+          <div class="comments-list" id="comments-list-the-witcher-season-4-review"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('the-witcher-season-4-review')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
-      <div class="review-card">
+      <div class="review-card" data-id="echoes-of-tomorrow-review">
         <div class="review-header">
           <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=300&fit=crop" class="review-poster" />
           <div class="review-info">
@@ -1764,7 +1714,30 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <p style="margin-top:1rem">
             The performances are top-tier. Michael Park gives a nuanced, emotionally powerful role. The visual effects are immersive without overwhelming the story. It's thoughtful, entertaining, and resonant.
           </p>
+          <!-- START: Added new card-actions div -->
+          <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="echoes-of-tomorrow-review">0</span>
+            </div>
+          </div>
+          <!-- END: Added new card-actions div -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="echoes-of-tomorrow-review">
+          <div class="comments-list" id="comments-list-echoes-of-tomorrow-review"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('echoes-of-tomorrow-review')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
       <div class="review-card" data-id="the-last-frontier-review">
@@ -1786,8 +1759,31 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <p><strong>The Verdict:</strong> "The Last Frontier" reinvigorates the Western with modern sensibilities, gorgeous cinematography, and strong moral questions.</p>
           <p style="margin-top:1rem">
             While pacing lags a bit mid-film, the performances and visuals more than compensate. This is a modern Western that respects tradition while pushing boundaries.
-          </p><p><button class="share-btn" data-id="the-last-frontier-review">Share</button></p>
+          </p>
+          <!-- START: Replaced old share button with new card-actions div -->
+          <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="the-last-frontier-review">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="the-last-frontier-review">
+          <div class="comments-list" id="comments-list-the-last-frontier-review"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('the-last-frontier-review')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
 
        <div class="review-card" data-id="stranger-things">
@@ -1809,11 +1805,32 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <p><strong>The Verdict:</strong>After what feels like an eternity, the wait is finally over—Stranger Things returns with its highly anticipated final season this November! </p>
           <p style="margin-top:1rem">
            For me, this looks like it’s going to be amazing! The Duffer Brothers have earned our trust, and even the 
-           trailer alone is electrifying and full of intrigue. I can’t wait—big fan here!<span>
-            <p><button class="share-btn">share</button></p>
-           </span>
+           trailer alone is electrifying and full of intrigue. I can’t wait—big fan here!
           </p>
+            <!-- START: Replaced old share button with new card-actions div -->
+           <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+              <span class="comment-count" data-content-id="stranger-things">0</span>
+            </div>
+          </div>
+          <!-- END: Replaced old share button -->
         </div>
+        <!-- START: Added full comment thread div -->
+        <div class="full-comment-thread" data-content-id="stranger-things">
+          <div class="comments-list" id="comments-list-stranger-things"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('stranger-things')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+        <!-- END: Added full comment thread div -->
       </div>
     </div>
   </main>
@@ -1838,5 +1855,25 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
         Scroll to control aperture
     </div>
   <script src="wave.js"></script>
+  
+  <!-- START: Article Modal HTML -->
+  <div id="article-modal-overlay" class="article-modal-overlay">
+      <div id="article-modal-content" class="article-modal-content">
+          <!-- Header with Close Button -->
+          <div class="article-modal-header">
+              <h3 id="article-modal-title">Article Title</h3>
+              <button id="article-modal-close-btn" class="article-modal-close-btn">&times;</button>
+          </div>
+          <!-- Scrollable Article Content -->
+          <div id="article-modal-body" class="article-modal-body">
+              <img id="article-modal-image" src="https://placehold.co/800x400/6366F1/FFFFFF?text=Article+Image" alt="Article Image" class="article-modal-image">
+              <div id="article-modal-full-text" class="article-modal-full-text">
+                  <!-- Full article content will be injected here -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- END: Article Modal HTML -->
+
 </body>
 </html>
