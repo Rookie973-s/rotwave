@@ -445,7 +445,67 @@ function closeArticleModal() {
   }, 300); // Match transition duration
 }
 
+/**
+ * Populates the modal with content and makes it visible.
+ */
+function populateAndShowModal(title, imageSrc, fullContentHTML) {
+  const articleModalOverlay = document.getElementById('article-modal-overlay');
+  const modalTitle = document.getElementById('article-modal-title');
+  const modalImage = document.getElementById('article-modal-image');
+  const modalFullText = document.getElementById('article-modal-full-text');
 
+  if (!articleModalOverlay || !modalTitle || !modalImage || !modalFullText) {
+      console.error("Modal elements not found. Check your HTML.");
+      return;
+  }
+
+  // Populate the modal
+  modalTitle.innerText = title;
+  modalImage.src = imageSrc;
+  modalImage.alt = title + " image";
+  modalFullText.innerHTML = fullContentHTML;
+
+  // Force reflow to ensure transition works
+  articleModalOverlay.style.display = 'flex';
+  void articleModalOverlay.offsetWidth; // Trigger reflow
+  
+  // Add visible class after a tiny delay to trigger animation
+  requestAnimationFrame(() => {
+    articleModalOverlay.classList.add('visible');
+  });
+  
+  // Prevent background scrolling
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Hides the article modal and restores background scrolling.
+ */
+function closeArticleModal() {
+  const articleModalOverlay = document.getElementById('article-modal-overlay');
+
+  if (!articleModalOverlay) return;
+  
+  // Remove visible class to trigger fade-out animation
+  articleModalOverlay.classList.remove('visible');
+  
+  // Allow background scrolling again
+  document.body.style.overflow = '';
+
+  // Wait for animation to complete before hiding
+  setTimeout(() => {
+    articleModalOverlay.style.display = 'none';
+    
+    // Reset content after animation
+    const modalTitle = document.getElementById('article-modal-title');
+    const modalImage = document.getElementById('article-modal-image');
+    const modalFullText = document.getElementById('article-modal-full-text');
+
+    if (modalTitle) modalTitle.innerText = "Article Title";
+    if (modalImage) modalImage.src = "";
+    if (modalFullText) modalFullText.innerHTML = "";
+  }, 400); // Match the transition duration
+}
 // =================================================================
 // 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
 // =================================================================
