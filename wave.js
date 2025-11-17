@@ -5,6 +5,7 @@ const dots = document.querySelectorAll('.carousel-dot');
 const totalSlides = document.querySelectorAll('.carousel-slide').length;
 
 function updateCarousel() {
+  if (!track) return;
   track.style.transform = `translateX(-${currentSlide * 100}%)`;
   dots.forEach((dot, index) => {
     dot.classList.toggle('active', index === currentSlide);
@@ -12,6 +13,7 @@ function updateCarousel() {
 }
 
 function moveCarousel(direction) {
+  if (totalSlides === 0) return;
   currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
   updateCarousel();
 }
@@ -25,93 +27,105 @@ setInterval(() => {
   moveCarousel(1);
 }, 5000);
 
-// --- TAB SWITCHING (FIXED for both user click and programmatic calls) ---
-function switchTab(tabName, event) { // Pass 'event' explicitly if available
+// --- TAB SWITCHING ---
+function switchTab(tabName, event) {
   document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
   
-  // Determine which button to activate
   let clickedButton = null; 
   if (event && event.target && event.target.classList.contains('tab-btn')) {
     clickedButton = event.target;
   } else {
-    // Fallback for programmatic calls (like from the shared link logic)
     clickedButton = document.querySelector(`.tab-btn[onclick*="switchTab('${tabName}')"]`);
   }
   
   document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-  document.getElementById(tabName).classList.add("active");
+  const targetTab = document.getElementById(tabName);
+  if (targetTab) targetTab.classList.add("active");
   
   if (clickedButton) {
     clickedButton.classList.add("active");
   }
-  // Ensure scroll to top happens for the new tab
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ---- NEW: MENU LOGIC ----
-// ---- NEW: MENU LOGIC ----
+// ---- MENU LOGIC ----
 function toggleMenu() {
     const menu = document.getElementById('menuDrawer');
+    if (!menu) return;
     const isVisible = menu.classList.toggle('active');
     
-    // Accessibility focus management
     const menuToggleBtn = document.getElementById('menuToggle');
     if (isVisible) {
-        // Find the new Close button or the first link and focus it
         const firstFocusable = menu.querySelector('#menuCloseBtn, a'); 
-        if (firstFocusable) {
-            firstFocusable.focus();
-        }
-    } else {
-        // Return focus to the toggle button
+        if (firstFocusable) firstFocusable.focus();
+    } else if (menuToggleBtn) {
         menuToggleBtn.focus();
     }
 }
 
-// ---- NEW: SEARCH ICON TOGGLE LOGIC (Replaces the inline search bar) ----
+// ---- SEARCH LOGIC ----
 function toggleSearchDropdown() {
     const searchDropdown = document.getElementById('searchDropdown');
     const searchInput = document.getElementById('searchInput');
     
-    // Toggle the visibility
     const isVisible = searchDropdown.classList.toggle('active');
     
-    // If shown, focus the input; otherwise, clear and blur it
     if (isVisible) {
         searchInput.focus();
     } else {
-        searchInput.value = ''; // Clear the input when hiding
-        runSearch('');      // Clear results
+        searchInput.value = '';
+        runSearch('');
         searchInput.blur();
     }
 }
 
-
-// ---- SMALL TOAST (for copy success) ----
-function showCopiedToast() {
-  let toast = document.createElement('div');
-  toast.innerText = '✅ Link copied!';
-  toast.style.position = 'fixed';
-  toast.style.bottom = '20px';
-  toast.style.right = '20px';
-  toast.style.background = '#222';
-  toast.style.color = '#fff';
-  toast.style.padding = '10px 15px';
-  toast.style.borderRadius = '8px';
-  toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
-  toast.style.fontSize = '14px';
-  toast.style.zIndex = '1000';
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2000);
+function runSearch(query) {
+  const activeTab = document.querySelector('.tab-content.active');
+  if (!activeTab) return;
+  
+  const tabId = activeTab.id;
+  let items = [];
+  
+  // Mapping tab IDs to their card classes
+  const cardClasses = {
+    'news': '.article-card',
+    'comics': '.comic-card',
+    'reviews': '.review-card'
+  };
+  
+  const titleClasses = {
+    'news': '.article-title',
+    'comics': '.comic-title',
+    'reviews': '.review-title'
+  };
+  
+  if (cardClasses[tabId]) {
+      items = Array.from(activeTab.querySelectorAll(cardClasses[tabId]));
+      items.forEach(item => {
+        const titleEl = item.querySelector(titleClasses[tabId]);
+        const title = titleEl ? titleEl.innerText.toLowerCase() : '';
+        item.style.display = title.includes(query) ? '' : 'none';
+      });
+  }
 }
 
-// ---- HEADER HIDE/SHOW ----
+const searchInput = document.getElementById('searchInput'); 
+if (searchInput) {
+  searchInput.addEventListener('input', function () {
+    runSearch(this.value.trim().toLowerCase());
+  });
+}
+
+// ---- TOAST & HEADER ----
+function showCopiedToast() {
+  showToast('✅ Link copied!');
+}
+
 let lastScroll = 0;
 const header = document.querySelector(".header");
 
 window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
-  // Do not hide if the menu or search dropdown is open
   if (document.getElementById('menuDrawer')?.classList.contains('active') ||
       document.getElementById('searchDropdown')?.classList.contains('active')) {
       return;
@@ -125,145 +139,62 @@ window.addEventListener("scroll", () => {
   lastScroll = currentScroll;
 });
 
-// Optional: hide header briefly when clicking a tab or article
-document.querySelectorAll(".tab-btn, .article-card").forEach(el => {
-  el.addEventListener("click", () => {
-    header.classList.add("hide");
-    setTimeout(() => header.classList.remove("hide"), 1200);
-  });
-});
-
-// ---- SEARCH LOGIC ----
-const searchInput = document.getElementById('searchInput'); 
-
-if (searchInput) {
-  searchInput.addEventListener('input', function () {
-    const q = this.value.trim().toLowerCase();
-    runSearch(q);
-  });
-}
-
-function runSearch(query) {
-  const activeTab = document.querySelector('.tab-content.active');
-  if (!activeTab) return;
-  
-  const tabId = activeTab.id;
-  let items = [];
-  
-  if (tabId === 'news') {
-    items = Array.from(activeTab.querySelectorAll('.article-card'));
-    items.forEach(item => {
-      const titleEl = item.querySelector('.article-title');
-      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
-      item.style.display = title.includes(query) ? '' : 'none';
-    });
-  } else if (tabId === 'comics') {
-    items = Array.from(activeTab.querySelectorAll('.comic-card'));
-    items.forEach(item => {
-      const titleEl = item.querySelector('.comic-title');
-      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
-      item.style.display = title.includes(query) ? '' : 'none';
-    });
-  } else if (tabId === 'reviews') {
-    items = Array.from(activeTab.querySelectorAll('.review-card'));
-    items.forEach(item => {
-      const titleEl = item.querySelector('.review-title');
-      const title = titleEl ? titleEl.innerText.toLowerCase() : '';
-      item.style.display = title.includes(query) ? '' : 'none';
-    });
-  }
-}
-
-// --- THEME TOGGLE LOGIC (UPDATED FOR SVG SWAP) ---
+// --- THEME TOGGLE LOGIC ---
 const themeToggle = document.getElementById('themeToggle');
-// SVG content for the icons
-const sunIconSVG = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>`;
-const moonIconSVG = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>`;
+const sunIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon sun-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+const moonIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
 if (themeToggle) {
-    // 1. Function to apply the selected theme
     function applyTheme(isLight) {
         document.body.classList.toggle('light-mode', isLight);
-        
-        // **NEW:** Swap the SVG based on the theme state
         themeToggle.innerHTML = isLight ? moonIconSVG : sunIconSVG; 
-        
-        // Update the button's aria-label for accessibility
         themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
 
-    // 2. Load saved preference or check system preference
     const savedTheme = localStorage.getItem('theme');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-    // Set initial theme
     if (savedTheme) {
         applyTheme(savedTheme === 'light');
     } else {
-        // Apply system preference on first visit
         applyTheme(prefersLight); 
     }
 
-    // 3. Event listener for the click
     themeToggle.addEventListener('click', () => {
         const isLight = document.body.classList.contains('light-mode');
-        // Toggle the theme
         applyTheme(!isLight);
-        // Save the new preference
         localStorage.setItem('theme', !isLight ? 'light' : 'dark');
     });
 }
-// --- END THEME TOGGLE LOGIC ---
 
-// ---- DOM READY: MAIN FUNCTIONALITY ----
+// ---- DOM READY ----
 document.addEventListener("DOMContentLoaded", function() {
   
-  // 1. Expand / collapse handling for news articles - now handled by read-more button only
   document.querySelectorAll(".read-more-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       const article = btn.closest('.article-card');
       if (article) {
         article.classList.toggle("expanded");
-        // Update button text
         btn.textContent = article.classList.contains('expanded') ? 'Read Less' : 'Read More';
       }
     });
   });
 
-  // 2. Run a search on load if input has text (only relevant if page loads with a query)
   const input = document.getElementById('searchInput');
   if (input && input.value.trim() !== '') {
-    // Ensure the dropdown is active if there is a search query
     document.getElementById('searchDropdown')?.classList.add('active');
     runSearch(input.value.trim().toLowerCase());
   }
 
-  // 3. SHARE BUTTON FEATURE (Applied to both Articles and Reviews)
   const shareButtons = document.querySelectorAll('.share-btn');
   shareButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-      e.stopPropagation(); // crucial: prevents article from expanding/collapsing
+      e.stopPropagation();
       
-      // Find the nearest parent card with a data-id attribute
       const card = button.closest('.article-card, .review-card');
       if (!card) return;
       
-      // Get the title and generate ID/URL
       let title = card.querySelector('.article-title, .review-title')?.innerText.trim() || 'Content';
       const articleId = card.getAttribute('data-id') || button.getAttribute('data-id') || title.replace(/\s+/g, '-').toLowerCase();
       
@@ -277,7 +208,6 @@ document.addEventListener("DOMContentLoaded", function() {
           url: articleUrl
         }).catch(() => {});
       } else {
-        // Fallback for non-supporting browsers
         navigator.clipboard.writeText(articleUrl).then(() => {
           showCopiedToast();
         }).catch(err => {
@@ -287,7 +217,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  // 4. SCROLL TO SHARED ARTICLE / REVIEW (FIXED SCROLLING AFTER TAB SWITCH)
   const params = new URLSearchParams(window.location.search);
   const articleId = params.get("article");
   
@@ -303,148 +232,122 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         targetTabName = 'news';
       }
-      // 1. Switch the tab to make the content visible
       switchTab(targetTabName);
 
-      // 2. Wait longer (1000ms) for the tab switch, animation, and scroll-to-top 
-      // to fully complete before attempting the specific element scroll.
       setTimeout(() => {
-        // Now scroll to the target element
         target.scrollIntoView({ behavior: "smooth", block: "center" });
-        
-        // Only expand if it's an article-card
         if (target.classList.contains('article-card')) {
           target.classList.add("expanded"); 
         }
-
-        // Temporary highlight
         target.style.boxShadow = "0 0 15px #ff9800"; 
         setTimeout(() => (target.style.boxShadow = ""), 2000);
-      }, 1000); // 1 second delay
+      }, 1000);
     }
   }
+  
+  // Initialize comments logic
+  initializeCommentCounts();
 });
-//Lens Logic
-  const bladeCount = 8;
-        const bladesContainer = document.getElementById('blades');
-        const centerCircle = document.getElementById('center');
-        const fstopDisplay = document.getElementById('fstop');
-        
-        // Create aperture blades
-        for (let i = 0; i < bladeCount; i++) {
-            const blade = document.createElement('div');
-            blade.className = 'blade';
-            blade.innerHTML = '<div class="blade-inner"></div>';
-            blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
-            bladesContainer.appendChild(blade);
-        }
 
-        const blades = document.querySelectorAll('.blade');
-        let lastScrollY = window.scrollY;
-        let rotation = 0;
+// --- LENS ANIMATION ---
+const bladeCount = 8;
+const bladesContainer = document.getElementById('blades');
+const centerCircle = document.getElementById('center');
+const fstopDisplay = document.getElementById('fstop');
+const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
 
-        // F-stop values for display
-        const fStops = [1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22];
+if (bladesContainer) {
+    for (let i = 0; i < bladeCount; i++) {
+        const blade = document.createElement('div');
+        blade.className = 'blade';
+        blade.innerHTML = '<div class="blade-inner"></div>';
+        blade.style.transform = `rotate(${(360 / bladeCount) * i}deg)`;
+        bladesContainer.appendChild(blade);
+    }
+}
 
-        function updateAperture() {
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = window.scrollY / maxScroll;
-            
-            // Calculate rotation based on scroll direction
-            const scrollDelta = window.scrollY - lastScrollY;
-            rotation += scrollDelta * 0.1;
-            lastScrollY = window.scrollY;
-            
-            // Aperture opens when scrolling down (0 to 100%)
-            const openPercent = scrollPercent;
-            
-            // Min and max aperture size
-            const minSize = 4; // Smallest opening (f/22)
-            const maxSize = 44; // Largest opening (f/1.4)
-            
-            // Calculate current aperture size (inverted: scroll down = open = large)
-            const currentSize = minSize + (maxSize - minSize) * openPercent;
-            
-            // Update center circle
-            centerCircle.style.width = currentSize + 'px';
-            centerCircle.style.height = currentSize + 'px';
-            
-            // Calculate blade angle (more closed = more angled inward)
-            const bladeAngle = 25 - (openPercent * 20); // From 25deg (closed) to 5deg (open)
-            
-            // Update each blade
-            blades.forEach((blade, index) => {
-                const baseRotation = (360 / bladeCount) * index;
-                const totalRotation = baseRotation + rotation;
-                blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
-            });
-            
-            // Update f-stop display (inverted: more open = lower f-stop number)
-            const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
-            fstopDisplay.textContent = `f/${fStops[fstopIndex]}`;
-        }
+const blades = document.querySelectorAll('.blade');
+let lastScrollY = window.scrollY;
+let rotation = 0;
 
-        // Initialize
-        updateAperture();
+function updateAperture() {
+    if (!centerCircle) return;
+    
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = window.scrollY / maxScroll;
+    
+    const scrollDelta = window.scrollY - lastScrollY;
+    rotation += scrollDelta * 0.1;
+    lastScrollY = window.scrollY;
+    
+    const openPercent = scrollPercent;
+    const minSize = 4; 
+    const maxSize = 44; 
+    
+    const currentSize = minSize + (maxSize - minSize) * openPercent;
+    
+    centerCircle.style.width = currentSize + 'px';
+    centerCircle.style.height = currentSize + 'px';
+    
+    const bladeAngle = 25 - (openPercent * 20); 
+    
+    blades.forEach((blade, index) => {
+        const baseRotation = (360 / bladeCount) * index;
+        const totalRotation = baseRotation + rotation;
+        blade.style.transform = `rotate(${totalRotation}deg) translateX(${-bladeAngle}%)`;
+    });
+    
+    const fstopIndex = Math.floor((1 - openPercent) * (fStops.length - 1));
+    if (fstopDisplay) fstopDisplay.textContent = `f/${fStops[fstopIndex] || 22}`;
+}
 
-        // Update on scroll with throttling for performance
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    updateAperture();
-                    ticking = false;
-                });
-                ticking = true;
-            }
+updateAperture();
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateAperture();
+            ticking = false;
         });
+        ticking = true;
+    }
+});
 
-        // Handle window resize
-        window.addEventListener('resize', updateAperture);
+window.addEventListener('resize', updateAperture);
 
-        // Click aperture to scroll to top
-        const apertureContainer = document.querySelector('.aperture-container');
-        apertureContainer.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+const apertureContainer = document.querySelector('.aperture-container');
+if (apertureContainer) {
+    apertureContainer.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-        
+    });
+}
+
 // =================================================================
 // 💬 ===== COMMENT SECTION LOGIC (Frontend) =====
 // =================================================================
 
 const API_URL = "https://wave-backend-umi8.onrender.com";
-// FIX: Use a consistent path for all comment operations
 const API_BASE_PATH = "/comments"; 
 
-// Current user state
 let currentUser = null;
 
-// -----------------------------------------------------------------
-// 💡 Helper Functions
-// -----------------------------------------------------------------
-
-/**
- * FIX: Function to parse JWT token (required for Google Sign-In)
- */
 function parseJwt(token) {
-    // This is a standard client-side JWT parser implementation
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
+    try {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        return null;
+    }
 };
 
-
-/**
- * Displays a small toast notification with a message.
- * @param {string} message - The message to display.
- */
 function showToast(message) {
     let toast = document.createElement('div');
     toast.innerText = message;
@@ -463,56 +366,32 @@ function showToast(message) {
     `;
     document.body.appendChild(toast);
     
-    // Set up removal animation
     setTimeout(() => {
-        // Since we don't have CSS, we just remove it after a delay.
         toast.style.opacity = '0'; 
         toast.style.transition = 'opacity 0.3s ease'; 
         setTimeout(() => toast.remove(), 300);
     }, 2500);
 }
-  const logoutBtn = document.getElementById('logout-btn');
+
+const logoutBtn = document.getElementById('logout-btn');
 if (logoutBtn) logoutBtn.style.display = isUserSignedIn() ? 'inline-block' : 'none';
-/**
- * Escapes HTML content to prevent Cross-Site Scripting (XSS).
- * @param {string} text - The string to escape.
- * @returns {string} The HTML-safe string.
- */
+
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-/**
- * Checks if a user is currently simulated as signed in.
- * @returns {boolean} True if currentUser is set, false otherwise.
- */
 function isUserSignedIn() {
     return currentUser !== null;
 }
 
-/**
- * Gets the email of the current signed-in user.
- * @returns {string|null} The current user's email.
- */
 function getCurrentUserEmail() {
     return currentUser;
 }
 
-// -----------------------------------------------------------------
-// 👤 User/Form State Functions
-// -----------------------------------------------------------------
-
-/**
- * Simulates a sign-in process and saves the user email.
- */
 // ---------------- GOOGLE SIGN-IN ----------------
-/**
- * Prompts the user to sign in with Google.
- */
 function promptSignIn() {
-    // Initialize Google Sign-In
     if (typeof google === 'undefined' || !google.accounts) {
         showToast('⚠️ Google Sign-In not loaded yet. Please refresh the page.');
         return;
@@ -526,26 +405,25 @@ function promptSignIn() {
     google.accounts.id.prompt();
 }
 
-// ---------------- GOOGLE SIGN-IN ----------------
 function handleGoogleSignIn(response) {
   try {
     const user = parseJwt(response.credential);
-    currentUser = user.email;
-    localStorage.setItem("googleUser", JSON.stringify(user));
-    updateAllCommentForms();
-    
-    // Show logout button
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) logoutBtn.style.display = 'flex';
-    
-    showToast(`✅ Signed in as ${user.email}`);
+    if (user) {
+        currentUser = user.email;
+        localStorage.setItem("googleUser", JSON.stringify(user));
+        updateAllCommentForms();
+        
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) logoutBtn.style.display = 'flex';
+        
+        showToast(`✅ Signed in as ${user.email}`);
+    }
   } catch (error) {
     console.error('Sign-in error:', error);
     showToast('❌ Sign-in failed. Please try again.');
   }
 }
 
-// Handle logout
 function handleLogout() {
   currentUser = null;
   localStorage.removeItem("googleUser");
@@ -557,7 +435,6 @@ function handleLogout() {
   showToast('👋 Signed out successfully');
 }
 
-// Restore user on page load
 document.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("googleUser");
   if (saved) {
@@ -568,18 +445,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const logoutBtn = document.getElementById('logout-btn');
       if (logoutBtn) logoutBtn.style.display = 'flex';
     } catch (error) {
-      console.error('Error restoring user session:', error);
       localStorage.removeItem("googleUser");
     }
   }
   updateAllCommentForms();
 });
 
-
-/**
- * Updates the disabled status and visibility of all comment inputs/buttons
- * based on the current sign-in state.
- */
 function updateAllCommentForms() {
     document.querySelectorAll('.comment-input').forEach(input => {
         if (isUserSignedIn()) {
@@ -601,14 +472,6 @@ function updateAllCommentForms() {
     });
 }
 
-// -----------------------------------------------------------------
-// 🔢 Display and Initialization
-// -----------------------------------------------------------------
-
-/**
- * Toggles the visibility of a specific comment section thread.
- * @param {HTMLElement} indicator - The comment count/toggle button element.
- */
 function toggleCommentSection(indicator) {
     const contentId = indicator.querySelector('.comment-count').getAttribute('data-content-id');
     const threadSection = document.querySelector(`.full-comment-thread[data-content-id="${contentId}"]`);
@@ -624,11 +487,6 @@ function toggleCommentSection(indicator) {
     }
 }
 
-/**
- * Updates the visible comment count on the indicator element.
- * @param {string} contentId - The ID of the content item.
- * @param {number} count - The new comment count.
- */
 function updateCommentCount(contentId, count) {
     const countElement = document.querySelector(`.comment-count[data-content-id="${contentId}"]`);
     if (countElement) {
@@ -636,22 +494,12 @@ function updateCommentCount(contentId, count) {
     }
 }
 
-/**
- * Initializes comment counts for all content items and restores user session on page load.
- */
 async function initializeCommentCounts() {
-    // Restore user session
-    
-    // Fetch and update comment count for every element
     document.querySelectorAll('.comment-count').forEach(async (countElement) => {
         const contentId = countElement.getAttribute('data-content-id');
-        if (!contentId) {
-            console.error('Comment count element missing data-content-id');
-            return;
-        }
+        if (!contentId) return;
         
         try {
-            // FIX: Add /comments prefix for GET requests
             const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`);
             if (res.ok) {
                 const comments = await res.json();
@@ -663,28 +511,15 @@ async function initializeCommentCounts() {
     });
 }
 
-// -----------------------------------------------------------------
-// 🌐 API Interaction Functions
-// -----------------------------------------------------------------
-
-/**
- * Loads and displays comments from the API for a specific content ID.
- * @param {string} contentId - The ID of the content item.
- */
 async function renderComments(contentId) {
     const list = document.getElementById("comments-list-" + contentId);
-    if (!list) {
-        console.error(`Comments list not found for: comments-list-${contentId}`);
-        return;
-    }
+    if (!list) return;
     
     list.innerHTML = "<p>Loading comments...</p>";
 
     try {
-        // FIX: Add /comments prefix for GET requests
         const res = await fetch(`${API_URL}${API_BASE_PATH}/${contentId}`); 
         if (!res.ok) {
-            // FIX: This throws the 404 error but now should hit the correct endpoint
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         const comments = await res.json();
@@ -720,7 +555,6 @@ async function renderComments(contentId) {
                 `;
                 list.appendChild(div);
                 
-                // Render replies if they exist
                 if (comment.replies && comment.replies.length > 0) {
                     renderReplies(comment._id, comment.replies);
                 }
@@ -734,16 +568,12 @@ async function renderComments(contentId) {
         list.innerHTML = `<p class="error">Error loading comments: ${err.message}</p>`;
     }
 }
-/**
- * Renders a list of replies for a specific comment.
- * @param {string} parentCommentId - The ID of the comment to attach replies under.
- * @param {Array} replies - The array of reply objects.
- */
+
 function renderReplies(parentCommentId, replies = []) {
     const container = document.getElementById(`replies-${parentCommentId}`);
     if (!container) return;
 
-    container.innerHTML = ''; // Clear previous replies
+    container.innerHTML = ''; 
 
     if (replies.length === 0) return;
 
@@ -762,25 +592,18 @@ function renderReplies(parentCommentId, replies = []) {
         container.appendChild(div);
     });
 }
-/**
- * Submits a new comment to the backend API.
- * @param {string} contentId - The ID of the content item.
- */
+
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-    showToast('⚠️ Please sign in with Google first.');
-    return;
-}
-
+        showToast('⚠️ Please sign in with Google first.');
+        return;
+    }
     
     const textarea = document.querySelector(
         `.full-comment-thread[data-content-id="${contentId}"] .comment-input`
     );
     
-    if (!textarea) {
-        console.error(`Textarea not found for contentId: ${contentId}`);
-        return;
-    }
+    if (!textarea) return;
     
     const text = textarea.value.trim();
     if (!text) {
@@ -791,15 +614,16 @@ async function submitComment(contentId) {
     const email = getCurrentUserEmail();
 
     try {
-        // FIX: Add /comments prefix for POST requests
         const res = await fetch(`${API_URL}${API_BASE_PATH}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, email, text })
         });
 
+        // FIX: Better error handling to read the JSON message from server
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
         }
 
         textarea.value = "";
@@ -807,64 +631,45 @@ async function submitComment(contentId) {
         showToast('✅ Comment posted!');
     } catch (err) {
         console.error('Error submitting comment:', err);
-        showToast("Error submitting comment: " + err.message);
+        showToast("Error: " + err.message);
     }
 }
 
-/**
- * Sends a request to the API to delete a specific comment.
- * @param {string} contentId - The ID of the content item (used for re-rendering).
- * @param {string} commentId - The MongoDB ID of the comment to delete.
- */
 async function deleteComment(contentId, commentId) {
-    // FIX: Removed the illegal confirm() call. Rely on button visibility for security.
-    
     try {
-        // FIX: Add /comments prefix for DELETE requests
         const res = await fetch(`${API_URL}${API_BASE_PATH}/${commentId}`, {
             method: "DELETE"
         });
 
+        // FIX: Better error handling
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+             const errorData = await res.json().catch(() => ({}));
+             throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
         }
 
         renderComments(contentId);
         showToast('🗑️ Comment deleted');
     } catch (err) {
         console.error('Error deleting comment:', err);
-        showToast("Error deleting comment: " + err.message);
+        showToast("Error: " + err.message);
     }
 }
-/**
- * Toggles the reply form visibility for a specific comment.
- * @param {string} contentId - The parent content item ID.
- * @param {string} commentId - The ID of the comment to reply to.
- */
+
 function toggleReplyForm(contentId, commentId) {
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (replyForm) {
         replyForm.classList.toggle("active");
-    } else {
-        console.warn(`Reply form not found for comment: ${commentId}`);
     }
 }
-/**
- * Submits a reply for a specific comment.
- * @param {string} contentId - The ID of the parent content item.
- * @param {string} commentId - The ID of the parent comment being replied to.
- */
+
 async function submitReply(contentId, commentId) {
    if (!isUserSignedIn()) {
     showToast('⚠️ Please sign in with Google first.');
     return;
-}
+   }
 
     const replyForm = document.getElementById(`reply-form-${commentId}`);
-    if (!replyForm) {
-        console.error(`Reply form not found for comment: ${commentId}`);
-        return;
-    }
+    if (!replyForm) return;
 
     const textarea = replyForm.querySelector(".reply-input");
     const text = textarea.value.trim();
@@ -876,28 +681,24 @@ async function submitReply(contentId, commentId) {
     const email = getCurrentUserEmail();
 
     try {
-        // FIX: Add /comments prefix for Reply POST requests
         const res = await fetch(`${API_URL}${API_BASE_PATH}/reply`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contentId, parentCommentId: commentId, email, text }),
         });
 
+        // FIX: Better error handling
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
         }
 
-        // Clear the input field and hide the form
         textarea.value = "";
         replyForm.classList.remove("active");
-
-        // Re-render comments so the new reply appears immediately
         renderComments(contentId);
-
         showToast("✅ Reply posted!");
     } catch (err) {
         console.error("Error submitting reply:", err);
-        showToast("Error submitting reply: " + err.message);
+        showToast("Error: " + err.message);
     }
 }
-// ---- END ----
