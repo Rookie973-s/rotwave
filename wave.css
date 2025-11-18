@@ -1508,3 +1508,11 @@ body.light-mode .article-modal-full-text footer {
     color: #555;
     border-top-color: #ddd;
 }
+/* Light mode for logout */
+body.light-mode .menu-logout-btn span {
+    color: #000; /* Makes text black in light mode */
+}
+
+body.light-mode .menu-logout-btn svg {
+    color: #fff; /* Keeps icon white in light mode */
+}
