@@ -4,117 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="4lHbptvu_LzITQyb5HMac6Ls8io3nSCLWBct6FPRtjU" />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6202945765701350"
-     crossorigin="anonymous"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-  <title>ROTWAVE STUDIOS - Film News & Entertainment News</title>
- <link rel="stylesheet" type="text/css" href="wave.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6202945765701350" crossorigin="anonymous"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>WAVE STUDIOS Film News & Entertainment News</title>
+  <link rel="stylesheet" type="text/css" href="wave.css">
 </head>
 
 <body>
- <header class="header">
-  <div class="header-top-bar">
+  <header class="header">
+    <div class="header-top-bar">
       <button id="menuToggle" aria-label="Open navigation menu" onclick="toggleMenu()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
 
       <div class="logo">
-          <a href="index.html">
-              <img src="images/waves.png" class="logo-img" alt="ROTWAVE Studios"/>
-          </a>
+        <a href="index.html">
+          <img src="images/waves.png" class="logo-img" alt="ROTWAVE Studios"/>
+        </a>
       </div>
 
       <div class="header-controls-right">
-          <button id="searchIconToggle" aria-label="Open search bar" onclick="toggleSearchDropdown()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </button>
-          <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg></button>
+        <button id="searchIconToggle" aria-label="Open search bar" onclick="toggleSearchDropdown()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button id="themeToggle" aria-label="Toggle dark/light mode"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg></button>
       </div>
-  </div>
+    </div>
 
-  <div class="search-dropdown-container" id="searchDropdown">
+    <div class="search-dropdown-container" id="searchDropdown">
       <input type="text" id="searchInput" placeholder="Search articles, reviews, and comics..." />
-  </div>
+    </div>
 
-  <nav class="nav-tabs">
+    <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('news', event)">NEWS</button>
-      <button class="tab-btn" onclick="switchTab('comics', event)">ROTSHELL</button>
-      <button class="tab-btn" onclick="switchTab('reviews', event)">ROTCHIRP</button>
+      <button class="tab-btn" onclick="switchTab('comics', event)">FILES</button>
+      <button class="tab-btn" onclick="switchTab('reviews', event)">CHIRP</button>
       <button class="tab-btn" onclick="window.location.href='https://rookie973-s.github.io/Watchlist/';">MY WATCHLIST</button>
-      
-  </nav>
+    </nav>
+  </header>
 
- <div id="menuDrawer" class="menu-drawer">
+  <div id="menuDrawer" class="menu-drawer">
     <button id="menuCloseBtn" aria-label="Close navigation menu" onclick="toggleMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
     
     <a href="index.html" onclick="toggleMenu()">Back Home</a>
     <a href="aboutwave.html" onclick="toggleMenu()">About us</a>
     <a href="contactwave.html" onclick="toggleMenu()">Contact us</a>
     
-    <!-- Fixed Logout Button -->
     <button id="logout-btn" class="menu-logout-btn" style="display:none;" onclick="handleLogout()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-        </svg>
-        <span>Logout</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" y1="12" x2="9" y2="12"></line>
+      </svg>
+      <span>Logout</span>
     </button>
-</div>
-
-
-</header>
-
+  </div>
 
   <main class="container">
-    <!-- Film News Tab -->
     <div id="news" class="tab-content active">
       <h2 class="section-title">Featured Stories</h2>
       
-      <!-- Carousel -->
-     
       <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
 
-         <div class="carousel-slide">
-            <img src="images/moana.jpg" class="carousel-image" alt="Featured 1" />
+          <div class="carousel-slide">
+            <img src="images/moana.jpg" class="carousel-image" alt="Moana Live Action" />
             <div class="carousel-overlay">
-              <h3 class="carousel-title">First look at Moana Live Action
-              </h3>
-              <p class="carousel-description">in theatres july 2026.</p>
+              <h3 class="carousel-title">First look at Moana Live Action</h3>
+              <p class="carousel-description">In theatres July 2026.</p>
             </div>
           </div>
 
           <div class="carousel-slide">
-            <img src="images/mike.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/mike.jpg" class="carousel-image" alt="Michael Biopic" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">MICHAEL</h3>
               <p class="carousel-description">First Poster for Michael Jackson’s nephew Jaafar Jackson as Michael Jackson in the new biopic ‘MICHAEL’ 2026.</p>
             </div>
           </div>
 
-<div class="carousel-slide">
-            <img src="images/park.jpg" class="carousel-image" alt="Featured 1" />
+          <div class="carousel-slide">
+            <img src="images/park.jpg" class="carousel-image" alt="Jurassic World 5" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">Jurassic World 5 in works</h3>
               <p class="carousel-description">The 5th Sequel Of Jurassic World Confirmed to be in development.</p>
             </div>
           </div>
 
-<div class="carousel-slide">
-            <img src="images/box.jpg" class="carousel-image" alt="Featured 1" />
+          <div class="carousel-slide">
+            <img src="images/box.jpg" class="carousel-image" alt="Jake vs Paul" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">Jake vs Paul?</h3>
               <p class="carousel-description">First Poster for Boxing Match 'Jake Vs Paul' On Netflix Dec. 19.</p>
@@ -122,7 +112,7 @@
           </div>     
 
           <div class="carousel-slide">
-            <img src="images/jon.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/jon.jpg" class="carousel-image" alt="The Mummy" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">THE MUMMY IS RETURNING</h3>
               <p class="carousel-description">Universal Revives Mummy Franchise with Brendan Fraser and Rachel Weisz Returning.</p>
@@ -130,52 +120,50 @@
           </div>  
       
           <div class="carousel-slide">
-            <img src="images/devil.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/devil.jpg" class="carousel-image" alt="Daredevil" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">Daredevil Season 2</h3>
-              <p class="carousel-description">First look at dare devil Seson 2.</p>
+              <p class="carousel-description">First look at Daredevil Season 2.</p>
             </div>
           </div>
 
           <div class="carousel-slide">
-            <img src="images/nowyou.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/nowyou.jpg" class="carousel-image" alt="Now You See Me 3" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">NOW YOU SEE ME III</h3>
-              <p class="carousel-description">The third installation of 'Now You See Me' Titled 'Now You See Me: Now You Don't Will be Released 
-                In theatres 14th Of November.</p>
+              <p class="carousel-description">The third installation titled 'Now You See Me: Now You Don't' will be released in theatres 14th of November.</p>
             </div>
           </div>
 
           <div class="carousel-slide">
-            <img src="images/plubris.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/plubris.jpg" class="carousel-image" alt="Pluribus" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">PLURIBUS</h3>
-              <p class="carousel-description">'Breaking Bad' Creator New Anticipated Apple series, Streaming Now .</p>
+              <p class="carousel-description">'Breaking Bad' Creator New Anticipated Apple series, Streaming Now.</p>
             </div>
           </div>
-  
 
           <div class="carousel-slide">
-            <img src="images/grammy.jpg" class="carousel-image" alt="Featured 1" />
+            <img src="images/grammy.jpg" class="carousel-image" alt="Grammy" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">Grammy Nominations</h3>
               <p class="carousel-description">The 2025 Grammy Nominations Has Been Released.</p>
             </div>
           </div>
 
-            <div class="carousel-slide">
-            <img src="images/frank.jpg" class="carousel-image" alt="Featured 1" />
+          <div class="carousel-slide">
+            <img src="images/frank.jpg" class="carousel-image" alt="Frankenstein" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">The Frankenstein</h3>
-              <p class="carousel-description">Jacob Elordi as Frankenstein's monster Looks in FRANKENSTEIN, Streaming now on Netflix.</p>
+              <p class="carousel-description">Jacob Elordi as Frankenstein's monster looks in FRANKENSTEIN, Streaming now on Netflix.</p>
             </div>
           </div>
 
-            <div class="carousel-slide">
-            <img src="images/strange2.jpg" class="carousel-image" alt="Featured 1" />
+          <div class="carousel-slide">
+            <img src="images/strange2.jpg" class="carousel-image" alt="Stranger Things" />
             <div class="carousel-overlay">
               <h3 class="carousel-title">The Strange Buzz</h3>
-              <p class="carousel-description">After what feels like an eternity, the wait is finally over Stranger Things returns with its highly anticipated final season this November!</p>
+              <p class="carousel-description">After what feels like an eternity, Stranger Things returns with its highly anticipated final season this November!</p>
             </div>
           </div>
           
@@ -195,123 +183,234 @@
           <button class="carousel-dot" onclick="goToSlide(7)"></button>
           <button class="carousel-dot" onclick="goToSlide(8)"></button>
           <button class="carousel-dot" onclick="goToSlide(9)"></button>
+          <button class="carousel-dot" onclick="goToSlide(10)"></button>
         </div>
       </div>
 
       <h2 class="section-title">Latest News</h2>
       <div class="articles-grid">
- 
- <article class="article-card" data-id="jeff-bezos-startup-ai">
-          <img src="images/bezos.jpg" class="article-image" />
+  
+        <article class="article-card" data-id="cloudfare-crash">
+          <div class="article-image-container">
+            <img src="images/cloudfare.jpg" class="article-image" alt="Cloudfare" />
+            <span class="article-category">Tech</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
-            <h3 class="article-title">Jeff Bezos Startup AI </h3>
-            <p class="article-excerpt">
-             Jeff Bezos Is Back As Co-CEO of a $6.2 B AI Startup Called Project Prometheus...
-            </p>
+            <h3 class="article-title">Cloudfare Crash</h3>
+            <p class="article-excerpt">Global Internet Disruption: Cloudflare Says “We Failed Our Customers”...</p>
             <div class="article-full">
               <p>
-              <section>
-    <p>Jeff Bezos is returning to the executive spotlight with <strong>Project Prometheus</strong>, a brand-new AI company that has already raised a mammoth $6.2 billion. Bezos is not just funding it — he’s stepping in as co-CEO, marking his first formal operating role since stepping down at Amazon.</p>
+                <section>
+    <p>On November 18, 2025, a major outage at Cloudflare disrupted access to a swath of the internet. The company later issued a public apology, admitting that it had “failed our customers” and that the disruption was not caused by a cyberattack.</p>
   </section>
 
   <section>
-    <h2>● What Prometheus Plans to Do</h2>
-    <p>This isn’t your typical chatbot startup. Project Prometheus aims to build AI for the physical world — engineering and manufacturing systems for computers, automobiles, even aerospace. Bezos is teaming up with physicist-chemist Vik Bajaj, who has a background at Google X and Verily.</p>
-    <p>The startup already has nearly 100 staff, including talent from OpenAI, Google DeepMind, and Meta — a sign that this is intended to be a serious contender in next-gen AI.</p>
+    <h2>● What Caused the Crash</h2>
+    <p>According to Cloudflare, an internal configuration issue triggered a software crash. A configuration file — one that helps manage threat traffic — grew larger than expected and overwhelmed parts of its system, leading to widespread service degradation.</p>  
+    <p>The company confirmed it saw a “spike in unusual traffic” at around 11:20 GMT, which played a role in triggering the problem. 2 Unlike many outages, experts and Cloudflare both emphasize there’s no evidence of a malicious attack.</p>
   </section>
 
   <section>
-    <h2>● Why This Move Is So Big</h2>
-    <p>For Bezos, Project Prometheus is more than an investment — it’s a return to hands-on leadership. Since leaving Amazon in 2021, he’s been focused on Blue Origin, but this shows he’s not done building.</p>
-    <p>The mission is equally bold: use AI to dramatically speed up and optimize real world manufacturing. If successful, this could change how cars, rockets, and computers are designed and built.</p>
+    <h2>● What Is Cloudflare (and Why Its Failure Hits Hard)</h2>
+    <p>Cloudflare isn’t just another web company — it’s a cornerstone of global internet infrastructure. It offers CDN (content delivery), DNS, DDoS protection, and more, serving about 20% of global traffic. When Cloudflare goes down, thousands of websites — big and small — feel the impact immediately.</p>  
+    <p>During this outage, services affected included major platforms like ChatGPT, X (formerly Twitter), Uber, and Zoom. 5 For many users, it wasn’t just “some site is slow” — it was large parts of daily life suddenly inaccessible.</p>
   </section>
 
   <section>
-    <h2>● What Could Go Wrong</h2>
-    <p>Pouring $6.2 billion into a startup raises expectations sky-high. Turning AI ideas into physical products — not just software — is notoriously hard. Hardware, safety, scale, regulatory risk — all of these are big obstacles.</p>
-    <p>Also, recruiting top talent from OpenAI, DeepMind, and Meta might help, but keeping that talent and turning their research into real, reliable industrial systems is a different game.</p>
+    <h2>● The Risks of Overdependence</h2>
+    <p>This incident has once again spotlighted a dangerous truth: much of the internet depends on a few big infrastructure providers. Experts warn that when a company as central as Cloudflare falters, the ripple effects are massive.</p>  
+    <p>Cloudflare’s outage arrives less than a month after similar major issues at other cloud providers — reinforcing fears that the web’s backbone may be too fragile and too concentrated.</p>
   </section>
 
   <section class="rotwave-take">
     <h2>Wave Verdict</h2>
-    <p>Project Prometheus could be Bezos’s boldest bet yet — not just another AI lab, but a bridge between intelligence and industry. If he pulls it off, he might redefine how we think about manufacturing and AI together.</p>
-    <p>But the road ahead is filled with risk. Right now, it’s not just about raising cash — it’s about building something tangible in the real world, where failure is expensive and execution matters more than ambition.</p>
+    <p>What happened at Cloudflare today is a serious reminder: even the giants are vulnerable. This wasn’t a cyberattack — but a system failure. And in the world of infrastructure, that may be just as scary.</p>  
+    <p>If Cloudflare doesn’t learn from this and build stronger redundancy, we could see more “internet blackouts” that feel less like accidents and more like predictable breakdowns. The internet is too important to ride on one company’s configuration files.</p>
   </section>
 
   <footer>
-    <p>Sources: The Verge, The Guardian, Reuters, TechCrunch, eWEEK</p>
+    <p>Leave a comment let us know what you think.</p>
   </footer>
               </p>
             </div>
             <div class="article-meta">
+              <span class="article-date">Nov 18, 2025</span>
               <button class="read-more-btn">Read More</button>
-              <span>Nov-8-25</span>
             </div>
             <div class="card-actions">
-                <button class="share-btn">share</button>
-                <div class="comment-indicator" onclick="toggleCommentSection(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    <span class="comment-count" data-content-id="jeff-bezos-startup-ai">0</span>
-                </div>
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="cloudfare-crash">0</span>
               </div>
+            </div>
+          </div>
+          <div class="full-comment-thread" data-content-id="cloudfare-crash">
+            <div class="comments-list" id="comments-list-cloudfare-crash"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('cloudfare-crash')">Post Comment</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+         <article class="article-card" data-id="green-drama">
+          <div class="article-image-container">
+            <img src="images/drama.jpg" class="article-image" alt="Nigeria" />
+            <span class="article-category">Politics</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              4 min read
+            </span>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Green Drama</h3>
+            <p class="article-excerpt">A Heavy Hour for Nigeria: Kidnapped Schoolgirls, Cloudflare Chaos & Diplomatic Silence...</p>
+            <div class="article-full">
+              <p>
+                 <section>
+    <p>On paper, these are three very different stories. But in Nigeria’s current moment, they feel painfully connected each one a test of leadership, trust, and whether the state truly cares for its people.</p>
+  </section>
+
+  <section>
+    <h2>The Kidnapped Schoolgirls in Kebbi State: A Pattern of Fear</h2>
+    <p>In the early hours of November 17, 2025, armed gunmen—believed to be bandits specializing in kidnapping for ransom—stormed the boarding dormitory of Government Girls Comprehensive Secondary School in Maga, Kebbi State. The assailants, reportedly armed with sophisticated weapons and arriving on motorcycles, scaled the fence. Tragically, the school's Vice Principal, Malam Hassan Makuku, who also served as the chief security officer, was fatally shot while attempting to protect the students. 25 schoolgirls were abducted. </p>
+    <p>The incident has reinforced a "distressing pattern" of repeated attacks on learning environments since the 2014 Chibok abduction. Despite an official 'clear mandate' for security forces to rescue the girls, the recurrence of these events—with similar mass abductions recorded in other northern states—has weakened the confidence of parents and drawn condemnation from groups like Plan International. Yet, many Nigerians are asking: Where is the moral outrage? Where is the visible, consistent leadership from the very top? </p>
+  </section>
+  <section>
+    <h2> The Foreign Minister’s Quiet Diplomacy on Religious Scrutiny</h2>
+    <p>In recent public discussions (around early November 2025), Nigeria’s Foreign Minister, Yusuf Tuggar, firmly rejected international scrutiny over religious persecution, particularly of Christians, following threats of possible U.S. military intervention from figures like Donald Trump.</p>
+    <p>The Minister's defense, presented in briefings to the diplomatic community, stressed Nigeria's constitutional guarantees of religious freedom and democratic framework, urging international partners to rely on verified information over misleading reports. However, critics argue this defense leaned too heavily on legal protections and broad denials, without addressing the widely reported on-the-ground realities of banditry and violence.</p>
+    <p>Meanwhile, the president who should be rallying national and international support, especially in the face of global attention on security and human rights has remained remarkably silent on the Kebbi abduction. Given the scale of violence, the kidnappings, and the potential diplomatic fallout, his absence is being noticed.</p>
+  </section>
+
+  <section class="rotwave-take">
+    <h2>Wave Thought: The Stress Test</h2>
+    <p>These three stories reveal an uncomfortable narrative: the government is reactive, not proactive. It speaks when forced, but rarely leads in crisis. </p>
+    <p>When 25 young girls are taken in the dead of night, the response is a loop of promises and search operations, failing to break the established cycle of impunity and neglect that allows these attacks to continue. When the internet breaks, there’s little sense that long-term digital resilience is being built. When international spotlight falls on Nigeria, the diplomacy is cautious, clumsy, and lacking in real accountability to the victims. </p>
+    <p>This isn’t just about fear or tragedy. It’s a stress test for Nigeria’s institutions: Do they protect? Do they respond? Or do they only react when the world is watching? </p>
+  </section>
+
+  <footer>
+    <p>Primary Source for Context: Vanguard</p>
+    <p>Leave a comment what’s your take? Is this a turning point for Nigeria’s leadership, or a reminder that broken systems stay broken until something truly changes? </p>
+  </footer>
+              </p>
+            </div>
+            <div class="article-meta">
+              <span class="article-date">Nov 18, 2025</span>
+              <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="green-drama">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="full-comment-thread" data-content-id="green-drama">
+            <div class="comments-list" id="comments-list-green-drama"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('green-drama')">Post Comment</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card" data-id="jeff-bezos-startup-ai">
+          <div class="article-image-container">
+            <img src="images/bezos.jpg" class="article-image" alt="Jeff Bezos AI Startup" />
+            <span class="article-category">Tech</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              4 min read
+            </span>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Jeff Bezos Startup AI</h3>
+            <p class="article-excerpt">Jeff Bezos Is Back As Co-CEO of a $6.2 B AI Startup Called Project Prometheus...</p>
+            <div class="article-full">
+              <p>
+                <section><p>Jeff Bezos is returning to the executive spotlight with <strong>Project Prometheus</strong>, a brand-new AI company that has already raised a mammoth $6.2 billion. Bezos is not just funding it — he’s stepping in as co-CEO, marking his first formal operating role since stepping down at Amazon.</p></section>
+                <section><h2>● What Prometheus Plans to Do</h2><p>This isn’t your typical chatbot startup. Project Prometheus aims to build AI for the physical world...</p></section>
+                <section><h2>● Why This Move Is So Big</h2><p>For Bezos, Project Prometheus is more than an investment — it’s a return to hands-on leadership...</p></section>
+                <section><h2>● What Could Go Wrong</h2><p>Pouring $6.2 billion into a startup raises expectations sky-high...</p></section>
+                <section class="rotwave-take"><h2>Wave Verdict</h2><p>Project Prometheus could be Bezos’s boldest bet yet...</p></section>
+                <footer><p>Sources: The Verge, The Guardian, Reuters, TechCrunch, eWEEK</p></footer>
+              </p>
+            </div>
+            <div class="article-meta">
+              <span class="article-date">Nov 18, 2025</span>
+              <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="jeff-bezos-startup-ai">0</span>
+              </div>
+            </div>
           </div>
           <div class="full-comment-thread" data-content-id="jeff-bezos-startup-ai">
             <div class="comments-list" id="comments-list-jeff-bezos-ai"></div>
             <div class="comment-form-container">
-                <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
-               <div class="comment-form-actions">
-                    <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
-                    
-                    <button class="submit-comment-btn" style="display:none;" onclick="submitComment('jeff-bezos-startup-ai')">Post Comment</button>
-                </div>
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('jeff-bezos-startup-ai')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="new-camp-nou">
-          <img src="images/camp.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/camp.jpg" class="article-image" alt="Camp Nou"/>
+            <span class="article-category">Sports</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">New Camp Nou</h3>
-            <p class="article-excerpt">
-            The legendary Camp Nou is being reborn — bigger, smarter, and designed for the modern era.
-             The “New Camp Nou,” part of the Espai Barça project, aims to host over 100,000 fans,...
-            </p>
+            <p class="article-excerpt">The legendary Camp Nou is being reborn — bigger, smarter, and designed for the modern era...</p>
             <div class="article-full">
               <p>
-                <section>
-    <h2>● What’s new</h2>
-    <p>Barcelona plans to turn its iconic home into a high-tech fortress — solar roofing, digital fan experiences, and upgraded comfort. But current projections hint at full completion only by 2027. Partial openings for limited fans have begun, yet cranes still dominate the skyline. The dream is alive, but it’s running behind schedule.</p>
-  </section>
-
-  <section>
-    <h2>● Why it matters</h2>
-    <p>The rebuild isn’t just architectural — it’s financial survival. Every delay costs millions and dents morale. The club’s debt restructuring and bond sales show how critical this project is to their future stability. For fans, it’s more than construction; it’s a test of faith in a club that once symbolized consistency and glory.</p>
-  </section>
-
-  <section>
-    <h2>Wave take</h2>
-    <p>The new Camp Nou could be Europe’s crown jewel or a long, expensive lesson in overreach. If Barça finishes strong — with sound, spirit, and spectacle — it’ll be worth the wait. But for now, it’s still a half-built promise, standing tall and unfinished — a monument to ambition paused in concrete.</p>
-  </section>
-
-  <footer>
-    <p>Sources: Catalan News, Reuters, The Stadium Business</p>
-  </footer>
+                <section><h2>● What’s new</h2><p>Barcelona plans to turn its iconic home into a high-tech fortress...</p></section>
+                <section><h2>● Why it matters</h2><p>The rebuild isn’t just architectural — it’s financial survival...</p></section>
+                <section><h2>Wave take</h2><p>The new Camp Nou could be Europe’s crown jewel or a long, expensive lesson in overreach...</p></section>
+                <footer><p>Sources: Catalan News, Reuters, The Stadium Business</p></footer>
               </p>
             </div>
-         <div class="article-meta">
+            <div class="article-meta">
+              <span class="article-date">Nov 16, 2025</span>
               <button class="read-more-btn">Read More</button>
-              <span>Nov-6-25</span>
-
-              <span>1min read</span>
             </div>
             <div class="card-actions">
               <button class="share-btn">Share</button>
               <div class="comment-indicator" onclick="toggleCommentSection(this)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <span class="comment-count" data-content-id="new-camp-nou">0</span>
               </div>
             </div>
@@ -319,26 +418,30 @@
           <div class="full-comment-thread" data-content-id="new-camp-nou">
             <div class="comments-list" id="comments-list-new-camp-nou"></div>
             <div class="comment-form-container">
-                <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
-                <div class="comment-form-actions">
-                    <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
-                    <button class="submit-comment-btn" style="display:none;" onclick="submitComment('new-camp-nou')">Post Comment</button>
-                </div>
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('new-camp-nou')">Post Comment</button>
+              </div>
             </div>
           </div>
-
         </article>
 
         <article class="article-card" data-id="ronaldo-s-interview">
-          <img src="images/ronaldo.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/ronaldo.jpg" class="article-image" alt="Ronaldo Interview" />
+            <span class="article-category">Sports</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
-            <h3 class="article-title">Ronaldo s Interview</h3>
-            <p class="article-excerpt">
-             Cristiano Ronaldo’s Explosive November 2025 Interview — The Fame, The Critics, and The Legacy...
-            </p>
+            <h3 class="article-title">Ronaldo's Interview</h3>
+            <p class="article-excerpt">Cristiano Ronaldo’s Explosive November 2025 Interview — The Fame, The Critics, and The Legacy...</p>
             <div class="article-full">
               <p>
-               <section>
+                 <section>
     <p>In his latest sit-down with Piers Morgan on <em>Piers Morgan Uncensored</em>, Cristiano Ronaldo once again reminded the world why he’s both adored and debated. The football icon spoke openly about fame, legacy, and criticism — and the internet hasn’t stopped talking since.</p>
   </section>
 
@@ -381,1100 +484,847 @@
               </p>
             </div>
             <div class="article-meta">
+              <span class="article-date">Nov 8, 2025</span>
               <button class="read-more-btn">Read More</button>
-              <span>Nov-8-25</span>
             </div>
             <div class="card-actions">
-                <button class="share-btn">share</button>
-                <div class="comment-indicator" onclick="toggleCommentSection(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    <span class="comment-count" data-content-id="ronaldo-s-interview">0</span>
-                </div>
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="ronaldo-s-interview">0</span>
               </div>
+            </div>
           </div>
           <div class="full-comment-thread" data-content-id="ronaldo-s-interview">
             <div class="comments-list" id="comments-list-ronaldo-s-interview"></div>
             <div class="comment-form-container">
-                <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
-               <div class="comment-form-actions">
-                    <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
-                    
-                    <button class="submit-comment-btn" style="display:none;" onclick="submitComment('ronaldo-s-interview')">Post Comment</button>
-                </div>
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('ronaldo-s-interview')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="tesla-shareholders">
-
-          <img src="images/elonpay.jpg" class="article-image" />
-
+          <div class="article-image-container">
+            <img src="images/elonpay.jpg" class="article-image" alt="Elon Musk Tesla" />
+            <span class="article-category">Business</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
-
             <h3 class="article-title">Tesla Shareholders</h3>
-
-            <p class="article-excerpt">
-
-              Tesla Shareholders Back Elon Musk’s 2025 CEO Performance Award Plan — Bold Vision or Risky Bet?...
-
-            </p>
-
+            <p class="article-excerpt">Tesla Shareholders Back Elon Musk’s 2025 CEO Performance Award Plan — Bold Vision or Risky Bet?...</p>
             <div class="article-full">
-
               <p>
-
-        <section>
-
+                 <section>
     <p>In a decisive shareholder vote, Tesla approved Elon Musk’s 2025 CEO Performance Award Plan, giving the CEO a sweeping set of incentives tied to ambitious targets. The package links Musk’s future compensation to a dramatic expansion of Tesla’s business beyond cars — into autonomy, robotaxis, humanoid robots and a broader AI-first strategy. This is more than pay; it’s a mandate.</p>
-
   </section>
-
-
-
   <section>
-
     <h2>● What this actually means</h2>
-
     <p>This approval signals that investors are willing to stake the company’s future on Musk’s vision. The targets in the plan are not small tweaks. They imagine Tesla evolving into a company that sells autonomous mobility services, builds humanoid robots for work, and scales AI hardware and software to power those ambitions. In short, the company is being asked to transform itself from an automaker into an AI and robotics powerhouse — and Musk stands to gain massively if those milestones are hit.</p>
-
   </section>
-
-
-
   <section>
-
     <h2>● Why some are uneasy</h2>
-
     <p>There are legitimate concerns beneath the celebratory headlines. Critics point to governance questions, potential shareholder dilution and the concentration of power in one individual’s hands. Some large institutional holders publicly opposed the plan, arguing the scale and terms raise long term risks for ordinary shareholders. Others warn that tying the company’s future to wildly optimistic targets could backfire if execution lags.</p>
-
   </section>
-
-
-
   <section>
-
     <h2>● What the plan could deliver</h2>
-
     <p>If Musk and Tesla hit the stretch goals, the upside is huge. We could see robotaxis deployed at scale, new revenue streams from mobility services, breakthrough humanoid robotics deployed in factories and homes, and custom AI hardware that becomes a backbone for Tesla’s products. That future would change whole industries — transportation, logistics, manufacturing and beyond.</p>
-
   </section>
-
-
-
   <section>
-
     <h2>● The real risk in plain terms</h2>
-
     <p>Promises of radical transformation are easy. Delivering them is not. The plan hands Musk a long runway to build something extraordinary, but it also raises the stakes for regulators, employees and investors. If the technology, the markets or the laws move against Tesla, the very incentives meant to accelerate progress could become a weight.</p>
-
   </section>
-
-
-
   <section>
-
     <h2>● Latest developments to watch</h2>
-
     <p>Here are the moves and flashpoints that matter right now:</p>
-
     <ul>
-
       <li>Tesla continues to push custom AI chips and autonomy hardware as the technical foundation for robotaxis and fleet autonomy.</li>
-
       <li>The company faces market pressure in key regions where cheaper electric rivals are gaining ground and vehicle margins are under strain.</li>
-
       <li>Musk’s public and political activities have created fresh brand and regulatory risks that could affect partnerships and approvals.</li>
-
       <li>Tesla’s board has framed the vote as make-or-break for the CEO relationship, underscoring how pivotal Musk’s leadership is to the company’s path.</li>
-
     </ul>
-
   </section>
-
-
-
   <section>
-
-    <h2>RotWave take</h2>
-
+    <h2>Wave take</h2>
     <p>This vote is a crossroads moment. It reads like a public bet that one visionary can carry the company through a radical reinvention. That can be glorious — or catastrophic. The clear truth is this: the headlines and the vote are only the start. The real story will be written in product launches, regulatory outcomes and whether Tesla can scale autonomy and robotics without losing the ground it already holds.</p>
-
     <p>Watch the milestones not the soundbites. Because in this case, hype is plentiful — delivery is everything.</p>
-
   </section>
-
-
-
   <footer>
-
     <p>Sources:</p>
-
     <ul>
-
       <li>Reuters</li>
-
       <li>The Guardian</li>
-
       <li>Financial Times</li>
-
       <li>AP News</li>
-
     </ul>
-
   </footer>
-
               </p>
-
             </div>
-
             <div class="article-meta">
-
-              <span>Nov-6-25</span>
-
-              <span>2 min read</span>
-
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 6, 2025</span>
               <button class="read-more-btn">Read More</button>
-
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="tesla-shareholders">0</span>
+              </div>
             </div>
           </div>
- </article>
-        
-        <article class="article-card" data-id="gta-delayed-again">
-
-          <img src="images/gta.jpg" class="article-image" />
-
-          <div class="article-content">
-
-            <h3 class="article-title">GTA DELAYED AGAIN</h3>
-
-            <p class="article-excerpt">
-
-              GTA VI Delayed to November 19 2026 — What’s Really Going On?...
-
-            </p>
-
-            <div class="article-full">
-
-              <p>
-
-                <section>
-
-    <p>The long-awaited release of <strong>Grand Theft Auto VI</strong> has been pushed back yet again. Originally anticipated for autumn 2025, then officially scheduled for May 26 2026, it now gets a new launch date: <strong>November 19 2026</strong>. The announcement came from Rockstar Games via parent company Take‑Two Interactive, citing “extra months … to finish the game with the level of polish you expect and deserve.”</p>
-
-  </section>
-
-
-
-  <section>
-
-    <h2>Why the delay again?</h2>
-
-    <p>On paper, the official reason is quality assurance. Rockstar claims they need more time to polish every facet of the game — the world, physics, characters, narrative. But let’s dig a little deeper.</p>
-
-    <p>First: the hype. Fans have waited 13 years since Grand Theft Auto V. Every trailer, every leak, every promise adds weight. A single misstep could cost billions in reputation and revenue.</p>
-
-    <p>Second: scope. Reports suggest GTA VI will launch on current-gen consoles, possibly PC later, and cover a massive open world (state of “Leonida” and Vice City). Integrating modern tech, global platforms, and massive narrative ambition takes more than a normal cycle.</p>
-
-    <p>Third: internal pressures. The studio environment has also been publicly discussed — from workforce changes to reported crunch. Big launches equal big risk. Some might say the delay is as much about managing risk as it is about creativity.</p>
-
-  </section>
-
-
-
-  <section>
-
-    <h2>Is the wait justified — or is something else going on?</h2>
-
-    <p>If we trust Rockstar, yes: the delay is justified. Better to ship late and polished than early and broken. But there’s room for scepticism. The gaming world has changed: larger online components, live-service models, global launches. Could the delay reflect business strategy more than creative refinement?</p>
-
-    <p>We should ask: is the delay a genuine push for greatness, or is it a sign they’ve bitten off more than they can chew? When game engines, cross-platform features, and live economies all combine, the risk of over-reach grows.</p>
-
-  </section>
-
-
-
-  <section class="rotwave-take">
-
-    <h2>RotWave Verdict</h2>
-
-    <p>For many, the delay will feel like another let-down. The wait already stretches back years. But if GTA VI lands on November 19 2026 as promised — and delivers something ground-breaking — the extra time might pay off. If not, the delay will look like the game industry’s version of “too many cooks in the kitchen”.</p>
-
-    <p>My hope is simple: November 2026 should feel like the right moment for a new benchmark, not just another postponed “big game”. Because at this point, waiting isn’t just about patience — it’s about expectation.</p>
-
-  </section>
-
-              </p>
-
-            </div>
-
-            <div class="article-meta">
-
-              <span>Nov-6-25</span>
-
-              <span>1min read</span>
-
-              <button class="share-btn">Share</button>
-              <button class="read-more-btn">Read More</button>
-
+           <div class="full-comment-thread" data-content-id="tesla-shareholders">
+            <div class="comments-list" id="comments-list-tesla-shareholders"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('tesla-shareholders')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
-        
-        
-        <article class="article-card" data-id="november-unleashed">
-          <img src="images/Novmovie.jpg" class="article-image" />
+
+        <article class="article-card" data-id="gta-delayed-again">
+          <div class="article-image-container">
+            <img src="images/gta.jpg" class="article-image" alt="GTA 6 Delayed" />
+            <span class="article-category">Gaming</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
-            <h3 class="article-title">November Unleashed</h3>
-            <p class="article-excerpt">
-              Major Movie Releases This November — What We’re Hyped For...
-            </p>
+            <h3 class="article-title">GTA DELAYED AGAIN</h3>
+            <p class="article-excerpt">GTA VI Delayed to November 19 2026 — What’s Really Going On?...</p>
             <div class="article-full">
               <p>
-                <section>
-    <p>Here are the films we’ve got on our radar this month, release dates, what’s got us seated, and what we’re quietly wondering about. Because hype is good… but only if the delivery pays off.</p>
-  </section>
-
-  <section>
-    <h2><strong>Predator: Badlands (Nov 7, 2025)</strong></h2>
-    <p>The trailer looks promising a fresh take on the Predator universe, new hunting ground, and a shift in perspective (“Predator is the prey” vibes). I’m fully seated for this one. The question: can it live up to the mythology and make us care about a Predator story again?</p>
-  </section>
-
-  <section>
-    <h2><strong>Ice Fall (Nov 4, 2025)</strong></h2>
-    <p>A cold thriller, high-stakes survival, a crashed plane, frozen lake and hidden riches. This one caught me off guard the trailer gives that atmospheric tension I love. Solid pick for November.</p>
-  </section>
-
-  <section>
-    <h2><strong>The Running Man (Nov 7, 2025)**</strong></h2>
-    <p>We all know the source story. Directed by Edgar Wright, starring Glen Powell. This one is *much anticipated*. I’ve had it circled on my calendar. The big ask: will it bring new energy or just re-spin what’s been done?</p>
-  </section>
-
-  <section>
-    <h2><strong>Now You See Me: Now You Don’t (Nov 14, 2025)</strong></h2>
-    <p>I’ll admit: I haven’t yet watched *Now You See Me 2*, so I’m catching up. But the trailer’s good, the cast is back, and the concept still has that “twist you didn’t see” energy. So far: not disappointed.</p>
-  </section>
-
-  <section>
-    <h2><strong>Keeper (Nov 14, 2025)</strong></h2>
-    <p>Love the cinematography, love the plot setup (isolated cabin, secrets, creeping horror). This one’s got me. I’m hoping it’s more than style though — wants substance behind the visuals.</p>
-  </section>
-
-  <section>
-    <h2><strong>Wicked: For Good (Nov 21, 2025)</strong></h2>
-    <p>The sequel to the 2024 musical smash. Big expectations. Will it match the magic of the first? With the release slot and the trailers, I’m curious — but cautious.</p>
-  </section>
-
-  <section>
-    <h2><strong>Zootopia 2 (Date TBA, Nov 2025 target)</strong></h2>
-    <p>We all know how huge the first one was. With the trailer out, this feels like a “must see” in the family-movie slot. If the story and characters evolve, this could be a highlight. But given how many sequels disappoint — the risk is real.</p>
-  </section>
-
-  <section>
-    <h2><strong>Wake Up Dead Man: A Knives Out Mystery (Nov 2025 target)</strong></h2>
-    <p>Our own brand of James Bond—feel, twist, style. The two previous films had serious re-watch value. Let’s hope this third keeps that rhythm rather than losing pace under franchise fatigue.</p>
-  </section>
-
-  <section>
-    <h2><strong>Frankenstein (Nov 2025, Netflix)</strong></h2>
-    <p>I love Guillermo del Toro — he never disappoints. This one on Netflix has “beautifully dark mythology” written all over it. If he delivers, this might be one of the best originals of the month.</p>
-  </section>
-
-  <section>
-    <h2><strong>Sarah’s Oil (Nov 2025 target)</strong></h2>
-    <p>Trailer gave me a good feeling. A drama with weight, with promise of emotional stakes. I’m ready for it. November’s mix of big action and deep stories is showing up.</p>
-  </section>
-
-  <section class="verdict">
-    <h2>Wave Take</h2>
-    <p>November is shaping into a **wild ride**. Big action, big sequels, big expectations. The thing is — expectations are the easy part. Delivery is everything. My hope? These films bring both spectacle and story. Because hype fades fast, but the ones that stick are those with depth and heart.</p>
-    <p>What I’ll be watching for: which films make me sit back in the seat and think “yes… this matters.” I’m betting on several of these. We’ll see which ones actually deliver.</p>
-  </section>
-
+                <section><p>The long-awaited release of <strong>Grand Theft Auto VI</strong> has been pushed back yet again...</p></section>
+                <section><h2>Why the delay again?</h2><p>On paper, the official reason is quality assurance...</p></section>
+                <section class="rotwave-take"><h2>RotWave Verdict</h2><p>For many, the delay will feel like another let-down...</p></section>
               </p>
             </div>
             <div class="article-meta">
-              <span>Nov-6-25</span>
-              <span>2 min read</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 6, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="gta-delayed-again">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="gta-delayed-again">
+            <div class="comments-list" id="comments-list-gta-delayed-again"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('gta-delayed-again')">Post Comment</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card" data-id="november-unleashed">
+          <div class="article-image-container">
+            <img src="images/Novmovie.jpg" class="article-image" alt="November Movies" />
+            <span class="article-category">Cinema</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">November Unleashed</h3>
+            <p class="article-excerpt">Major Movie Releases This November — What We’re Hyped For...</p>
+            <div class="article-full">
+              <p>
+                <section><p>Here are the films we’ve got on our radar this month...</p></section>
+                <section><h2>Predator: Badlands</h2><p>The trailer looks promising...</p></section>
+                <section><h2>The Running Man</h2><p>Directed by Edgar Wright...</p></section>
+                <section class="verdict"><h2>Wave Take</h2><p>November is shaping into a **wild ride**...</p></section>
+              </p>
+            </div>
+            <div class="article-meta">
+              <span class="article-date">Nov 6, 2025</span>
+              <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="november-unleashed">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="full-comment-thread" data-content-id="november-unleashed">
+            <div class="comments-list" id="comments-list-november-unleashed"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('november-unleashed')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="political-flare">
-          <img src="images/New.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/New.jpg" class="article-image" alt="Political News" />
+            <span class="article-category">Politics</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">POLITICAL FLARE</h3>
-            <p class="article-excerpt">
-              Zohran Mamdani Fires at Trump After NYC Mayoral Win — A Victory Speech or Political Crossfire?...
-            </p>
+            <p class="article-excerpt">Zohran Mamdani Fires at Trump After NYC Mayoral Win — A Victory Speech or Political Crossfire?...</p>
             <div class="article-full">
               <p>
-                <section class="intro">
-    <p>
-      Fresh off his historic victory as New York City’s first immigrant mayor, <strong>Zohran Mamdani</strong> wasted no time sending a message that echoed far beyond city limits. 
-      “New York will remain a city of immigrants,” he declared, before aiming his next line straight at <strong>President Donald Trump</strong>: 
-      “To get to any of us, you will have to get through all of us.”
-    </p>
-  </section>
-
-  <section class="analysis">
-    <p>
-      A bold statement. A defiant one. But also — a risky one.
-      In politics, timing is everything. Mamdani’s victory was meant to symbolize a fresh page for New York — a city battered by division, revived by diversity. 
-      Yet, within hours, the spotlight shifted from celebration to confrontation.
-    </p>
-    <p>
-      Was this the right move? To draw the battle line so early, turning a mayoral oath into a national headline? 
-      Some say it’s courage — that in an age of fear, silence equals consent. Others argue it’s calculation — a symbolic jab to cement his base before even taking office.
-    </p>
-  </section>
-
-  <section class="context">
-    <p>
-      The message also touches a deeper nerve. Mamdani’s immigrant story resonates with millions in a post-Trump America still struggling with identity, 
-      border debates, and social division. His words remind the country of the cultural heartbeat that defines New York — 
-      one that refuses to be muted by federal politics.
-    </p>
-    <p>
-      But let’s not ignore what this sets up — a possible cold war between City Hall and the White House, one that could redefine how local governance 
-      clashes with national ideology. If this is his opening act, the next four years might not just be about housing, transit, or safety — 
-      but about resistance, power, and pride.
-    </p>
-  </section>
-
-  <section class="rotwave-take">
-    <h2>RotWave Verdict</h2>
-    <p>
-      It’s hard not to respect the fire. Mamdani didn’t just win — he walked into the room swinging. 
-      But fire needs direction. Because if leadership becomes a constant fight, 
-      the city that voted for hope might end up caught in the smoke.
-    </p>
-    <p>
-      The line between courage and chaos is thin — and Mamdani, in his first statement as mayor, is already walking it.
-      Whether this was a declaration of unity or the start of a feud, one thing’s clear — politics in New York just got cinematic again.
-    </p>
-  </section>
-
+                <section class="intro"><p>Fresh off his historic victory as New York City’s first immigrant mayor, <strong>Zohran Mamdani</strong> wasted no time sending a message...</p></section>
+                <section class="rotwave-take"><h2>RotWave Verdict</h2><p>It’s hard not to respect the fire...</p></section>
               </p>
             </div>
             <div class="article-meta">
-              <span>Nov-5-25</span>
-              <span>2min read</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 5, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="political-flare">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="full-comment-thread" data-content-id="political-flare">
+            <div class="comments-list" id="comments-list-political-flare"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('political-flare')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="gosling-vs-gyllenhaal">
-          <img src="images/cine.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/cine.jpg" class="article-image" alt="Gosling vs Gyllenhaal" />
+            <span class="article-category">Cinema</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
-            <h3 class="article-title">Gosling vs Gyllenhaal </h3>
-            <p class="article-excerpt">
-              Ryan Gosling vs. Jake Gyllenhaal — Two Faces of Modern Cinema...
-            </p>
+            <h3 class="article-title">Gosling vs Gyllenhaal</h3>
+            <p class="article-excerpt">Ryan Gosling vs. Jake Gyllenhaal — Two Faces of Modern Cinema...</p>
             <div class="article-full">
               <p>
-                 <section class="intro">
-    <p>
-      In an era where performances often blur under franchise fatigue, <strong>Ryan Gosling</strong> and <strong>Jake Gyllenhaal</strong> stand as proof that acting is still an art form — not a checklist. 
-      Both men have built careers that feel like reflections of human complexity: quiet storms that explode only when needed.
-    </p>
-  </section>
-
-  <section class="gosling-side">
-    <h2>Ryan Gosling — The Poetic Stoic</h2>
-    <p>
-      Gosling’s brilliance lies in restraint. Whether he’s a silent getaway driver in <em>Drive</em> or a replicant questioning existence in <em>Blade Runner 2049</em>, 
-      he communicates more with a stare than some actors manage with a monologue. His characters don’t beg for emotion — they earn it.
-    </p>
-    <p>
-      <em>La La Land</em> gave him rhythm and heartbreak; <em>The Notebook</em> made him a romantic legend; <em>The Nice Guys</em> proved his comedic timing is criminally underrated. 
-      There’s always a sense that Gosling is playing with stillness — he’s the calm center of chaos. Even when his world collapses, he doesn’t shout. He breathes through it.
-    </p>
-  </section>
-
-  <section class="gyllenhaal-side">
-    <h2>Jake Gyllenhaal — The Controlled Madness</h2>
-    <p>
-      If Gosling is the quiet poet, <strong>Jake Gyllenhaal</strong> is the method storm. His filmography bleeds intensity — 
-      every role feels like he’s burning calories for truth. In <em>Nightcrawler</em>, he becomes the embodiment of obsession, a mirror to modern media’s hunger for carnage. 
-      In <em>Prisoners</em>, he delivers a detective torn between faith and fury. 
-      <em>Donnie Darko</em> and <em>Zodiac</em> show his fascination with mystery, while <em>Brokeback Mountain</em> revealed raw vulnerability that defined a generation of drama.
-    </p>
-    <p>
-      Gyllenhaal doesn’t act; he <em>transforms</em>. There’s danger in his performances — the kind that makes you uneasy because you don’t know where the character ends and Jake begins.
-    </p>
-  </section>
-
-  <section class="comparison">
-    <h2>Two Sides of the Same Frame</h2>
-    <p>
-      What makes their duel fascinating is contrast. Gosling represents <strong>minimalism</strong> — emotion distilled to stillness. 
-      Gyllenhaal is <strong>maximalism</strong> — emotion turned up to eleven, but with surgical control. 
-      Together, they embody the evolution of male leads in modern cinema: flawed, layered, uncertain, and deeply human.
-    </p>
-    <p>
-      Their films mirror each other in strange ways. <em>Drive</em> and <em>Nightcrawler</em> both explore loneliness through motion. 
-      <em>Blade Runner 2049</em> and <em>Prisoners</em> ask what it means to be “real” in a world built on lies. 
-      Even <em>The Big Short</em> and <em>Zodiac</em> chase truth in systems designed to hide it.
-    </p>
-  </section>
-
-  <section class="rotwave-take">
-    <h2>RotWave Verdict</h2>
-    <p>
-      These two don’t compete — they complement. Gosling gives cinema <strong>grace under silence</strong>; Gyllenhaal gives it <strong>chaos under control</strong>. 
-      In a decade obsessed with franchises and quick fame, they remind us that acting isn’t about popularity — it’s about presence.
-    </p>
-    <p>
-      Maybe Gosling’s gaze tells stories that never need words. Maybe Gyllenhaal’s madness shows us truths we’d rather avoid. 
-      But together, they’ve shaped this generation’s cinematic soul — one quiet, one burning, both unforgettable.
-    </p>
-  </section>
+                <section class="intro"><p>In an era where performances often blur under franchise fatigue, <strong>Ryan Gosling</strong> and <strong>Jake Gyllenhaal</strong> stand as proof...</p></section>
+                <section class="rotwave-take"><h2>RotWave Verdict</h2><p>These two don’t compete — they complement...</p></section>
               </p>
             </div>
             <div class="article-meta">
-              <span>3-11-25</span>
-              <span>2min read</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 3, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="gosling-vs-gyllenhaal">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="gosling-vs-gyllenhaal">
+            <div class="comments-list" id="comments-list-gosling-vs-gyllenhaal"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('gosling-vs-gyllenhaal')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="samsung-finally-unveils-galaxy-trifold">
-          <img src="images/samsung.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/samsung.jpg" class="article-image" alt="Samsung TriFold" />
+            <span class="article-category">Tech</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Samsung Finally Unveils Galaxy TriFold</h3>
-            <p class="article-excerpt">
-             Samsung Finally Unveils Galaxy TriFold — Big Leap or Bold Misstep?...
-            </p>
+            <p class="article-excerpt">Samsung Finally Unveils Galaxy TriFold — Big Leap or Bold Misstep?...</p>
             <div class="article-full">
               <p>
-               <section class="intro">
-    <p>
-      Samsung just pulled the curtain back on its **Galaxy TriFold**, confirming a release date after months of speculation and leaks. <strong>Forbes</strong> reports the three-screen device is real, and Samsung is betting that foldables are about to get even more ambitious. 
-      But this isn’t just about screens folding again — it’s about whether Samsung can pull off something that changes how we use phones, or whether this will end up being a novelty we talk about — not use.
-    </p>
-  </section>
-
-  <section>
-    <h2>What We Know So Far</h2>
-    <p>
-      The Galaxy TriFold was unveiled in South Korea, and Samsung confirmed it is coming “soon.” 1 Early leaks suggest a Z-shaped dual hinge that lets the device fold inward twice, turning a compact phone into something closer to a tablet. 2
-      According to reports, the rollout might initially be limited, likely focused on markets Samsung already dominates in foldables. Production challenges, software optimization, and consumer pricing are obvious obstacles ahead.
-    </p>
-  </section>
-
-  <section>
-    <h2>Why Samsung Might Be Doing This</h2>
-    <p>
-      It’s not just ambition. Samsung’s already staking leadership in foldable tech with the Galaxy Z Fold line. The TriFold is the next frontier — a statement that it’s not satisfied with incremental change.  
-      But there’s also pressure. Competitors have teased triple-fold devices. Samsung needs to stay ahead of the curve. The question is, are they doing it to push boundaries — or just to say they did it first?
-    </p>
-  </section>
-
-  <section>
-    <h2>The Big Risks Behind the Fold</h2>
-    <p>
-      Technology like this is fragile — every hinge, every crevice, every fold line is a potential failure point. Battery life across three panels will be a nightmare to balance.  
-      Then there’s software. Can apps span three folding states without breaking UI, lagging, or draining performance? If they can’t, the TriFold becomes a tech demo, not a daily driver.  
-      And price — this kind of device won’t be cheap. If monthly users can’t justify it, Samsung risks making something niche for enthusiasts rather than the mainstream.
-    </p>
-  </section>
-
-  <section>
-    <h2>RotWave Questions (That Nobody’s Asking Loudly Enough)</h2>
-    <ul>
-      <li>Will the TriFold’s durability match the hype — or will users break it before they fall in love?</li>
-      <li>Will software support and optimization come fast enough to make this device usable beyond showrooms?</li>
-      <li>Will this shift Samsung’s foldables from flex gadgets to productivity tools — or will the “wow” fade into gimmick?</li>
-      <li>Is Samsung sacrificing reliability and lifetime support just to race ahead in innovation?</li>
-    </ul>
-  </section>
-
-  <section class="verdict">
-    <h2>Verdict (RotWave Take)</h2>
-    <p>
-      The Galaxy TriFold could either be the device that rewrote what we expect from smartphones — or it might end up as a fascinating misstep in product history. Right now, it’s a bold risk.  
-      If Samsung nails the hinge, the battery, and software, this could change how we think about screens — making phones, tablets, and even laptops blur. If they miscalculate on any major axis, the device will become one more expensive curiosity.  
-      I hope they get it right. Because the future they’re betting on — tri-fold screens, device flexibility, multi-mode productivity — is the kind of future RotWave loves to see. Just don’t let hype crush the promise.
-    </p>
-  </section>
-
+                <section class="intro"><p>Samsung just pulled the curtain back on its **Galaxy TriFold**...</p></section>
+                <section class="verdict"><h2>Verdict (RotWave Take)</h2><p>The Galaxy TriFold could either be the device that rewrote what we expect from smartphones...</p></section>
               </p>
             </div>
             <div class="article-meta">
-              <span>3/11/25</span>
-              <span>2min read</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 3, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="samsung-finally-unveils-galaxy-trifold">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="samsung-finally-unveils-galaxy-trifold">
+            <div class="comments-list" id="comments-list-samsung-finally-unveils-galaxy-trifold"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('samsung-finally-unveils-galaxy-trifold')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
-  <article class="article-card" data-id="netflix-bids-to-buy-warner-bros">
-          <img src="images/netflix.jpg" class="article-image" />
+        <article class="article-card featured" data-id="netflix-bids-to-buy-warner-bros">
+          <div class="article-image-container">
+            <img src="images/netflix.jpg" class="article-image" alt="Netflix Warner Bros" />
+            <span class="article-category">Business</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              6 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">NETFLIX BIDS TO BUY WARNER BROS</h3>
-            <p class="article-excerpt">
-              What It Could Mean for the Film Industry...
-            </p>
+            <p class="article-excerpt">What It Could Mean for the Film Industry...</p>
             <div class="article-full">
               <p>
-               <p><strong>The Story So Far</strong></p>
-
-<p>Reports are circulating that Netflix is exploring a potential bid to acquire Warner Bros. Discovery. The move, which has already sparked widespread conversation across Hollywood and Wall Street, could reshape the entertainment landscape if it goes through. Sources indicate Netflix has been in early talks with advisors, evaluating WBD’s studio, streaming, and IP assets — a package that includes some of the most iconic franchises in film history.</p>
-
-<p>For Netflix, this would be more than just a business expansion — it would be a power move. Owning Warner Bros. Discovery’s libraries, which include the DC Universe, HBO’s catalog, and legendary cinema properties, could give Netflix the kind of legacy content power it’s always lacked.</p>
-
-<p><strong>Why Warner Bros. Discovery Might Be Open to Selling</strong></p>
-
-<p>Warner Bros. Discovery’s openness to potential buyers stems from mounting financial pressure, long-term debt, and the volatile streaming market. Despite strong brands under its umbrella, the company has struggled with consistent profitability and streaming losses. This review process — which allows firms like Netflix to explore offers — is part of WBD’s ongoing strategy to “maximize shareholder value.”</p>
-
-<p>Still, it raises eyebrows. Why would one of Hollywood’s oldest and most respected studios even consider selling in the first place? There’s a quiet fear that the modern streaming war has pushed even the giants into survival mode.</p>
-
-<p><strong>What a Deal Like This Could Mean</strong></p>
-
-<p>If Netflix were to pull this off, the merger could bring both opportunity and danger:</p>
-
-<ul>
-  <li><strong>Creative Powerhouse:</strong> A combined library of Warner’s storytelling heritage and Netflix’s global streaming reach could create a content empire unlike any before it.</li>
-  <li><strong>Monopoly Concerns:</strong> One company controlling this much of the entertainment pipeline could limit creative diversity, pushing smaller studios further into the margins.</li>
-  <li><strong>Franchise Fatigue Risk:</strong> There’s worry that too much focus on established IP might choke out fresh voices and new ideas — something the industry desperately needs right now.</li>
-</ul>
-
-<p>Handled right, this could rejuvenate global cinema and streaming, with Netflix taking production quality and storytelling scale to new heights. But handled poorly, it could trigger the kind of creative collapse that fans and filmmakers have long feared — one where profits come before innovation.</p>
-
-<p><strong>Why This Moment Feels Bigger Than Business</strong></p>
-
-<p>This potential deal comes at a time when Hollywood is redefining itself. The strikes, AI disruption, and the shift from box office dominance to streaming supremacy have all shaken the old order. Warner Bros. Discovery represents legacy filmmaking. Netflix represents the new wave. A merger between them would symbolize not just a business shift — but a full passing of the torch from old Hollywood to new media dominance.</p>
-
-<p><strong>The Rotwave Take</strong></p>
-
-<p>Is this the best scenario for the film industry? Maybe — if Netflix brings financial stability and allows Warner’s storytellers freedom to create without corporate chaos. But there’s also something unsettling about the speed at which studios are being traded like assets, not art houses.</p>
-
-<p>We can’t ignore how strange it feels that Warner Bros., the studio behind cinema-defining franchises and decades of storytelling history, is suddenly “open to offers.” There’s clearly more beneath the surface — maybe financial distress, maybe boardroom politics — but one thing’s certain: Hollywood is entering a new era, and every move from here could shape how the world consumes stories for decades to come.</p>
-
-<p>For now, fans and creators alike can only hope Netflix’s ambition doesn’t turn into overreach. Because a deal of this scale could either spark a creative rebirth — or crumble the very foundation of the industry it seeks to rule.</p>
-
-<p><strong>Sources:</strong> Reuters, Variety, Bloomberg</p>
+                <p><strong>The Story So Far</strong></p><p>Reports are circulating that Netflix is exploring a potential bid to acquire Warner Bros. Discovery...</p>
+                <p><strong>The Rotwave Take</strong></p><p>Is this the best scenario for the film industry? Maybe...</p>
               </p>
             </div>
             <div class="article-meta">
-              <span>2nd Nov, 2025</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 2, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="netflix-bids-to-buy-warner-bros">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="full-comment-thread" data-content-id="netflix-bids-to-buy-warner-bros">
+            <div class="comments-list" id="comments-list-netflix-bids-to-buy-warner-bros"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('netflix-bids-to-buy-warner-bros')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="league-spolight-matches">
-          <img src="images/football.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/football.jpg" class="article-image" alt="League Football" />
+            <span class="article-category">Sports</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">League Spotlight Matches</h3>
-            <p class="article-excerpt">
-              Real Madrid put on a statement performance, routing Valencia 4-0 as their attack...
-            </p>
+            <p class="article-excerpt">Real Madrid put on a statement performance, routing Valencia 4-0 as their attack...</p>
             <div class="article-full">
               <p>
-                <p>Arsenal maintained their strong start with a composed win that reinforced their bid for the title.
-                   Their consistency, balanced squad, and mental toughness showed through in moments where lesser teams would crack. 
-                   Meanwhile, West Ham snapped out of a slump with a statement 3-1 victory over Newcastle. Lucas Paquetá, tactical changes, and fresh legs turned the tide late in the game. Brighton, Fulham, and other steady performers also capitalized on opportunities, reminding us again how unforgiving the bottom half can be in this league.</p>
-
-<p>Manchester United, under Ruben Amorim, fought back in a tense 2-2 draw against Nottingham Forest. Casemiro’s header opened the scoring before Forest shocked the Reds with two quick goals, but Amad Diallo’s stunning volley in the 81st minute saved a point. The result stretched United’s unbeaten run to four, keeping them fifth on the table and showing signs of growing resilience.</p>
-
-<p>Liverpool bounced back from their recent slump with a controlled 3-1 win over Brentford. Mohamed Salah found his rhythm again, netting twice to silence critics. Chelsea, however, dropped more points in a frustrating 1-1 draw against Bournemouth, adding more questions to Enzo Maresca’s early season campaign.</p>
-
-<p><strong>La Liga — Results and Headlines (Nov 1–2, 2025)</strong></p>
-
-<p>Real Madrid put on a statement performance, routing Valencia 4-0 as their attack clicked from the off; the win reinforced their charge at the top of the table. Villarreal also enjoyed a big day, beating Rayo Vallecano 4-0, while Atlético Madrid recorded a 3-0 victory over Sevilla to keep pressure on the leaders. The weekend belonged to the high-scoring sides as La Liga reshaped the top positions.</p>
-
-<p><strong>Serie A — Results and Headlines (Nov 1–2, 2025)</strong></p>
-
-<p>It was a busy Saturday in Italy. Juventus edged Cremonese 2-1 on the road, Udinese stunned Atalanta 1-0, and Napoli were held to a goalless draw by Como — results that tightened the midtable while the usual title contenders kept pace. The Italian weekend proved once again that Serie A rewards tactical discipline and punishes lapses in concentration.</p>
-
-<p><strong>Bundesliga — Results and Headlines (Nov 1–2, 2025)</strong></p>
-
-<p>Bayern Munich delivered a convincing 3-0 win over Bayer Leverkusen as they reasserted themselves at the top of the German table. RB Leipzig beat Stuttgart 3-1, Borussia Mönchengladbach thrashed St. Pauli 4-0, and Heidenheim drew 1-1 with Eintracht Frankfurt — a weekend that underlined Bayern’s continued dominance but also highlighted dangerous challengers.</p>
-
-<p><strong>Ligue 1 — Results and Headlines (Nov 1–2, 2025)</strong></p>
-
-<p>Paris Saint-Germain ground out a 1-0 win over Nice, while Marseille, Monaco and Paris FC all picked up wins in a weekend of narrow margins across France. The results kept PSG near the summit but showed the title race in Ligue 1 remains competitive, with several sides capable of stealing important points.</p>
-
-<p><strong>Saudi Pro League — Al-Nassr in Clutch Mode</strong></p>
-
-<p>Al-Nassr survived a late test and emerged with a gutsy 2-1 win over Al-Fayha. Cristiano Ronaldo once again made the difference, converting a stoppage-time penalty to seal the result. The win underlined the team’s reliance on moments of brilliance and the thin line between title favorite and title chaser in Saudi football.</p>
-
-<p><strong>Key Takeaways (ROTWAVE Voice)</strong></p>
-
-<p>The Premier League keeps proving it’s the global standard. Arsenal’s sharp control, United’s growing fight, and Liverpool’s reawakening define the narrative. Every fixture feels like a story — tight, emotional, unpredictable.</p>
-
-<p>Across Europe, the familiar pattern continues. Real Madrid are ruthless, Bayern are machine-like, Juventus keep grinding, and PSG win with discipline. Every league might play differently, but dominance has the same language: precision and persistence.</p>
-
-<p>And through it all, the superstars still write football’s biggest lines. Ronaldo in Riyadh, Bellingham in Madrid, Salah at Anfield — every weekend, the game reminds us it’s still about who shows up when the spotlight burns brightest.</p>
+                <p>Arsenal maintained their strong start with a composed win...</p>
+                <p><strong>Key Takeaways (ROTWAVE Voice)</strong></p><p>The Premier League keeps proving it’s the global standard...</p>
               </p>
             </div>
             <div class="article-meta">
-              <span>2nd Nov, 2025</span>
-              <span>1 min read</span>
-              <button class="share-btn">Share</button>
+              <span class="article-date">Nov 2, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="league-spolight-matches">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="league-spolight-matches">
+            <div class="comments-list" id="comments-list-league-spolight-matches"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('league-spolight-matches')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="bola-tinubu-to-meet-donald-trump-over-christian-genocide-in-nigeria">
-          <img src="images/trump1.jpg" class="article-image" />
-          <div class="article-content">
-            <h3 class="article-title">Bola Tinubu to Meet Donald Trump Over Christian Genocide in Nigeria</h3>
-            <p class="article-excerpt">
-             The claim follows Trump’s redesignation of Nigeria as a “Country of Particular Concern” under U.S. 
-             law and threats of aid cuts or other measures if the situation is not addressed.
-            </p>
-            <div class="article-full">
-              <p>
-                <p>According to the presidency, the meeting aims to clarify whether recent violence is targeted at Christians specifically or part of wider
-                   terrorist and communal violence that affects Nigerians of all faiths. Officials say the discussions will focus
-                    on ways to confront terrorism and improve security cooperation.
-       summarised the government position.</p>
-    <h2>Is this a genuine push for justice or political theatre?</h2>
-
-    <p>There are two ways to read this. On the optimistic side, the meeting could produce tangible gains: better intelligence sharing,
-       targeted support against extremist groups, and renewed international pressure to protect civilians. If Tinubu secures meaningful
-        military and technical assistance, that could strengthen Nigeria’s capacity to stop attacks and hold perpetrators to account.</p>
-
-    <p>On the skeptical side, the timing and rhetoric raise red flags. The label “Christian genocide” has been strongly contested by Abuja, which argues the violence is driven by a mix of terrorism, banditry and ethnic conflict affecting Christians and Muslims.
-       Critics warn the designation risks oversimplifying a messy security picture and could be exploited as geopolitical leverage.</p>
-    <h2>What the recent security messaging tells us</h2>
-<p>In the days leading up to this diplomatic exchange, Nigeria’s defence and security channels have published a stream of 
-  “terrorism rescue” updates — footage of liberated hostages, images from successful raids and statements about neutralised insurgents.
-  Those posts have a double effect. They show progress that the government can point to, but they also raise questions.</p>
-<p>If genuine operations are yielding results, why is international attention framing Nigeria as failing to protect a specific religious group?
-   For many Nigerians the apparent disconnect feeds suspicion: is the government using staged victories to shore up image, or are 
-   international actors amplifying a selective narrative for their own ends?</p>
-    <h2>Corruption, credibility and public trust</h2>
-
-    <p>Questions about President Tinubu’s credibility persist. Accusations of corruption, weak oversight and poor governance have dogged
-       his administration in the eyes of some analysts and citizens. That context matters. A diplomatic meeting that ignores governance issues 
-       and focuses only on headline grievances risks looking like optics rather than reform.</p>
-<p>If Tinubu is serious about security and justice, the public will expect more than rhetoric. They will expect clear steps: 
-  transparent investigations into attacks, accountability for security failures, and sustained support for communities rebuilding after violence.
-</p>
-    <h2>So what might happen when they meet?</h2>
-
-    <p>Positive scenario: The meeting produces concrete, accountable commitments — stepped up intelligence cooperation, 
-      vetted training programs, rapid response support for vulnerable communities, and a joint plan to investigate atrocities without
-       political spin. That would be a win for Nigerians and a clear sign the meeting had value.</p>
-
-    <p>Negative scenario: The meeting becomes a political photo opportunity. Strong language replaces concrete plans, aid and cooperation are framed as conditional bargaining chips, and the core problems — corruption, poor governance, and weak institutions — 
-    remain unaddressed. In that case, the meeting will feel less like help and more like headlines.</p>
-    <h2>Bottom line</h2>
-<p>For Nigerians, the key question is simple: will this meeting produce security and justice, or will it be another episode 
-  of foreign-led theatre? Recent defence posts of successful rescues are encouraging on paper, but they do not erase the larger
-   structural failures that leave communities exposed.</p>
- <p>Until we see commitments that are measurable, transparent and sustained,
-       skepticism is understandable. Nigerians deserve more than statements. They deserve results.</p>
-  </p>
-            </div>
-            <div class="article-meta">
-              <span>1st Nov, 2025</span>
-              <button class="share-btn">Share</button>
-              <button class="read-more-btn">Read More</button>
-            </div>
+          <div class="article-image-container">
+            <img src="images/trump1.jpg" class="article-image" alt="Tinubu Trump" />
+            <span class="article-category">Politics</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              3 min read
+            </span>
           </div>
-        </article>
-
-<article class="article-card" data-id="trump-redesignates-nigeria">
-          <img src="images/trump.jpg" class="article-image" />
           <div class="article-content">
-            <h3 class="article-title">Trump Redesignates Nigeria as Country of Particular Concern</h3>
-            <p class="article-excerpt">
-             Citing ongoing Islamist violence against Christians. The move brings back a policy from his first term that was reversed by the Biden administration...
-            </p>
+            <h3 class="article-title">Bola Tinubu to Meet Donald Trump</h3>
+            <p class="article-excerpt">The claim follows Trump’s redesignation of Nigeria as a “Country of Particular Concern”...</p>
             <div class="article-full">
               <p>
-                <p>Former U.S. President <strong>Donald Trump</strong> has once again placed <strong>Nigeria</strong> on the list of "Countries of Particular Concern" under the <strong>International Religious Freedom Act</strong>, citing ongoing Islamist violence against Christians. The move brings back a policy from his first term that was reversed by the Biden administration, and it directs Congress — including figures like <strong>Rep. Riley Moore</strong> and <strong>Chairman Tom Cole</strong> — to investigate the continued attacks by groups such as <strong>Boko Haram</strong> and <strong>Fulani militias</strong>.</p>
-
-<p>Trump's statement highlighted years of unrest and thousands of Christian deaths in Northern Nigeria, describing the situation as a crisis that has long been ignored. Meanwhile, the Nigerian government continues to deny allegations of targeted persecution, insisting that the violence stems from broader ethnic tensions and terrorism affecting people of all faiths.</p>
-
-<p>The redesignation has drawn mixed reactions. <strong>U.S. conservatives</strong> and <strong>faith-based organizations</strong> have praised the move, calling it a long-overdue stand for persecuted Christians. Others, however, are skeptical — questioning whether this is a genuine humanitarian concern or another layer of U.S. political theater.</p>
-
-<p>For many Nigerians, the announcement sparks a familiar question: <strong>is this finally a thank God moment, or just another audio political news?</strong> After years of bloodshed and diplomatic back-and-forth, the real test will be whether this designation brings actual change — or fades like every promise before it.</p>
-
-<p><strong>May peace and justice find Nigeria soon.</strong></p>
+                <p>According to the presidency, the meeting aims to clarify...</p>
+                <h2>Is this a genuine push for justice or political theatre?</h2><p>There are two ways to read this...</p>
               </p>
             </div>
             <div class="article-meta">
-  <span>October 31st</span>
-  <button class="share-btn" data-id="trump-redesignates-nigeria-as-country-of-particular-concern">Share</button>
-  <button class="read-more-btn">Read More</button>
-</div>
+              <span class="article-date">Nov 1, 2025</span>
+              <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="bola-tinubu-to-meet-donald-trump-over-christian-genocide-in-nigeria">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="bola-tinubu-to-meet-donald-trump-over-christian-genocide-in-nigeria">
+            <div class="comments-list" id="comments-list-bola-tinubu-to-meet-donald-trump-over-christian-genocide-in-nigeria"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('bola-tinubu-to-meet-donald-trump-over-christian-genocide-in-nigeria')">Post Comment</button>
+              </div>
+            </div>
           </div>
         </article>
 
-       <article class="article-card" data-id="tanzania-protest">
-          <img src="images/tanzania.jpg" class="article-image" />
+        <article class="article-card" data-id="trump-redesignates-nigeria">
+          <div class="article-image-container">
+            <img src="images/trump.jpg" class="article-image" alt="Trump Nigeria" />
+            <span class="article-category">Politics</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Trump Redesignates Nigeria</h3>
+            <p class="article-excerpt">Citing ongoing Islamist violence against Christians. The move brings back a policy from his first term...</p>
+            <div class="article-full">
+              <p>
+                <p>Former U.S. President <strong>Donald Trump</strong> has once again placed <strong>Nigeria</strong> on the list of "Countries of Particular Concern"...</p>
+                <p><strong>May peace and justice find Nigeria soon.</strong></p>
+              </p>
+            </div>
+            <div class="article-meta">
+              <span class="article-date">Oct 31, 2025</span>
+              <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="trump-redesignates-nigeria">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="trump-redesignates-nigeria">
+            <div class="comments-list" id="comments-list-trump-redesignates-nigeria"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('trump-redesignates-nigeria')">Post Comment</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card" data-id="tanzania-protest">
+          <div class="article-image-container">
+            <img src="images/tanzania.jpg" class="article-image" alt="Tanzania Protest" />
+            <span class="article-category">World</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Tanzania Protest</h3>
-            <p class="article-excerpt">
-              Tanzania Protests Enter Third Day Over President Samia Suluhu Hassan's Disputed Election Victory...
-            </p>
+            <p class="article-excerpt">Tanzania Protests Enter Third Day Over President Samia Suluhu Hassan's Disputed Election Victory...</p>
             <div class="article-full">
               <p>
-                Tanzania is on edge as protests against President Samia Suluhu Hassan's disputed election victory stretch into their third day, with anger spilling across major cities including Dar es Salaam, Arusha, and Dodoma.
-
-What began as peaceful demonstrations has escalated into chaos — young protesters clashing with security forces, airports like Julius Nyerere International being occupied, and at least 10 reported deaths from security crackdowns. Internet access remains restricted after a nationwide blackout that began during the October 29 polls, as allegations of vote rigging, opposition silencing, and media suppression continue to rise.
-
-The UN has expressed concern, while the U.S. Embassy has issued a shelter-in-place advisory for its citizens. 
-Military forces have been deployed to enforce curfews, as tension builds and solidarity movements emerge — even across borders, 
-with Kenyans at the Namanga border standing with Tanzanian youth.
-
- A Painful Reality
-This moment hits harder because Samia Suluhu Hassan made history as Tanzania's first female president,
-a symbol of hope for a new kind of leadership — one that was meant to shine as an example for African women in power.
-But now, that image is cracking under the weight of violence, fear, and silence. 
-Women's leadership was supposed to mean compassion, progress, and a new dawn, not curfews and censorship.
-And what's even sadder? It's barely trending.
-While the world scrolls past, Africa bleeds — again.
- May God help Tanzania. May God help Africa.
+                Tanzania is on edge as protests against President Samia Suluhu Hassan's disputed election victory stretch into their third day...
               </p>
             </div>
             <div class="article-meta">
-              <span>weeks ago</span>
-              <button class="share-btn" data-id="tanzania-protest-hap">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="tanzania-protest">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="tanzania-protest">
+            <div class="comments-list" id="comments-list-tanzania-protest"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('tanzania-protest')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
+
         <article class="article-card" data-id="elon-space-jam">
-          <img src="images/space.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/space.jpg" class="article-image" alt="Elon Space" />
+            <span class="article-category">Tech</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">FRONT-ROW HEADLINE</h3>
-            <p class="article-excerpt">
-              Elon drops another bomb — and the internet's holding its breath."...
-            </p>
+            <p class="article-excerpt">Elon drops another bomb — and the internet's holding its breath."...</p>
             <div class="article-full">
               <p>
-                Elon's latest tweet hit like a mic drop: minimal words, maximum impact. We're talking one-liners that read like philosophical grenades — and fans are losing it. Social feeds are catching fire.
-He's never been one to beat around the bush. This time? He's served up ambiguity, edge, and a sense that something huge is coming.
-Followers? They're in frenzy mode. Some applauding, others scratching their heads — all locked in.
----
-WHY WE'RE HERE FOR IT
-
-Elon knows how to play the long-game: cryptic posts, big promise, world watching.
-
-The vibe is electric: this isn't a casual update. It's a signal.
-
-From tech nerds to meme armies to board-room watchers, everyone's trying to decode what he means.
+                Elon's latest tweet hit like a mic drop: minimal words, maximum impact...
               </p>
             </div>
             <div class="article-meta">
-              <span>October 31st, 2025 — 7:42 PM</span>
-              <button class="share-btn" data-id="elon-space-jam">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="elon-space-jam">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="elon-space-jam">
+            <div class="comments-list" id="comments-list-elon-space-jam"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('elon-space-jam')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="ronaldo-interview">
-          <img src="images/ronaldo1.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/ronaldo1.jpg" class="article-image" alt="Ronaldo Interview" />
+            <span class="article-category">Sports</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Cristiano's Interview</h3>
-            <p class="article-excerpt">
-              Cristiano Ronaldo Teases "His Most Personal Interview Yet With Piers Morgan...
-            </p>
+            <p class="article-excerpt">Cristiano Ronaldo Teases "His Most Personal Interview Yet With Piers Morgan...</p>
             <div class="article-full">
               <p>
-               I mean this has to be talked about right?
-                Cristiano Ronaldo has set the internet on fire once again. 
-The football icon just revealed he'll be sitting down with Piers Morgan for what's being teased as his most personal and revealing interview yet. The episode, filmed earlier this month in Riyadh, will air next week on Piers Morgan Uncensored.
-
-This marks the third major sit-down between the two since their explosive 2022 interview — the one that shook the football world and changed
- the course of Ronaldo's career, leading to his move to Al-Nassr.
-
-Now, fans are buzzing across social media, flooding timelines with questions and predictions. 
-Will Ronaldo open up about his next big step? His family? His long-standing rivalries? Or maybe his mindset as Portugal gears up for the
- 2026 World Cup?
-Whatever it is, one thing's clear — CR7 isn't holding back this time.
-The stage is set, the lights are ready, and the world's most talked-about athlete is about to speak again.
+               I mean this has to be talked about right? Cristiano Ronaldo has set the internet on fire once again...
               </p>
             </div>
             <div class="article-meta">
-              <span>October 31st, 2025 — 7:42 PM</span>
-              <button class="share-btn" data-id="ronaldo-interview-blow">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="ronaldo-interview">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="ronaldo-interview">
+            <div class="comments-list" id="comments-list-ronaldo-interview"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('ronaldo-interview')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
-<article class="article-card" data-id="crime-101-trailer">
-          <img src="images/crime.jpg" class="article-image" />
+
+        <article class="article-card" data-id="crime-101-trailer">
+          <div class="article-image-container">
+            <img src="images/crime.jpg" class="article-image" alt="Crime 101" />
+            <span class="article-category">Entertainment</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              3 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Crime 101 Trailer</h3>
-            <p class="article-excerpt">
-             Chris Hemsworth & Mark Ruffalo Go From Avengers To Opponents In A Gritty Amazon Heist Thriller...
-            </p>
+            <p class="article-excerpt">Chris Hemsworth & Mark Ruffalo Go From Avengers To Opponents In A Gritty Amazon Heist Thriller...</p>
             <div class="article-full">
               <p>
-               When Thor and Hulk reunite, fans expect thunder and smashed cities — but this time, they're trading Mjölnir and rage for guns and badges. In Crime 101, an upcoming Amazon thriller from American Animals director Bart Layton, Chris Hemsworth and Mark Ruffalo take their long-standing MCU chemistry into a tense, stylish game of cops and robbers set in sun-soaked Los Angeles.
-Hemsworth stars as Davis, a sharp, fast-moving jewel thief planning one last big score. But his plan takes a dangerous turn when Detective Lou Lubesnick (Ruffalo) starts connecting the dots, setting up a high-stakes cat-and-mouse showdown reminiscent of Heat.
-Check out the trailer below — it's all sleek cars, disguises, and tension you could slice with a diamond.
-
----
-Imagine this: Thor, Catwoman (Halle Berry), and The Joker (Barry Keoghan) teaming up for a slick LA heist — 
-while a moustached Hulk pins photos on his crime board, muttering, "I'm gettin' close…" That's the energy Crime 101 is bringing, 
-and fans are absolutely buzzing. Social feeds are lighting up as Marvel lovers say it feels like watching an alternate MCU universe — one
- where Thor and Hulk are finally on opposite sides.
-
-After more than half a decade since his breakout with American Animals, Bart Layton proves he hasn't lost his creative spark. 
-The trailer teases sharp direction, a stylish neo-noir tone, and that classic Layton confidence — blending real grit with cinematic cool.
-
-Official Synopsis
-
-Set against the sun-bleached grit of Los Angeles, Crime 101 follows an elusive thief (Hemsworth) whose string of high-stakes heists along the
- 101 freeway leaves police baffled. When he plans one last job, his path crosses with a disillusioned insurance broker (Berry) facing her own
-  moral crossroad. As they collide, a relentless detective (Ruffalo) closes in, raising the tension to explosive heights.
-Also starring Monica Barbaro, Corey Hawkins, Jennifer Jason Leigh, and Nick Nolte, Crime 101 is shaping up to be one of 2025's most electric
- thrillers — and fans can't wait to see two MCU icons collide in a whole new kind of battle.
+               When Thor and Hulk reunite, fans expect thunder and smashed cities — but this time, they're trading Mjölnir and rage for guns and badges...
               </p>
             </div>
             <div class="article-meta">
-              <span>October 30, 2025 — 7:02 PM</span>
-              <span>📖 3 min read</span>
-              <button class="share-btn" data-id="crime-trail-buzz">Share</button>
+              <span class="article-date">Oct 30, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="crime-101-trailer">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="crime-101-trailer">
+            <div class="comments-list" id="comments-list-crime-101-trailer"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('crime-101-trailer')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="rising-star-blockbuster">
-          <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=220&fit=crop" class="article-image" />
+          <div class="article-image-container">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=220&fit=crop" class="article-image" alt="Rising Star" />
+            <span class="article-category">Entertainment</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Rising Star Joins Blockbuster Franchise</h3>
-            <p class="article-excerpt">
-              Industry sources confirm the casting of a breakthrough talent in the upcoming installment...
-            </p>
+            <p class="article-excerpt">Industry sources confirm the casting of a breakthrough talent in the upcoming installment...</p>
             <div class="article-full">
               <p>
-                The casting announcement has sent waves through Hollywood, with fans eagerly anticipating how the young actor will bring new life to the iconic franchise. Production begins early next year, and insiders say the film will redefine action storytelling.
+                The casting announcement has sent waves through Hollywood...
               </p>
             </div>
             <div class="article-meta">
-              <span>weeks ago</span>
-              <span>1 min read</span>
-              <button class="share-btn" data-id="rise-star-join">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="rising-star-blockbuster">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="rising-star-blockbuster">
+            <div class="comments-list" id="comments-list-rising-star-blockbuster"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('rising-star-blockbuster')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
 
         <article class="article-card" data-id="horror-film-box-office">
-          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=220&fit=crop" class="article-image" />
+          <div class="article-image-container">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=220&fit=crop" class="article-image" alt="Horror Film" />
+            <span class="article-category">Cinema</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              1 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">Horror Film Dominates Weekend Box Office</h3>
-            <p class="article-excerpt">
-              A low-budget horror thriller exceeds expectations, claiming the top spot...
-            </p>
+            <p class="article-excerpt">A low-budget horror thriller exceeds expectations, claiming the top spot...</p>
             <div class="article-full">
               <p>
-                Despite modest production costs, the film grossed over $80 million worldwide in its opening weekend. Critics praise its tension and storytelling, proving that creative vision can triumph over big budgets.
+                Despite modest production costs, the film grossed over $80 million worldwide in its opening weekend...
               </p>
             </div>
             <div class="article-meta">
-              <span>October 31st, 2025 — 7:00 PM</span>
-              <span>1min read</span>
-              <button class="share-btn" data-id="horror-boom-box">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="horror-film-box-office">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="horror-film-box-office">
+            <div class="comments-list" id="comments-list-horror-film-box-office"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('horror-film-box-office')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
+
         <article class="article-card" data-id="smartest-beings-dc">
-          <img src="images/dc.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/dc.jpg" class="article-image" alt="DC Comics" />
+            <span class="article-category">Comics</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              5 min read
+            </span>
+          </div>
           <div class="article-content">
             <h3 class="article-title">The Smartest Beings in the DC Universe</h3>
-            <p class="article-excerpt">
-              From Human Geniuses to Cosmic MindsIn a world filled with gods, monsters, and metahumans, intelligence is the rarest superpower of all. ...
-            </p>
+            <p class="article-excerpt">From Human Geniuses to Cosmic Minds...</p>
             <div class="article-full">
               <p>
-                The DC Universe isn’t just about who can punch hardest — it’s about who can outthink the impossible.
-Here’s a look at the greatest minds across DC, their ranks, their seats of intellect, and what makes each of them uniquely brilliant.
-
-
----
-
-<p>1. Lex Luthor — The Human Apex
-
-Seat: Metropolis
-Specialty: Engineering, biology, and strategic manipulation
-
-When it comes to raw, human intellect, Lex Luthor stands alone. No powers, no alien origin 
- just unrelenting genius and ego the size of Metropolis. He’s mastered almost every field of science, built tech that rivals alien worlds,
-  and still finds time to challenge a god in a cape. His intellect isn’t just his weapon — it’s his obsession.
-Why he’s special: Luthor represents humanity’s defiance — proof that even without powers, a mind can be more dangerous than any fist.</p>
-
-<p>2. Bruce Wayne (Batman) — The Tactical Genius
-
-Seat: Gotham City
-Specialty: Deductive reasoning, strategic combat, psychological warfare
-Batman’s mind is his superpower. The world’s greatest detective sees what others miss patterns, lies, opportunities. 
-He’s studied every form of combat, science, and psychology. Every scenario, every counter  already in his head before it even happens.
-Why he’s special: Batman’s genius is built from obsession and trauma. He doesn’t just solve crimes  he plans for gods.
-</p>
-
-<p>3. Mr. Terrific (Michael Holt) — The Polymath of Perfection
-
-Seat: TerrificTech Labs
-Specialty: Advanced physics, technology, dimensional science
-The man with “a fair play” creed has an IQ of 192 and a brain that rivals artificial intelligence itself. 
-He’s mastered nanotechnology, holographic computing, and interdimensional travel. His T-spheres alone make Iron Man look like he’s still
-in beta testing.
-
-Why he’s special: Holt embodies intellect without arrogance — the quiet storm of brilliance who uses his mind for progress, not pride.</p>
-
-<p>4. Brainiac — The Collector of Worlds
-
-Seat: His Skull Ship, orbiting the cosmos
-Specialty: Universal knowledge acquisition, AI intellect
-A twelfth-level intellect capable of processing infinite data streams, Brainiac is a machine mind obsessed with perfection and preservation 
- by destruction. He collects civilizations, bottling them for study, proving that knowledge can be just as terrifying as power.
-
-Why he’s special: Brainiac shows what happens when intelligence forgets empathy  when logic devours morality.</p>
-
-
----
-
-<p>5. The Martian Manhunter (J’onn J’onzz) — The Telepathic Strategist
-
-Seat: The Watchtower / Mars’ Memory
-Specialty: Psychology, telepathy, interspecies science
-
-He’s not just a mind-reader — he’s a mind-architect. J’onn J’onzz can process thoughts, memories, 
-and emotions faster than supercomputers. His understanding of the human psyche and alien biology makes him one of the most complete
- intellects in the Justice League.
-
-Why he’s special: He bridges emotion and intellect, turning empathy into strategy.</p>
-
-
-<p>6. Ray Palmer (The Atom) — The Quantum Explorer
-
-Seat: Ivy Town University
-Specialty: Quantum physics, micro-engineering
-
-Ray Palmer cracked the secrets of the subatomic world. His ability to shrink beyond atoms isn’t just science fiction 
- it’s mastery of the quantum realm itself. Every discovery he makes rewrites the laws of existence.
-
-Why he’s special: Palmer’s mind doesn’t just build — it discovers. He sees universes within dust.
-</p>
-
----
-<p>
-7. The Monitor — The Cosmic Observer
-
-Seat: Beyond the Multiverse
-Specialty: Cosmic order, dimensional architecture
-
-While others understand science, the Monitor understands creation itself. He oversees infinite realities, predicting cosmic events and balancing universal forces. His intellect is beyond measurement, operating on scales humanity can barely imagine.
-Why he’s special: He thinks in multiverses, not moments.</p>
-
-<p>8. Cyborg (Victor Stone) — The Living Interface
-
-Seat: The Watchtower
-Specialty: Cybernetics, data manipulation, digital warfare
-
-Cyborg isn’t just tech — he is technology. With direct access to every network on Earth (and beyond), 
-his brain processes data at machine speed while retaining human emotion.
-
-Why he’s special: He represents the bridge between man and machine — a genius of instinct and information.
-</p>
-
-<p>
-9. Doctor Fate (Kent Nelson / Nabu) — The Mystic Mind
-
-Seat: The Tower of Fate
-Specialty: Magic, ancient sciences, cosmic philosophy
-
-Doctor Fate’s intellect extends beyond mortal comprehension fueled by ancient wisdom and divine insight. 
-Nabu’s knowledge of magic, time, and existence itself places him at the edge of omniscience.
-
-Why he’s special: He fuses intellect with spirituality — knowledge that’s both infinite and mystical.
-</p>
-
----<p>
-
-10. The Source — The Ultimate Mind
-
-Seat: Beyond all things
-Specialty: Creation itself
-
-The Source is not just intelligent — it’s the origin of intellect. The consciousness that drives existence,
-it’s what beings like the Monitor, Metron, and New Gods seek to understand but never fully grasp.
-
-Why it’s special: It defines the ceiling of knowledge in the DC Universe — the mind beyond minds.
-
-
----
-</p>
-Final Thought
-
-From Luthor’s ruthless genius to The Source’s omniscience, the DC Universe proves that brains can shake worlds just as much as power ever could.
- Each of these minds sees reality differently through logic, empathy, obsession, or divine understanding and together, 
- they remind us that intelligence isn’t just about answers, but about how far one dares to ask.
+                The DC Universe isn’t just about who can punch hardest — it’s about who can outthink the impossible...
               </p>
             </div>
             <div class="article-meta">
-              <span>October 20, 2025 — 7:00 AM</span>
-              <span>5 min read</span>
-              <button class="share-btn" data-id="the-smartest-beings-in-the-dc-universe">Share</button>
+              <span class="article-date">Oct 20, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="smartest-beings-dc">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="smartest-beings-dc">
+            <div class="comments-list" id="comments-list-smartest-beings-dc"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('smartest-beings-dc')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
+
         <article class="article-card" data-id="opta-predicts-arsenal">
-          <img src="images/arsenal.jpg" class="article-image" />
+          <div class="article-image-container">
+            <img src="images/arsenal.jpg" class="article-image" alt="Arsenal" />
+            <span class="article-category">Sports</span>
+            <span class="article-reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              2 min read
+            </span>
+          </div>
           <div class="article-content">
-            <h3 class="article-title">Opta Supercomputer Predicts Arsenal 2025 and 2026 Premier League</h3>
-            <p class="article-excerpt">
-            Arsenal’s 2025/26 Premier League Triumph Winning the Title by 11 Points The numbers are in  and they’re painting North London red.
-            </p>
+            <h3 class="article-title">Opta Predicts Arsenal 2025/26</h3>
+            <p class="article-excerpt">Arsenal’s 2025/26 Premier League Triumph Winning the Title by 11 Points...</p>
             <div class="article-full">
               <p>
-             <p>I've got to say as a Man Utd Fan this hurts while writing but..</p>   According to Opta’s latest supercomputer forecast, Arsenal is on course to win the 2025/26 Premier League title, 
-             finishing 11 points clear of the competition. The model predicts Mikel Arteta’s side will end the season with 80 points, 
-             well ahead of Manchester City on 70 and Liverpool on 69. Arsenal currently lead the table with 19 points from nine unbeaten games,
-              looking every bit like a team built for consistency rather than chaos. Meanwhile, defending champions Liverpool have slumped to
-               seventh after losing five of their last six matches — a sharp contrast to the dominance that defined their previous campaign.
-
-Elsewhere, Manchester United, revitalized under new manager Ruben Amorim, are projected to finish ninth on 57 points, 
-despite climbing to fifth with three consecutive wins.
-
-Opta’s simulations, which factor in team strength, form, and fixture difficulty, suggest Arsenal’s balance and momentum could finally deliver
- the title Arteta has been chasing — and this time, the data agrees with the fans’ belief.
+                <p>I've got to say as a Man Utd Fan this hurts while writing but..</p> According to Opta’s latest supercomputer forecast...
               </p>
             </div>
             <div class="article-meta">
-              <span>Published on October 31st, 2025 — 10:04 PM</span>
-              <span>2min read</span>
-              <button class="share-btn" data-id="opta-supercomputer-predicts-arsenal-2025-and-2026-premier-league">Share</button>
+              <span class="article-date">Oct 31, 2025</span>
               <button class="read-more-btn">Read More</button>
+            </div>
+            <div class="card-actions">
+              <button class="share-btn">Share</button>
+              <div class="comment-indicator" onclick="toggleCommentSection(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span class="comment-count" data-content-id="opta-predicts-arsenal">0</span>
+              </div>
+            </div>
+          </div>
+           <div class="full-comment-thread" data-content-id="opta-predicts-arsenal">
+            <div class="comments-list" id="comments-list-opta-predicts-arsenal"></div>
+            <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                <button class="submit-comment-btn" style="display:none;" onclick="submitComment('opta-predicts-arsenal')">Post Comment</button>
+              </div>
             </div>
           </div>
         </article>
         
       </div>
     </div>
-
-    <!-- ROTcomics Tab -->
-    <div id="comics" class="tab-content">
+<!--Files/Comics Tab-->
+   <div id="comics" class="tab-content">
       <h2 class="section-title">Files</h2>
       <div class="comics-grid">
        
-     <div class="comic-card">
+       <div class="comic-card">
+          <img src="images/playdate.jpg" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">PLAYDATE</h3>
+            <p class="comic-issue">2025</p>
+            <a href="comics/Playdate.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
+          </div>
+        </div>
+
+        <div class="comic-card">
+          <img src="images/battle.jpg" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">One Battle After Another</h3>
+            <p class="comic-issue">2025</p>
+            <a href="comics/One_Battle_After_Another_2025.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
+          </div>
+        </div>
+
+        <div class="comic-card">
           <img src="images/smash.jpg" class="comic-cover" />
           <div class="comic-info">
             <h3 class="comic-title">The Smashing Machine</h3>
@@ -1482,7 +1332,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
             <a href="comics/The_Smashing_Machine_2025_1080p_WEBRip_x264_AAC5_1_YTS_MX_eng_en.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
           </div>
         </div>
-        
         
         <div class="comic-card">
           <img src="images/black.jpg" class="comic-cover" />
@@ -1508,7 +1357,7 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
             <h3 class="comic-title">Abominable</h3>
             <p class="comic-issue">2019</p>
             <a href="comics/Abominable2019.srt" class="download-btn" download style="color: black;">Download Subtitle</a>
-</div>
+          </div>
         </div> 
         
         <div class="comic-card">
@@ -1520,54 +1369,107 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           </div>
         </div>
 
-            <div class="comic-card">
+        <div class="comic-card">
           <img src="images/xmen.jpg" class="comic-cover" />
           <div class="comic-info">
             <h3 class="comic-title">X-Men</h3>
             <p class="comic-issue">2016</p>
-            <a href="comics/X men 2016.srt" class="download-btn" download  style="color: black;">Download Subtitle </a>
+            <a href="comics/X men 2016.srt" class="download-btn" download style="color: black;">Download Subtitle </a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ROTWAVE Reviews Tab -->
     <div id="reviews" class="tab-content">
       <h2 class="section-title">ROTWAVE Reviews</h2>
-<div class="review-card" data-id="frankenstein">
+      
+<div class="review-card" data-id="one-battle-after-another">
+        <div class="review-header">
+          <img src="images/battle.jpg" class="review-poster" />
+          <div class="review-info">
+            <h3 class="review-title">One Battle After Another</h3>
+            <div class="review-meta-info">Drama Action Thriller • 2025 • Paul Thomas Anderson<br>
+              Leonardo DiCaprio, Sean Penn, Teyana Taylor</div>
+            <div class="rating"><div class="rating-score">7.9</div><div class="rating-text">Very Good</div></div>
+          </div>
+        </div>
+        <div class="review-body">
+          <p><strong>The Verdict:</strong><p><em>One Battle After Another</em> is one of those rare surprises — an original film that actually lands with force. 
+            It’s bold, chaotic in all the right ways, emotionally charged, and driven by powerhouse performances.</p>
+          <p style="margin-top:1rem">
+            <section class="performance">
+    <h2>Performances</h2>
+    <p>Leonardo DiCaprio is the engine of this movie. His performance feels lived-in and unpredictable, pulling you into the world instead of just guiding you through it. Teyana Taylor proves she belongs on screens this size — confident, raw and unforgettable. Sean Penn slips into the madness with unnerving ease, while Benicio del Toro delivers the quiet, magnetic intensity he’s known for.</p>
+  </section>
+
+  <section class="story-pace">
+    <h2>Story & Pacing</h2>
+    <p>The film’s pacing rushes through a few essential beats — you can feel scenes trimmed to meet runtime — yet the narrative still holds its emotional line. The stakes remain high, and the tension never fully loosens.</p>
+  </section>
+
+  <section class="lockjaw">
+    <h2>Lockjaw — The Comic Thread That Ends Cold</h2>
+    <p>A standout thread comes from Lockjaw, whose chaotic humor blends oddly well with the film’s darker edge. His desperate line claiming Perfidia “raped him in reverse” is both ridiculous and strangely fitting. But the scene also marks the moment he seals his fate.</p>
+    <p><strong>How it unfolds:</strong> Lockjaw is cornered in his office by the same people he tried to betray. They humor his excuses long enough to get the confirmation they need. Then, once the door shuts, they suffocate him with a plastic sheet  quick, silent, and deliberately unceremonious. It’s a cold execution, and a reminder of what betrayal costs in this world.</p>
+  </section>
+
+  <section class="soundtrack">
+    <h2>Soundtrack & Tone</h2>
+    <p>If the film has a true flaw, it’s the soundtrack. Several scenes lose tension because the songs feel out of place or too loud, pulling you out of otherwise gripping moments.</p>
+  </section>
+
+  <section class="final-thoughts">
+    <h2>Final Thoughts</h2>
+    <p>Still, <em>One Battle After Another</em> stands tall.</p>
+    <ul>
+      <li>Big performances.</li>
+      <li>Real stakes.</li>
+      <li>Unforgettable scenes.</li>
+      <li>A story that refuses to play it safe.</li>
+    </ul>
+    <p>It’s easily one of the strongest original films of the year — messy, human, thrilling, and absolutely worth the watch. If this is the direction original filmmaking is heading, the industry is in good hands.</p>
+  </section>
+          </p>
+          <div class="card-actions">
+            <button class="share-btn">Share</button>
+            <div class="comment-indicator" onclick="toggleCommentSection(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              <span class="comment-count" data-content-id="one-battle-after-another">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="full-comment-thread" data-content-id="one-battle-after-another">
+          <div class="comments-list" id="comments-list-one-battle-after-another"></div>
+          <div class="comment-form-container">
+              <textarea class="comment-input" placeholder="Sign in to post a comment..." rows="3" disabled></textarea>
+              <div class="comment-form-actions">
+                  <button class="sign-in-prompt-btn" onclick="promptSignIn()">Sign In to Comment</button>
+                  <button class="submit-comment-btn" style="display:none;" onclick="submitComment('one-battle-after-another')">Post Comment</button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card" data-id="frankenstein">
         <div class="review-header">
           <img src="images/20251109_221230.jpg" />
           <div class="review-info">
             <h3 class="review-title">Frankenstein</h3>
-            <div class="review-meta-info"> CHIRP              Horror Suspense Sci-fi • 2025 • Guillermo del Toro<br>
-              Oscar Isaac, Mia Goth, Jacob Elordi
-            </div>
-            <div class="rating">
-              <div class="rating-score">8</div>
-              <div class="rating-text">Excellent</div>
-            </div>
+            <div class="review-meta-info"> CHIRP Horror Suspense Sci-fi • 2025 • Guillermo del Toro<br>Oscar Isaac, Mia Goth, Jacob Elordi</div>
+            <div class="rating"><div class="rating-score">8</div><div class="rating-text">Excellent</div></div>
           </div>
         </div>
         <div class="review-body">
-          <p><strong>The Verdict:</strong> "Frankenstein" is a visually crafted sci-fi horror combining stunning plots and deep themes. The narrative challenges how we wrongfully and pridefully treat things as monstrous </p>
-          <p style="margin-top:1rem">
-<!-- ... existing review text ... -->
-<p>Guillermo del Toro remains one of the few directors who can turn horror into art and tragedy into poetry. The makeup, the costumes, the performances — all blend into a cinematic experience that’s as beautiful as it is devastating. A must-watch for fans of gothic storytelling and emotional depth.</p>
-
-          </p>
-          <!-- START: Replaced old share button with new card-actions div -->
+          <p><strong>The Verdict:</strong> "Frankenstein" is a visually crafted sci-fi horror combining stunning plots and deep themes.</p>
+          <p style="margin-top:1rem">Guillermo del Toro remains one of the few directors who can turn horror into art...</p>
           <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="frankenstein">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="frankenstein">
           <div class="comments-list" id="comments-list-frankenstein"></div>
           <div class="comment-form-container">
@@ -1578,43 +1480,28 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
-</div>
+      </div>
       
       <div class="review-card" data-id="stranger-things-clip">
         <div class="review-header">
           <img src="images/strange3.jpg" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">Stranger Things Clip</h3>
-            <div class="review-meta-info">
-              2025 • CHIRP<br>
-            </div>
-            <div class="rating">
-              <div class="rating-score">?</div>
-              <div class="rating-text">?</div>
-            </div>
+            <div class="review-meta-info">2025 • CHIRP</div>
+            <div class="rating"><div class="rating-score">?</div><div class="rating-text">?</div></div>
           </div>
         </div>
         <div class="review-body">
           <p><strong>The Verdict:</strong>Lets Surf The New Clip .</p>
-          <p style="margin-top:1rem">
-<!-- ... existing review text ... -->
-    <p>Score (based solely on the 5-minute clip): <strong>4.5 / 5</strong></p>
-  </section>
-          </p>
-           <!-- START: Replaced old share button with new card-actions div -->
+          <p style="margin-top:1rem"><p>Score (based solely on the 5-minute clip): <strong>4.5 / 5</strong></p></p>
            <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="stranger-things-clip">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="stranger-things-clip">
           <div class="comments-list" id="comments-list-stranger-things-clip"></div>
           <div class="comment-form-container">
@@ -1625,7 +1512,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
 
@@ -1634,38 +1520,21 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <img src="images/long.jpg" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">The Long Walk</h3>
-            <div class="review-meta-info">
-              Horror Suspense • 2025 • Francis Lawrence<br>
-              David Jonsson, Cooper Hoffman, Mark Hamill<br>
-              ROTCHIRP
-            </div>
-            <div class="rating">
-              <div class="rating-score">8</div>
-              <div class="rating-text">Excellent</div>
-            </div>
+            <div class="review-meta-info">Horror Suspense • 2025 • Francis Lawrence<br>David Jonsson, Cooper Hoffman, Mark Hamill<br>ROTCHIRP</div>
+            <div class="rating"><div class="rating-score">8</div><div class="rating-text">Excellent</div></div>
           </div>
         </div>
         <div class="review-body">
           <p><strong>The Verdict:</strong> It's haunting, emotional, and beautifully bleak. It asks questions we don’t usually want answered.</p>
-          <p style="margin-top:1rem">
-<!-- ... existing review text ... -->
-    <p>Watched. Felt. Enjoyed. Still thinking about it.</p>
-  </section>
-
-          </p>
-           <!-- START: Replaced old share button with new card-actions div -->
+          <p style="margin-top:1rem"><p>Watched. Felt. Enjoyed. Still thinking about it.</p></p>
            <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="the-long-walk-review">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="the-long-walk-review">
           <div class="comments-list" id="comments-list-the-long-walk-review"></div>
           <div class="comment-form-container">
@@ -1676,46 +1545,28 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
-
-<div class="review-card" data-id="solo-leveling-season-2-review">
+      <div class="review-card" data-id="solo-leveling-season-2-review">
         <div class="review-header">
           <img src="images/solo.jpg" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">Solo Leveling Season 2</h3>
-            <div class="review-meta-info">
-              Anime Action • 2025 • Shunsuke Nakashige<br>
-              By Ocheme | ROTCHIRP
-            </div>
-            <div class="rating">
-              <div class="rating-score">7</div>
-              <div class="rating-text">Good</div>
-            </div>
+            <div class="review-meta-info">Anime Action • 2025 • Shunsuke Nakashige<br>By Ocheme | ROTCHIRP</div>
+            <div class="rating"><div class="rating-score">7</div><div class="rating-text">Good</div></div>
           </div>
         </div>
         <div class="review-body">
           <p><strong>The Verdict:</strong>This Season Filled with Overpowerd visuals and Underpowerd storytelling.</p>
-          <p style="margin-top:1rem">
-<!-- ... existing review text ... -->
-      *Solo Leveling* one of the most promising anime of its kind.
-    </p>
-  </section>
-          </p>
-            <!-- START: Replaced old share button with new card-actions div -->
+          <p style="margin-top:1rem">*Solo Leveling* one of the most promising anime of its kind.</p>
            <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="solo-leveling-season-2-review">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="solo-leveling-season-2-review">
           <div class="comments-list" id="comments-list-solo-leveling-season-2-review"></div>
           <div class="comment-form-container">
@@ -1726,7 +1577,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
       <div class="review-card" data-id="the-witcher-season-4-review">
@@ -1734,37 +1584,21 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <img src="images/witcher1.jpg" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">The Witcher Season 4</h3>
-            <div class="review-meta-info">
-              Adventure Action Drama • 2025 • Lauren Schmidt<br>
-              Liam Hemsworth, Freya Allan, Anya Chalotra
-            </div>
-            <div class="rating">
-              <div class="rating-score">7</div>
-              <div class="rating-text">Good</div>
-            </div>
+            <div class="review-meta-info">Adventure Action Drama • 2025 • Lauren Schmidt<br>Liam Hemsworth, Freya Allan, Anya Chalotra</div>
+            <div class="rating"><div class="rating-score">7</div><div class="rating-text">Good</div></div>
           </div>
         </div>
         <div class="review-body">
           <p><strong>The Verdict:</strong> "The Witcher" This Season Is caught between identity and reinvention. Trying to find it's joy and magic again.</p>
-          <p style="margin-top:1rem">
-<!-- ... existing review text ... -->
-      It had the potential to rival *Game of Thrones* — and maybe, just maybe, it still can.
-    </p>
-  </section>
-          </p>
-            <!-- START: Replaced old share button with new card-actions div -->
+          <p style="margin-top:1rem">It had the potential to rival *Game of Thrones* — and maybe, just maybe, it still can.</p>
            <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="the-witcher-season-4-review">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="the-witcher-season-4-review">
           <div class="comments-list" id="comments-list-the-witcher-season-4-review"></div>
           <div class="comment-form-container">
@@ -1775,7 +1609,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
       <div class="review-card" data-id="echoes-of-tomorrow-review">
@@ -1783,34 +1616,21 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=300&fit=crop" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">Echoes of Tomorrow</h3>
-            <div class="review-meta-info">
-              Science Fiction • 2025 • Sarah Chen<br>
-              Michael Park, Elena Rodriguez, David Kim
-            </div>
-            <div class="rating">
-              <div class="rating-score">8.5</div>
-              <div class="rating-text">Excellent</div>
-            </div>
+            <div class="review-meta-info">Science Fiction • 2025 • Sarah Chen<br>Michael Park, Elena Rodriguez, David Kim</div>
+            <div class="rating"><div class="rating-score">8.5</div><div class="rating-text">Excellent</div></div>
           </div>
         </div>
         <div class="review-body">
-          <p><strong>The Verdict:</strong> "Echoes of Tomorrow" is a masterfully crafted sci-fi thriller combining stunning visuals and deep themes. The narrative challenges how we see AI and humanity.</p>
-          <p style="margin-top:1rem">
-            The performances are top-tier. Michael Park gives a nuanced, emotionally powerful role. The visual effects are immersive without overwhelming the story. It's thoughtful, entertaining, and resonant.
-          </p>
-          <!-- START: Added new card-actions div -->
+          <p><strong>The Verdict:</strong> "Echoes of Tomorrow" is a masterfully crafted sci-fi thriller combining stunning visuals and deep themes.</p>
+          <p style="margin-top:1rem">The performances are top-tier...</p>
           <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="echoes-of-tomorrow-review">0</span>
             </div>
           </div>
-          <!-- END: Added new card-actions div -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="echoes-of-tomorrow-review">
           <div class="comments-list" id="comments-list-echoes-of-tomorrow-review"></div>
           <div class="comment-form-container">
@@ -1821,7 +1641,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
       <div class="review-card" data-id="the-last-frontier-review">
@@ -1829,34 +1648,21 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <img src="https://images.unsplash.com/photo-1524169358666-79f22534bc6e?w=200&h=300&fit=crop" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">The Last Frontier</h3>
-            <div class="review-meta-info">
-              Western Drama • 2025 • James Morrison<br>
-              Robert Hayes, Maria Santos, John Walker
-            </div>
-            <div class="rating">
-              <div class="rating-score">7.8</div>
-              <div class="rating-text">Very Good</div>
-            </div>
+            <div class="review-meta-info">Western Drama • 2025 • James Morrison<br>Robert Hayes, Maria Santos, John Walker</div>
+            <div class="rating"><div class="rating-score">7.8</div><div class="rating-text">Very Good</div></div>
           </div>
         </div>
         <div class="review-body">
           <p><strong>The Verdict:</strong> "The Last Frontier" reinvigorates the Western with modern sensibilities, gorgeous cinematography, and strong moral questions.</p>
-          <p style="margin-top:1rem">
-            While pacing lags a bit mid-film, the performances and visuals more than compensate. This is a modern Western that respects tradition while pushing boundaries.
-          </p>
-          <!-- START: Replaced old share button with new card-actions div -->
+          <p style="margin-top:1rem">While pacing lags a bit mid-film, the performances and visuals more than compensate.</p>
           <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="the-last-frontier-review">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="the-last-frontier-review">
           <div class="comments-list" id="comments-list-the-last-frontier-review"></div>
           <div class="comment-form-container">
@@ -1867,7 +1673,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
 
        <div class="review-card" data-id="stranger-things">
@@ -1875,35 +1680,21 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
           <img src="images/strange1.jpg" class="review-poster" />
           <div class="review-info">
             <h3 class="review-title">Stranger Things</h3>
-            <div class="review-meta-info">
-              Science Fiction • 2025 • Duffer Brothers<br>
-              Millie Bobby, David Harbour, Jamie Bower
-            </div>
-            <div class="rating">
-              <div class="rating-score">8.5</div>
-              <div class="rating-text">Intriguing</div>
-            </div>
+            <div class="review-meta-info">Science Fiction • 2025 • Duffer Brothers<br>Millie Bobby, David Harbour, Jamie Bower</div>
+            <div class="rating"><div class="rating-score">8.5</div><div class="rating-text">Intriguing</div></div>
           </div>
         </div>
         <div class="review-body">
-          <p><strong>The Verdict:</strong>After what feels like an eternity, the wait is finally over—Stranger Things returns with its highly anticipated final season this November! </p>
-          <p style="margin-top:1rem">
-           For me, this looks like it’s going to be amazing! The Duffer Brothers have earned our trust, and even the 
-           trailer alone is electrifying and full of intrigue. I can’t wait—big fan here!
-          </p>
-            <!-- START: Replaced old share button with new card-actions div -->
+          <p><strong>The Verdict:</strong>After what feels like an eternity, the wait is finally over...</p>
+          <p style="margin-top:1rem">For me, this looks like it’s going to be amazing!</p>
            <div class="card-actions">
             <button class="share-btn">Share</button>
             <div class="comment-indicator" onclick="toggleCommentSection(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="comment-icon"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
               <span class="comment-count" data-content-id="stranger-things">0</span>
             </div>
           </div>
-          <!-- END: Replaced old share button -->
         </div>
-        <!-- START: Added full comment thread div -->
         <div class="full-comment-thread" data-content-id="stranger-things">
           <div class="comments-list" id="comments-list-stranger-things"></div>
           <div class="comment-form-container">
@@ -1914,7 +1705,6 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
               </div>
           </div>
         </div>
-        <!-- END: Added full comment thread div -->
       </div>
     </div>
   </main>
@@ -1940,24 +1730,17 @@ Opta’s simulations, which factor in team strength, form, and fixture difficult
     </div>
   <script src="wave.js"></script>
   
-  <!-- START: Article Modal HTML -->
   <div id="article-modal-overlay" class="article-modal-overlay">
       <div id="article-modal-content" class="article-modal-content">
-          <!-- Header with Close Button -->
           <div class="article-modal-header">
               <h3 id="article-modal-title">Article Title</h3>
               <button id="article-modal-close-btn" class="article-modal-close-btn">&times;</button>
           </div>
-          <!-- Scrollable Article Content -->
           <div id="article-modal-body" class="article-modal-body">
               <img id="article-modal-image" src="https://placehold.co/800x400/6366F1/FFFFFF?text=Article+Image" alt="Article Image" class="article-modal-image">
-              <div id="article-modal-full-text" class="article-modal-full-text">
-                  <!-- Full article content will be injected here -->
-              </div>
+              <div id="article-modal-full-text" class="article-modal-full-text"></div>
           </div>
       </div>
   </div>
-  <!-- END: Article Modal HTML -->
-
 </body>
 </html>
