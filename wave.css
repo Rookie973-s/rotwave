@@ -221,7 +221,7 @@ body.light-mode .nav-tabs {
     margin: 1rem 2rem;
     padding: 0.9rem 1.2rem;
     background: linear-gradient(135deg, #ff6b35 0%, #ff4444 100%);
-    color: red;
+    color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
