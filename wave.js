@@ -383,7 +383,7 @@ function enhancedShare(button) {
     if (navigator.share) {
         navigator.share({
             title: title,
-            text: `${title} - Read on ROTWAVE Studios`,
+            text: `${title} - Read on WAVE Studios`,
             url: url
         }).catch(err => {
             if (err.name !== 'AbortError') {
