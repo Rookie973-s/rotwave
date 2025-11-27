@@ -466,10 +466,10 @@ function fallbackShare(url, title) {
     
     copyBtn.onclick = () => {
         navigator.clipboard.writeText(url).then(() => {
-            showEnhancedToast('✅ Link copied!', 'success');
+            showEnhancedToast('Link copied!', 'success');
             modal.remove();
         }).catch(() => {
-             showEnhancedToast('❌ Failed to copy', 'error');
+             showEnhancedToast('Failed to copy', 'error');
         });
     };
     
@@ -561,10 +561,10 @@ function updateReadingProgress(card, reviewBody, progressBar) {
 
 function showEnhancedToast(message, type = 'info') {
     const icons = {
-        success: '✅',
-        error: '❌',
-        warning: '⚠️',
-        info: 'ℹ️'
+        success: '',
+        error: '',
+        warning: '',
+        info: ''
     };
     
     const toast = document.createElement('div');
@@ -703,7 +703,7 @@ if (searchInputEl) {
 
 // ===== HEADER HIDE ON SCROLL =====
 function showCopiedToast() {
-    showEnhancedToast('✅ Link copied!', 'success');
+    showEnhancedToast('Link copied!', 'success');
 }
 
 let lastScroll = 0;
@@ -926,7 +926,7 @@ function getCurrentUserEmail() {
 
 function promptSignIn() {
     if (typeof google === 'undefined' || !google.accounts) {
-        showEnhancedToast('⚠️ Google Sign-In not loaded yet. Please refresh the page.', 'warning');
+        showEnhancedToast('Google Sign-In not loaded yet. Please refresh the page.', 'warning');
         return;
     }
     
@@ -950,11 +950,11 @@ function handleGoogleSignIn(response) {
             const logoutBtn = document.getElementById('logout-btn');
             if (logoutBtn) logoutBtn.style.display = 'flex';
             
-            showEnhancedToast(`✅ Signed in as ${user.email}`, 'success');
+            showEnhancedToast(`Signed in as ${user.email}`, 'success');
         }
     } catch (error) {
         console.error('Sign-in error:', error);
-        showEnhancedToast('❌ Sign-in failed. Please try again.', 'error');
+        showEnhancedToast('Sign-in failed. Please try again.', 'error');
     }
 }
 
@@ -967,7 +967,7 @@ function handleLogout() {
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) logoutBtn.style.display = 'none';
     
-    showEnhancedToast('👋 Signed out successfully', 'info');
+    showEnhancedToast('May the wave be with you', 'info');
 }
 
 function updateAllCommentForms() {
@@ -1114,7 +1114,7 @@ function renderReplies(parentCommentId, replies = []) {
 
 async function submitComment(contentId) {
     if (!isUserSignedIn()) {
-        showEnhancedToast('⚠️ Please sign in with Google first.', 'warning');
+        showEnhancedToast('Please sign in with Google first.', 'warning');
         return;
     }
     
@@ -1126,7 +1126,7 @@ async function submitComment(contentId) {
     
     const text = textarea.value.trim();
     if (!text) {
-        showEnhancedToast('⚠️ Please write a comment', 'warning');
+        showEnhancedToast('Please write a comment', 'warning');
         return;
     }
 
@@ -1146,7 +1146,7 @@ async function submitComment(contentId) {
 
         textarea.value = "";
         renderComments(contentId);
-        showEnhancedToast('✅ Comment posted!', 'success');
+        showEnhancedToast('Comment posted!', 'success');
     } catch (err) {
         console.error('Error submitting comment:', err);
         showEnhancedToast("Error: " + err.message, 'error');
@@ -1165,7 +1165,7 @@ async function deleteComment(contentId, commentId) {
         }
 
         renderComments(contentId);
-        showEnhancedToast('🗑️ Comment deleted', 'success');
+        showEnhancedToast('Comment deleted', 'success');
     } catch (err) {
         console.error('Error deleting comment:', err);
         showEnhancedToast("Error: " + err.message, 'error');
@@ -1181,7 +1181,7 @@ function toggleReplyForm(contentId, commentId) {
 
 async function submitReply(contentId, commentId) {
    if (!isUserSignedIn()) {
-    showEnhancedToast('⚠️ Please sign in with Google first.', 'warning');
+    showEnhancedToast('Please sign in with Google first.', 'warning');
     return;
    }
 
@@ -1191,7 +1191,7 @@ async function submitReply(contentId, commentId) {
     const textarea = replyForm.querySelector(".reply-input");
     const text = textarea.value.trim();
     if (!text) {
-        showEnhancedToast("⚠️ Please write a reply", 'warning');
+        showEnhancedToast("Please write a reply", 'warning');
         return;
     }
 
@@ -1212,7 +1212,7 @@ async function submitReply(contentId, commentId) {
         textarea.value = "";
         replyForm.classList.remove("active");
         renderComments(contentId);
-        showEnhancedToast("✅ Reply posted!", 'success');
+        showEnhancedToast("Reply posted!", 'success');
     } catch (err) {
         console.error("Error submitting reply:", err);
         showEnhancedToast("Error: " + err.message, 'error');
