@@ -5,6 +5,37 @@
 
   var synth = window.speechSynthesis;
   var activeBtn = null;
+  var preferredVoice = null;
+
+  var VOICE_PRIORITY = [
+    /Google UK English Male/i,
+    /Microsoft George/i,
+    /Microsoft Ryan/i,
+    /Daniel/i,
+    /male/i
+  ];
+
+  function choosePreferredVoice() {
+    var voices = synth.getVoices();
+    if (!voices.length) return null;
+
+    for (var i = 0; i < VOICE_PRIORITY.length; i++) {
+      var match = voices.find(function (v) {
+        return VOICE_PRIORITY[i].test(v.name) && /^en/i.test(v.lang);
+      });
+      if (match) return match;
+    }
+    return voices.find(function (v) { return /^en/i.test(v.lang); }) || voices[0];
+  }
+
+  function refreshVoice() {
+    preferredVoice = choosePreferredVoice();
+  }
+
+  refreshVoice();
+  if ("onvoiceschanged" in synth) {
+    synth.onvoiceschanged = refreshVoice;
+  }
 
   function stripForSpeech(text) {
     return text
@@ -75,8 +106,9 @@
       if (!text) return;
 
       var utter = new SpeechSynthesisUtterance(text);
-      utter.rate = 1;
-      utter.pitch = 1;
+      if (preferredVoice) utter.voice = preferredVoice;
+      utter.rate = 0.94;
+      utter.pitch = preferredVoice && /male/i.test(preferredVoice.name) ? 0.85 : 0.9;
 
       utter.onstart = function () {
         btn.classList.add("is-playing");
