@@ -1,0 +1,40 @@
+.listen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.listen-btn:hover {
+  opacity: 1;
+  background-color: rgba(128, 128, 128, 0.14);
+}
+
+.listen-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.listen-btn.is-playing {
+  opacity: 1;
+  animation: listen-pulse 1.3s ease-in-out infinite;
+}
+
+.listen-btn.is-paused {
+  opacity: 0.85;
+}
+
+@keyframes listen-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(128, 128, 128, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(128, 128, 128, 0); }
+}
